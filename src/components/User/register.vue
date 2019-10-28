@@ -31,6 +31,43 @@
             placeholder="请再次输入密码"
             autocomplete="off"
           />
+           <van-field 
+          class="userName" 
+          v-model="xingming" 
+          placeholder="姓名"
+          maxlength="4"
+          v-validate="'required'"
+          autocomplete="off" />
+        </van-cell-group>
+      </div>
+      <div class="redlogin">
+         <van-cell-group>
+          <van-field 
+          class="userName" 
+          v-model="pay" 
+          placeholder="输入安全码" 
+          type="password"
+         
+          v-validate="'required|numeric|min:6'"
+          autocomplete="off" />
+          <van-field
+            v-model="pays"
+            class="userName"
+            type="password"
+         
+            v-validate="'required|numeric|min:6'"
+            placeholder="再输入安全码"
+            autocomplete="off"
+          />
+          <van-field
+            class="userName"
+            v-model="tuijian"
+            
+
+            v-validate="'required'"
+            placeholder="推荐码"
+            autocomplete="off"
+          />
         </van-cell-group>
       </div>
       <van-button type="default" class="btn" @click="submit">立即注册</van-button>
@@ -39,12 +76,19 @@
 </template>
 
 <script>
+
+import { Toast } from 'vant'
+
 export default {
   data() {
     return {
       userName: "",
       password: "",
-      repeassword: ''
+      repeassword: '',
+      pay: '',
+      pays:'',
+      tuijian:'',
+      xingming:''
     };
   },
   methods: {
@@ -52,7 +96,36 @@ export default {
       this.$router.go(-1);
     },
     submit () {
-      this.$router.push('/Login')
+
+            var that = this
+            this.$validator.validateAll().then(function(result) {
+                if(result){
+                    that.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/regadd',
+                    {
+                        uid: that.userName,
+                        realname: that.xingming,
+                        password: that.password,
+                        passworded: that.repeassword,
+                        secpwd: that.pay,
+                        secpwded: that.pays,
+                        pid: that.tuijian
+                    }).then(res => {
+                      console.log(res)
+                      // 返回成功状态
+                        if (res.code) {
+                            Toast('注册成功')
+                            // that.$cookies.set('status', res.data.status)
+                            that.$router.push('/login')
+                            // that.$cookies.set('accessToken', res.data.tokenType + " " + res.data.accessToken , res.data.expiresIn)
+                        }else{
+                            Toast(res.msg)
+                        }
+                    })
+                }else{
+                    console.log(that.errors)
+                    Toast(that.errors.items[0].msg)
+                }
+            })
     }
   }
 };
@@ -68,9 +141,10 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  // justify-content: space-around;
   box-sizing: border-box;
   padding: 0 15px;
+  padding-top: 20px;
   .navbar {
     padding: 0;
     margin: 0;
@@ -104,6 +178,7 @@ export default {
     }
   }
   .redlogin {
+    margin-bottom: 20px;
     .userName {
       background: none;
       border:.5px solid #FFDDAA;

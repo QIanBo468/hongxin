@@ -13,6 +13,7 @@
           placeholder="输入账号"
           v-validate="'required'"
           autocomplete="off"
+          :error="errors.has('phone')"
         />
         <van-field
           v-model="password"
@@ -20,6 +21,7 @@
           type="password"
           v-validate="'required'"
           placeholder="请输入密码"
+          :error="errors.has('password')"
           autocomplete="off"
         />
       </van-cell-group>
@@ -35,22 +37,65 @@
 </template>
 
 <script>
+import { Toast } from "vant";
+
 export default {
   data() {
     return {
+      
       userName: "",
       password: ""
     };
   },
   methods: {
     submit() {
+      // this.$axios
+      //   .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
+      //     // data: {
+      //       account: this.userName,
+      //       password: this.password
+      //     // }
+      //   })
+      //   .then(res => {
+          
+      //     console.log(res);
+      //     if (res.succes) {
+      //       that.$router.push("/index");
+      //     } else {
+      //       Toast(res.msg);
+      //     }
+      //   });
 
+      var that = this;
+      this.$validator.validateAll().then(function(reslut, field) {
+        if (reslut) {
+          that.$axios
+            .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
+             
+              account: that.userName,
+                password: that.password
+              
+                
+            })
+            .then(res => {
+              console.log(res);
+              if (res.code) {
+                that.$router.push("/index");
+              } else {
+                Toast(res.msg);
+              }
+            });
+        } else {
+          console.log(that.errors)
+          Toast(that.errors.items[0].msg);
+        }
+      });
     },
     toregister() {
-      this.$router.push('/register')
+      this.$router.push("/register");
     },
     toreset() {
-      this.$router.push('/reset')
+      this.$router.push("/reset");
     }
   }
 };
@@ -114,19 +159,19 @@ export default {
       }
     }
   }
-  .login-register{
+  .login-register {
     width: 100%;
     // height: 100%;
     margin-bottom: 100px;
     .btn {
       width: 100%;
-    height: 50px;
-    background: #ffddaa;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
+      height: 50px;
+      background: #ffddaa;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
     }
-    .logway{
+    .logway {
       display: flex;
       justify-content: space-between;
       font-size: 12px;

@@ -6,6 +6,10 @@ import App from './App'
 import router from './router'
 import Vant from 'vant'
 import 'vant/lib/index.css'
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+Vue.prototype.$axios = api
+import api from './utils/api'
 import VeeValidate, { Validator } from 'vee-validate'
 import zh from 'vee-validate/dist/locale/zh_CN'// 引入中文文件
 // 配置中文
@@ -60,7 +64,7 @@ const dictionary = {
 
 Validator.updateDictionary(dictionary)
 
-Validator.extend('phone', {
+Validator.extend('phones', {
   messages: {
     zh_CN: field => field + '必须是11位手机号码'
   },
@@ -68,6 +72,8 @@ Validator.extend('phone', {
     return value.length === 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
   }
 })
+Vue.prototype.$axios = api;
+Vue.use(VueCookies)
 Vue.use(Vant)
 Vue.config.productionTip = false
 

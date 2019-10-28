@@ -23,7 +23,7 @@
               size="small"
               type="primary"
               @click="codesubmit"
-            >发送验证码</van-button>
+            >{{btntxt}}</van-button>
           </van-field>
           <van-field
             v-model="password"
@@ -41,11 +41,6 @@
             placeholder="请再次输入密码"
             autocomplete="off"
           />
-          <div class="security">
-            <van-field class="userName" v-model="security" center placeholder="请输入验证码">
-            </van-field>
-            <img width="50px;" height="30px;" class="securitybtn" @click="codesubmit" src="../../../static/images/sms.jpg" />
-          </div>
         </van-cell-group>
       </div>
       <van-button type="default" class="btn" @click="submit">确认</van-button>
@@ -54,14 +49,21 @@
 </template>
 
 <script>
+
+import { Toast } from 'vant'
+
 export default {
   data() {
     return {
-      userPhone: "",
+      userPhone: null,
       password: "",
       repeassword: "",
       sms: null,
-      security: null
+      security: null,
+      time: 60,
+      btntxt: '发送验证码',
+      captcha: '验证码',
+      disabled: false,
     };
   },
   methods: {
@@ -69,13 +71,66 @@ export default {
       this.$router.push("/Login");
     },
     codesubmit() {
-      console.log("发送验证码");
-    },
-    submit() {
-      this.$router.push("/Login");
+         var phone = this.userPhone;
+            if(!(/^[1][3,4,5,7,8][0-9]{9}$/.test(phone))){ 
+                Toast("手机号码有误，请重填");  
+                return false; 
+            }
+            if(this.disabled == false){
+                this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/smsend',
+                {
+                    phone: this.userPhone
+                }).then(res => {
+                  console.log(res)
+                    Toast(res.msg)
+                if(res.code === 1){
+                    this.disabled = true;
+                    var  that = this
+                    var times = setInterval(function() {
+                    that.time--;
+                    if( that.time > 0){
+                        that.btntxt = '重新获取('+ that.time +'s)'
+                    }else{
+                        clearInterval(times)
+                        that.time = 10
+                        that.btntxt = "获取验证码";
+                        that.disabled = false;
+                    } 
+                    }, 1000);
+                }
+                }).catch( res => {
+                Toast(res.msg)
+                })
+            }
+        },
+         submit() {
+         var that = this;
+      this.$validator.validateAll().then(function(reslut, field) {
+        if (reslut) {
+          that.$axios
+            .fetchPost("http://hxlc.ltlfd.cn/home/login/forget_pwd", {
+             phone: that.userPhone,
+             phonecode: that.sms,
+             password: that.password,
+             passworded: that.repeassword
+            })
+            .then(res => {
+              console.log(res);
+              if (res.code ===1) {
+                that.$router.push("/Login");
+              } else {
+                Toast(res.msg);
+              }
+            });
+        } else {
+          console.log(that.errors)
+          Toast(that.errors.items[0].msg);
+        }
+      });
     }
+    },
+   
   }
-};
 </script>
 
 <style lang='less' scope>
@@ -142,16 +197,16 @@ export default {
         border: none;
       }
     }
-    .security{
-         position: relative;
-        // display: flex;// 
-      img{
+    .security {
+      position: relative;
+      // display: flex;//
+      img {
         position: absolute;
         right: 0;
         top: 50%;
         margin-top: -11.5px;
       }
-      }
+    }
   }
   .btn {
     height: 50px;

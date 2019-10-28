@@ -3,7 +3,7 @@
     <van-nav-bar class="indexnav" title="首页"></van-nav-bar>
     <van-swipe :loop="false" :width="300" @change="onChange" class="swiper">
       <van-swipe-item v-for="item of adSwiper" :key="item.id">
-        <img :src="item.adimg" alt />
+        <img class="pic" :src="item.pic" alt />
       </van-swipe-item>
 
       <div class="custom-indicator" slot="indicator">
@@ -36,43 +36,79 @@
       class="moneyswiper"
     >
       <van-swipe-item>
-        <div class="money-item" v-for="item of moneySwiper.slice(0,4)" :key="item.id">
-          <img :src="item.zuimg" alt />
-          <span>{{item.zuname}}</span>
+        <div class="money-item" @click="$router.push('/integral')">
+          <img :src="moneySwiper[0].zuimg" alt />
+          <span>{{moneySwiper[0].zuname}}</span>
         </div>
+        <div class="money-item">
+          <img :src="moneySwiper[1].zuimg" alt />
+          <span>{{moneySwiper[1].zuname}}</span>
+        </div>
+        <div class="money-item">
+          <img :src="moneySwiper[2].zuimg" alt />
+          <span>{{moneySwiper[2].zuname}}</span>
+        </div>
+        <div class="money-item">
+          <van-cell class="poup" @click="showPopup">
+            <img :src="moneySwiper[3].zuimg" alt />
+            <span>{{moneySwiper[3].zuname}}</span>
+          </van-cell>
+        </div>
+        
       </van-swipe-item>
       <van-swipe-item>
-        <div class="money-item" v-for="item of moneySwiper.slice(4, 6)" :key="item.id">
+        <div class="money-item" v-for="item of moneySwiper.slice(4, 6)" :key="item.id" @click="$router.push('/help')">
           <img :src="item.zuimg" alt />
           <span>{{item.zuname}}</span>
         </div>
       </van-swipe-item>
     </van-swipe>
-
-
+<van-popup v-model="show">
+          <div class="show">
+            <div class="showtitle">.. 我的激活码 ..</div>
+            <div class="shownum">
+              <span>{{'1'}}</span>个
+            </div>
+            <div class="xian"></div>
+            <div class="showjihuo">
+              <span>立即激活</span>
+            </div>
+            <div class="suoyao">
+              <p>OR</p>
+              <span>_</span>
+              <p>索要激活码</p>
+            </div>
+          </div>
+        </van-popup>
     <!-- 列表 -->
-  <van-list
-  v-model="loading"
-  :finished="finished"
-  finished-text="没有更多了"
-  @load="onLoad"
->
-  <div class="moneylist" v-for="(item, index) of list" :key="index">
-    <div class="list-left">
-      <div class="left-active">
-        <div class="red"></div>
-        {{item.active}}
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <div class="moneylist" v-for="(item, index) of list" :key="index">
+        <div class="list-left">
+          <div class="left-active">
+            <div class="red"></div>
+            {{item.note}}
+          </div>
+          <p>{{item.user}}</p>
+        </div>
+        <div class="list-right">
+          <p class="right-time">{{item.date}}</p>
+          <div class="purse">￥{{item.price}}</div>
+        </div>
       </div>
-      <p>{{item.name}}</p>
-    </div>
-    <div class="list-right">
-      <p class="right-time">{{item.time}}</p>
-      <div class="purse">￥{{item.purse}}</div>
-    </div>
-    
-  </div>
-</van-list>
-
+       <div class="moneylist" v-for="(item, index) of lists" :key="index">
+        <div class="list-left">
+          <div class="left-active">
+            <div class="red"></div>
+            {{item.note}}
+          </div>
+          <p>{{item.user}}</p>
+        </div>
+        <div class="list-right">
+          <p class="right-time">{{item.date}}</p>
+          <div class="purse">￥{{item.jbsum}}</div>
+        </div>
+      </div>
+    </van-list>
   </div>
 </template>
 
@@ -81,10 +117,10 @@ export default {
   data() {
     return {
       adSwiper: [
-        { id: 0, adimg: "./static/images/swiper@3x.png" },
-        { id: 1, adimg: "./static/images/swiper1@3x.png" },
-        { id: 2, adimg: "./static/images/swiper@3x.png" },
-        { id: 3, adimg: "./static/images/swiper1@3x.png" }
+        { id: 0, pic: "./static/images/swiper@3x.png" },
+        { id: 1, pic: "./static/images/swiper1@3x.png" },
+        { id: 2, pic: "./static/images/swiper@3x.png" },
+        { id: 3, pic: "./static/images/swiper1@3x.png" }
       ],
       moneySwiper: [
         { id: 0, zuimg: "./static/images/zujifen.png", zuname: "宏信积分" },
@@ -99,41 +135,57 @@ export default {
       gonggao: "三周年奖励之特大喜讯",
       loading: false,
       finished: false,
-      list: [
-        {active: '匹配中', time: '2019.10.11  10:10:10', name: '123456789', purse: '1000.00'},
-        {active: '匹配中', time: '2019.10.11  10:10:10', name: '123456789', purse: '1000.00'},
-        {active: '匹配中', time: '2019.10.11  10:10:10', name: '123456789', purse: '1000.00'},
-        {active: '匹配中', time: '2019.10.11  10:10:10', name: '123456789', purse: '1000.00'}
-      ]
+      show: false,
+      list: [],
+      lists:[]
     };
   },
   methods: {
     onChange(index) {
       this.current = index;
     },
-    onLoad () {
-      setTimeout (() =>{
-        
-        for (let i =0 ; i<4; i++){
-          console.log(this.list[i])
+    onLoad(ls,lss) {
+      setTimeout(() => {
+        if (list.length === ls.length && lists === lss.length){
+            this.loading = false;
+            this.finished = true;
         }
 
         // 加载状态结束
-      
-      this.loading = false 
 
-      // 数据全部加载完成
-      if (this.list.length >=4){
-        this.finished = true
-      }
-      },500)
-     
+        
+
+        // 数据全部加载完成
+        // if (this.list.length >= 4) {
+          
+        // }
+      }, 500);
+    },
+    showPopup() {
+      this.show = true;
     }
+  },
+  created() {
+    // axios.post()
+    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/home',{
+  
+    }).then(res =>{
+      console.log(res)
+      this.gonggao = res.data.news[0].if_theme
+      this.adSwiper = res.data.banners
+      this.list = res.data.tgbzlist
+      this.lists = res.data.jsbzlist
+      console.log(this.list)
+       this.onLoad(res.data.tgbzlist, res.data.jsbzlist)
+    })
   }
 };
 </script>
 
 <style lang='less' scope>
+.pic{
+  width: 100%;
+}
 .index {
   color: #ffddaa;
 }
@@ -233,7 +285,7 @@ export default {
   }
 }
 
-.moneylist{
+.moneylist {
   background: #ffddaa;
   color: #26263c;
   height: 80px;
@@ -244,51 +296,120 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-radius: 4px;
-  p{
+  p {
     margin: 0;
     padding: 0;
   }
-  .list-left{
+  .list-left {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    .left-active{
+    .left-active {
       display: flex;
       align-items: center;
-      .red{
-      background: #f00;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      margin-right: 5px;
+      .red {
+        background: #f00;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        margin-right: 5px;
       }
-      color: #0B0B1F;
+      color: #0b0b1f;
       font-size: 12px;
     }
-    p{
+    p {
       font-size: 16px;
-      color: #000
+      color: #000;
     }
   }
-  .list-right{
+  .list-right {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-end;
-    p{
+    p {
       margin: 0;
       padding: 0;
     }
-    .right-time{
-     color:  #956621;
-     font-size: 12px;
+    .right-time {
+      color: #956621;
+      font-size: 12px;
     }
-    .purse{
+    .purse {
       color: #000;
       font-weight: bold;
     }
   }
+}
+.poup {
+  background: none;
+
+  .van-cell__value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #ffddaa;
+  }
+}
+.show {
+  width: 250px;
+  height: 309px;
+  background: url("../../../static/images/5.png") no-repeat no-repeat;
+  background-size: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  padding: 20px 13px;
+  // z-index: 9;
+  .showtitle {
+    font-size: 16px;
+    color: #000;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+  .shownum {
+    width: 224px;
+    text-align: center;
+    background: url("../../../static/images/9@3x.png") no-repeat no-repeat;
+    // background-size: 100%;
+    span {
+      font-size: 30px;
+      color: #fff;
+    }
+  }
+  .xian {
+    height: 1px;
+    width: 90%;
+    border: 0.5px dashed #956621;
+    position: absolute;
+    top: 47%;
+    // background: #956621;
+  }
+  .showjihuo {
+    width: 224px;
+    height: 44px;
+    text-align: center;
+    background: url("../../../static/images/9@3x.png") no-repeat no-repeat;
+    background-size: 100%;
+    span {
+      line-height: 44px;
+      font-size: 14px;
+      color: #fff;
+    }
+    position: absolute;
+    bottom: 30%;
+  }
+  .suoyao {
+    color: #000;
+  }
+}
+.van-cell {
+  padding: 0;
 }
 </style>
