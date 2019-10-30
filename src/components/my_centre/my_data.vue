@@ -39,53 +39,27 @@
           placeholder="请输入手机号"
           type="number"
           label="手机号"
+          maxlength="11"
+          :error="errors.has('phones')"
           input-align="right"
         />
       </van-cell-group>
       <van-cell-group>
         <van-field v-model="mydata.pay"
-         placeholder="请输入支付宝账号"
-          label="支付宝"
+         placeholder="请输入安全密码"
+          label="安全密码"
+          :error="errors.has('password')"
            input-align="right" />
-      </van-cell-group>
-      <van-cell-group>
-        <van-field 
-        v-model="mydata.wx"
-         placeholder="请输入微信账号" 
-         label="微信号" 
-         input-align="right" />
       </van-cell-group>
     </div>
-    <div class="name">
-        <van-cell-group>
-          <van-field v-model="mydata.bankname" 
-          placeholder="中国银行" 
-          label="银行名称" 
-          input-align="right" 
-          disabled
-          />
-        </van-cell-group>
-        <van-cell-group>
-          <van-field
-           v-model="mydata.kaihu" 
-           placeholder="请输入开户行地址" 
-           label="开户地址" 
-           input-align="right" />
-        </van-cell-group>
-        <van-cell-group>
-          <van-field 
-          v-model="mydata.kahao" 
-          placeholder="请输入银行卡号" 
-          label="银行卡号" 
-          type="number"
-          input-align="right" />
-        </van-cell-group>
-      </div>
-      <button class="btn">保存</button>
+      <button class="btn" @click="submit">保存</button>
   </div>
 </template>
 
 <script>
+
+import { Toast } from 'vant'
+
 export default {
     data () {
         return{
@@ -94,17 +68,39 @@ export default {
                 nicheng:'',
                 usdt:'',
                 phone: null,
-                pay:'',
-                wx:'',
-                bankname: '',
-                kaihu:'',
-                kahao: null
+                pay:''
             }
         }
     },
   methods: {
     onClickLeft() {
       this.$router.go(-1)
+    },
+    submit() {
+        var that = this;
+      this.$validator.validateAll().then(function(reslut, field) {
+        if (reslut) {
+          that.$axios
+            .fetchPost("http://hxlc.ltlfd.cn/home/info/editUser", {
+              realname: that.mydata.name,
+              nickname: that.mydata.nicheng,
+              phone: that.mydata.phone,
+              secpwd: that.mydata.pay,
+              usdt: that.mydata.usdt
+            })
+            .then(res => {
+              console.log(res);
+              if (res.code === 1) {
+                that.$router.push("/Login");
+              } else {
+                Toast(res.msg);
+              }
+            });
+        } else {
+          console.log(that.errors);
+          Toast(that.errors.items[0].msg);
+        }
+      });
     }
   }
 };

@@ -4,10 +4,10 @@
       <slot slot="left" name="left">
         <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
       </slot>
-      <slot slot="title" name="个人资料">{{title}}</slot>
+      <slot slot="title" name="个人资料">{{type == 0 ? '弘信积分': (type == 1 ? '激活码管理' : '排单币')}}</slot>
     </van-nav-bar>
-    <!-- 展示 -->
-    <div class="integral-contnet">
+    <!-- 激活码展示 -->
+    <div class="integral-contnet" v-if="type == 1">
       <div class="integral-contnet-head">
         <div class="integral-contnet-head-left">激活码余额(个)</div>
         <div class="integral-contnet-head-cont">{{integral}}</div>
@@ -38,8 +38,74 @@
         </van-cell-group>
       </div>
     </div>
+    <!-- 积分展示 -->
+    <div class="integral-contnet" v-else-if="type == 0">
+      <div class="integral-contnet-head">
+        <div class="integral-contnet-head-left">弘信积分个数(个)</div>
+        <div class="integral-contnet-head-cont">{{integral}}</div>
+        <div class="integral-contnet-head-right"></div>
+      </div>
+      <div>
+        <van-cell-group>
+          <van-field
+            v-model="jifenid"
+            label-width="60%"
+            input-align="right"
+            label-class="integral-input-text"
+            label="转入弘信积分到"
+            placeholder="输入账号"
+          />
+        </van-cell-group>
+      </div>
+      <div>
+        <van-cell-group>
+          <van-field
+            v-model="jifennum"
+            label-width="60%"
+            input-align="right"
+            label-class="integral-input-text"
+            label="转入弘信积分数量"
+            placeholder="输入数量"
+          />
+        </van-cell-group>
+      </div>
+    </div>
+
+    <!-- 排单币展示 -->
+    <div class="integral-contnet" v-else>
+      <div class="integral-contnet-head">
+        <div class="integral-contnet-head-left">排单币(个)</div>
+        <div class="integral-contnet-head-cont">{{integral}}</div>
+        <div class="integral-contnet-head-right"></div>
+      </div>
+      <div>
+        <van-cell-group>
+          <van-field
+            v-model="jifenid"
+            label-width="60%"
+            input-align="right"
+            label-class="integral-input-text"
+            label="转入排单币到"
+            placeholder="输入账号"
+          />
+        </van-cell-group>
+      </div>
+      <div>
+        <van-cell-group>
+          <van-field
+            v-model="jifennum"
+            label-width="60%"
+            input-align="right"
+            label-class="integral-input-text"
+            label="转入排单币数量"
+            placeholder="输入数量"
+          />
+        </van-cell-group>
+      </div>
+    </div>
+
     <div class="integral-btn">
-      <van-button size="large" color="#ffddaa">保存</van-button>
+      <van-button size="large" color="#ffddaa" @click="submit">保存</van-button>
     </div>
     <div class="intergral-record">
       <div class="intergral-record-title">
@@ -50,7 +116,7 @@
           </div>
         </div>
         <div>
-          <p style="color:#ffddaa;">全部交易记录</p>
+          <p style="color:#ffddaa;" @click="mydeals">全部交易记录</p>
         </div>
       </div>
       <div class="deal">
@@ -77,9 +143,12 @@
 export default {
   data() {
     return {
+      type: 0,
       integral: 10,
-      peopleId: 10123,
-      peopleNum: 1001010,
+      peopleId: null, // 激活码转入id
+      peopleNum: null, // 激活码数量
+      jifenid: null, // 积分转入id
+      jifennum: null, // 积分数量
       dealtype: {
         dzhanghu: "接受账户",
         dnum: "数量",
@@ -146,9 +215,81 @@ export default {
       ]
     };
   },
+  created() {
+    this.type = this.$route.query.type;
+    if (this.type == 0) {
+      this.$axios
+        .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
+        .then(res => {
+          this.mydata = res.data.coinlist;
+        });
+    } else if (this.type == 1) {
+       this.$axios
+        .fetchPost("http://hxlc.ltlfd.cn/home/info/pin")
+        .then(res => {
+          console.log(res);
+          this.mydata = res.data.coinlist;
+        });
+    } else {
+       this.$axios
+        .fetchPost("http://hxlc.ltlfd.cn/home/info/buycoin")
+        .then(res => {
+          console.log(res);
+          this.mydata = res.data.coinlist;
+        });
+    }
+    this.$axios
+      .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
+      .then(res => {
+        if (this.type === 0) {
+          this.integral = res.data.user.credit3;
+        } else {
+          this.integral = res.data.user.pin;
+        }
+      });
+  },
   methods: {
     onClickLeft() {
       this.$router.go(-1);
+    },
+    submit() {
+      if (this.type == 0) {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/info/integral", {
+            account: this.jifenid,
+            num: this.jifennum
+          })
+          .then(res => {
+            console.log(res);
+            this.$toast(res.msg);
+          });
+      } else if (this.type == 1) {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/info/pin", {
+            account: this.peopleId,
+            num: this.peopleNum
+          })
+          .then(res => {
+            console.log(res);
+            this.$toast(res.msg);
+          });
+      } else {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/info/buycoin", {
+            account: this.peopleId,
+            num: this.peopleNum
+          })
+          .then(res => {
+            console.log(res);
+            this.$toast(res.msg);
+          });
+      }
+    },
+    onLoad() {
+      (this.loading = false), (this.finished = true);
+    },
+    mydeals() {
+      this.$router.push({path:'mydeal',query:{type: this.type}})
     }
     // onClickRight() {
     //   Toast('按钮');
@@ -180,7 +321,7 @@ export default {
     }
   }
 }
-.van-button__text{
+.van-button__text {
   color: #000;
 }
 .integral {
@@ -208,14 +349,14 @@ export default {
     position: relative;
     .integral-contnet-head-left {
       position: absolute;
-      top: 20px;
+      top: 3px;
       left: 10px;
       font-size: 16px;
     }
     .integral-contnet-head-cont {
       display: flex;
       align-items: center;
-      font-size: 50px;
+      font-size: 45px;
       font-family: Microsoft YaHei UI;
       font-weight: bold;
     }
@@ -299,16 +440,16 @@ export default {
 }
 
 .jhnav {
-    background: none;
-    margin-bottom: 10px;
-    .van-nav-bar__title {
-      color: #ffddaa;
-    }
+  background: none;
+  margin-bottom: 10px;
+  .van-nav-bar__title {
+    color: #ffddaa;
   }
-  [class*=van-hairline]::after{
-      border: none;
-  }
-  .van-hairline--bottom::after {
+}
+[class*="van-hairline"]::after {
+  border: none;
+}
+.van-hairline--bottom::after {
   border: none;
 }
 </style>

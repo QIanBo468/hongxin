@@ -7,10 +7,7 @@
       </van-swipe-item>
 
       <div class="custom-indicator" slot="indicator">
-        <span :class="current == 0 ?  indicator : ''"></span>
-        <span :class="current == 1 ?  indicator : ''"></span>
-        <span :class="current == 2 ?  indicator : ''"></span>
-        <span :class="current == 3 ?  indicator : ''"></span>
+        <span v-for="(item, index) of adSwiper" :key="index+1" :class="current == index ?  indicator : ''"></span>
       </div>
     </van-swipe>
 
@@ -19,7 +16,7 @@
         <img src="../../../static/images/gonggao.png" alt />
         <span>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{gonggao}}</span>
       </div>
-      <p>查看</p>
+      <p @click="$router.push('/gonggao')">查看</p>
     </div>
 
     <div class="moneytitle">
@@ -36,7 +33,7 @@
       class="moneyswiper"
     >
       <van-swipe-item>
-        <div class="money-item" @click="$router.push('/integral')">
+        <div class="money-item" @click="$router.push({path:'/jhm',query:{type:0}})">
           <img :src="moneySwiper[0].zuimg" alt />
           <span>{{moneySwiper[0].zuname}}</span>
         </div>
@@ -49,10 +46,10 @@
           <span>{{moneySwiper[2].zuname}}</span>
         </div>
         <div class="money-item">
-          <van-cell class="poup" @click="showPopup">
+          
             <img :src="moneySwiper[3].zuimg" alt />
             <span>{{moneySwiper[3].zuname}}</span>
-          </van-cell>
+          
         </div>
         
       </van-swipe-item>
@@ -63,26 +60,10 @@
         </div>
       </van-swipe-item>
     </van-swipe>
-<van-popup v-model="show">
-          <div class="show">
-            <div class="showtitle">.. 我的激活码 ..</div>
-            <div class="shownum">
-              <span>{{'1'}}</span>个
-            </div>
-            <div class="xian"></div>
-            <div class="showjihuo">
-              <span>立即激活</span>
-            </div>
-            <div class="suoyao">
-              <p>OR</p>
-              <span>_</span>
-              <p>索要激活码</p>
-            </div>
-          </div>
-        </van-popup>
+
     <!-- 列表 -->
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <div class="moneylist" v-for="(item, index) of list" :key="index">
+      <div class="moneylist" v-for="(item, index) of list" :key="index+'list'" @click="$router.push({path: '/helplock',query:{ items: item.id,type: 0}})">
         <div class="list-left">
           <div class="left-active">
             <div class="red"></div>
@@ -95,7 +76,7 @@
           <div class="purse">￥{{item.price}}</div>
         </div>
       </div>
-       <div class="moneylist" v-for="(item, index) of lists" :key="index">
+       <div class="moneylist" v-for="(item, index) of lists" :key="index+'lists'" @click="$router.push({path: '/helplock',query:{ items: item.id, type: 1}})">
         <div class="list-left">
           <div class="left-active">
             <div class="red"></div>
@@ -117,10 +98,10 @@ export default {
   data() {
     return {
       adSwiper: [
-        { id: 0, pic: "./static/images/swiper@3x.png" },
-        { id: 1, pic: "./static/images/swiper1@3x.png" },
-        { id: 2, pic: "./static/images/swiper@3x.png" },
-        { id: 3, pic: "./static/images/swiper1@3x.png" }
+        // { id: 0, pic: "./static/images/swiper@3x.png" },
+        // { id: 1, pic: "./static/images/swiper1@3x.png" },
+        // { id: 2, pic: "./static/images/swiper@3x.png" },
+        // { id: 3, pic: "./static/images/swiper1@3x.png" }
       ],
       moneySwiper: [
         { id: 0, zuimg: "./static/images/zujifen.png", zuname: "宏信积分" },
@@ -146,10 +127,10 @@ export default {
     },
     onLoad(ls,lss) {
       setTimeout(() => {
-        if (list.length === ls.length && lists === lss.length){
+        // if (this.list.length === ls.length && this.lists.length === lss.length){
             this.loading = false;
             this.finished = true;
-        }
+        // }
 
         // 加载状态结束
 
@@ -161,9 +142,7 @@ export default {
         // }
       }, 500);
     },
-    showPopup() {
-      this.show = true;
-    }
+ 
   },
   created() {
     // axios.post()
@@ -212,6 +191,7 @@ export default {
       height: 4px;
       border-radius: 6px;
       background: #fff;
+      margin-right: 5px;
     }
     .xuanzhong {
       background: #ffddaa;

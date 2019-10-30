@@ -8,6 +8,10 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
+// 图片放大
+import vuePicturePreview from 'vue-picture-preview'
+Vue.use(vuePicturePreview)
+
 Vue.prototype.$axios = api
 import api from './utils/api'
 import VeeValidate, { Validator } from 'vee-validate'

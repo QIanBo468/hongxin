@@ -24,6 +24,7 @@ import integral from '@/components/my_centre/integral'
 import teamall from '@/components/my_centre/teamall'
 import teamm from '@/components/my_centre/team_m'
 import jhm from '@/components/my_centre/jh_m'
+import news from '@/components/my_centre/news'
 Vue.use(Router)
 
 export default new Router({
@@ -40,6 +41,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: register
+    },
+    {
+      path: '/news',
+      name: 'news',
+      component: news
     },
     {
       path: '/jhm',

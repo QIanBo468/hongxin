@@ -23,6 +23,7 @@
     "vue": "^2.5.2",
     "vue-axios": "^2.1.5",
     "vue-cookies": "^1.5.13",
+    "vue-picture-preview": "^1.3.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

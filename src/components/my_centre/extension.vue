@@ -7,7 +7,7 @@
     <div class="extension-con acea-row row-center-wrapper">
       <div class="img-box">
           <van-image class="image-bottom" width="11rem" src="../../../static/images/extensionBottom.png" />
-        <van-image width="12rem" height="12.2rem" src="../../../static/images/extensionKuang.png" />
+        <van-image width="12rem" height="12.2rem" :src="code.tgurl" />
         <van-image
           class="image-wife"
           width="2rem"
@@ -41,8 +41,16 @@ export default {
       newPassword: "", //新密码
       newPasswordRepeat: "", //新密码确认
       phoneNum: "", //手机号
-      sms: "" //短信验证码
+      sms: "", //短信验证码
+      code:{}
     };
+  },
+  created () {
+    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/myuser/qrcode')
+    .then(res=>{
+      console.log(res)
+      this.code= res.data
+    })
   },
   methods: {
     onClickLeft() {

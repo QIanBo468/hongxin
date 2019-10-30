@@ -3,20 +3,20 @@
     <van-nav-bar class="mi_nav" title="我的"></van-nav-bar>
     <div class="usetitle">
       <div class="useatuo">
-        <img :src="usexg.auther" width="53px" height="53px" alt />
+        <div class="touxiang">
+          <img :src="usexg.avatar" width="53px" height="53px" alt />
+        </div>
         <div class="usename">
-          <span>{{usexg.name}}</span>
-          <p>用户编号:{{usexg.bianhao}}</p>
+          <span>{{usexg.realname}}</span>
+          <p>用户编号:{{usexg.account}}</p>
         </div>
       </div>
-      <div class="active">{{usexg.active}}</div>
+      <div class="active">会员</div>
     </div>
     <div class="indexitem">
       <span>资料管理</span>
-      <van-grid :border="false" :column-num="3" class="ziliaoicon">
-        <van-grid-item text="资料查看">
-          <van-image width="30px" src="../../../static/my_index/Folder@3x.png" />资料查看
-        </van-grid-item>
+      <van-grid :border="false" :column-num="2" class="ziliaoicon">
+        
         <van-grid-item to="/mydata">
           <van-image width="30px" src="../../../static/my_index/Folder@3x.png" />资料修改
         </van-grid-item>
@@ -28,8 +28,8 @@
     <div class="indexitem">
       <span>我的钱包</span>
       <van-grid :border="false" :column-num="5" class="ziliaoicon">
-        <van-grid-item>
-          <van-image width="30px" src="../../../static/my_index/Ways_of_payment@3x.png" />排单币
+        <van-grid-item :to="{path:'jhm',query:{type:2}}">
+          <van-image  width="30px" src="../../../static/my_index/Ways_of_payment@3x.png" />排单币
         </van-grid-item>
         <van-grid-item>
           <van-image width="30px" src="../../../static/my_index/Purse@3x.png" />动态钱包
@@ -37,7 +37,7 @@
         <van-grid-item>
           <van-image width="30px" src="../../../static/my_index/Purse@3x.png" />静态钱包
         </van-grid-item>
-        <van-grid-item to="jhm">
+        <van-grid-item :to="{path:'jhm',query:{type:1}}">
             <van-image width="30px" src="../../../static/my_index/Сalendar@3x.png" />激活码管理
         </van-grid-item>
         <van-grid-item to="help">
@@ -57,7 +57,7 @@
         <van-grid-item>
           <van-image width="30px" src="../../../static/my_index/16@3x.png" />推荐奖励
         </van-grid-item>
-        <van-grid-item to="jhm">
+        <van-grid-item :to="{path:'jhm',query:{type:1}}">
           <van-image width="30px" src="../../../static/my_index/Purse@3x.png" />激活码转账
         </van-grid-item>
       </van-grid>
@@ -92,6 +92,19 @@ export default {
       }
     };
   },
+  created () {
+    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/personal')
+    .then(res=>{
+      console.log(res)
+      if(res.code ==1 ){
+        this.usexg = res.data
+      }
+      
+    })
+    // .then(res =>{
+    //   console.log(res)
+    // })
+  },
   methods: {
     showPopup() {
       this.show = true;
@@ -121,6 +134,12 @@ export default {
       display: flex;
       align-items: center;
       height: 100%;
+      .touxiang{
+        width: 53px;
+        height: 53px;
+        border-radius: 50%;
+        background: #0b0b1f;
+      }
       .usename {
         display: flex;
         flex-direction: column;

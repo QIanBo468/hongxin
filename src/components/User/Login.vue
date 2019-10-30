@@ -71,15 +71,15 @@ export default {
         if (reslut) {
           that.$axios
             .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
-             
               account: that.userName,
                 password: that.password
-              
-                
             })
             .then(res => {
               console.log(res);
               if (res.code) {
+                that.$cookies.set('status',res.data.status)
+                that.$cookies.set('accessToken',res.data.token)
+               console.log(that.$cookies.get('accessToken'))
                 that.$router.push("/index");
               } else {
                 Toast(res.msg);

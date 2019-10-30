@@ -49,6 +49,14 @@ export default {
             flg: false,
             select: 0
         }
+    },
+    created () {
+      if(this.$route.path == '/index'){
+        this.active = 0;
+      } else {
+        this.active = 1
+      }
+      // this.$route.path
     }
 };
 </script>

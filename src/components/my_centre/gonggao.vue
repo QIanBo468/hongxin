@@ -9,10 +9,10 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <div class="gg_content" v-for="(item, index) of list" :key="index">
         <div class="cont">
-          <p>{{item.title}}</p>
-          <span>{{item.time}}</span>
+          <p>{{item.if_theme}}</p>
+          <span>{{item.if_time}}</span>
         </div>
-        <router-link to>点击查看</router-link>
+        <div @click="submit(item)">点击查看</div>
       </div>
     </van-list>
   </div>
@@ -52,25 +52,36 @@ export default {
       finished: false
     };
   },
-
+  created () {
+    this.$axios.fetchGet('http://hxlc.ltlfd.cn/home/info/news').then(res =>{
+      console.log(res)
+      if(res.data.code ==1){
+        
+        this.list = res.data.data.newlist
+      }
+    })
+  },
   methods: {
     onClickLeft() {
       this.$router.go(-1);
     },
+    submit (item) {
+      this.$router.push({path:'/news',query:{id:item.if_id}})
+    },
     onLoad() {
       // 异步更新数据
-      setTimeout(() => {
-        for (let i = 0; i < 6; i++) {
-          console.log(this.list[i]);
-        }
-        // 加载状态结束
+      // setTimeout(() => {
+      //   for (let i = 0; i < 6; i++) {
+      //     console.log(this.list[i]);
+      //   }
+      //   // 加载状态结束
         this.loading = false;
 
-        // 数据全部加载完成
-        if (this.list.length > 5) {
+      //   // 数据全部加载完成
+      //   if (this.list.length > 5) {
           this.finished = true;
-        }
-      }, 500);
+      //   }
+      // }, 500);
     }
   }
 };

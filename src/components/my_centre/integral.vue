@@ -134,12 +134,12 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     position: relative;
-    .integral-contnet-head-left {
-      position: absolute;
-      top: 20px;
-      left: 10px;
-      font-size: 16px;
-    }
+    // .integral-contnet-head-left {
+    //   position: absolute;
+    //   top: 20px;
+    //   left: 10px;
+    //   font-size: 16px;
+    // }
     .integral-contnet-head-cont {
       display: flex;
       align-items: center;

@@ -36,6 +36,7 @@ export default {
         dway: '方式'
 
     },
+    type: null,
       title: "全部交易记录",
       loading: false,
       finished: false,
@@ -96,6 +97,14 @@ export default {
         }
       ]
     };
+  },
+  created() {
+   this.type = this.$route.query.type
+   console.log(this.type)
+   this.$axios.fetchGet('http://hxlc.ltlfd.cn/home/info/buycoin_log')
+   .then(res=>{
+     console.log(res)
+   })
   },
   methods: {
       onClickLeft () {
