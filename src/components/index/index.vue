@@ -37,15 +37,15 @@
           <img :src="moneySwiper[0].zuimg" alt />
           <span>{{moneySwiper[0].zuname}}</span>
         </div>
-        <div class="money-item">
+        <div class="money-item" @click="$toast('正在维护')">
           <img :src="moneySwiper[1].zuimg" alt />
           <span>{{moneySwiper[1].zuname}}</span>
         </div>
-        <div class="money-item">
+        <div class="money-item" @click="$toast('正在维护')">
           <img :src="moneySwiper[2].zuimg" alt />
           <span>{{moneySwiper[2].zuname}}</span>
         </div>
-        <div class="money-item">
+        <div class="money-item" @click="$router.push({path:'jhm',query:{type:1}})">
           
             <img :src="moneySwiper[3].zuimg" alt />
             <span>{{moneySwiper[3].zuname}}</span>
@@ -94,6 +94,9 @@
 </template>
 
 <script>
+
+import { Toast } from 'vant'
+
 export default {
   data() {
     return {

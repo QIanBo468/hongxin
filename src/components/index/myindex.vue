@@ -31,10 +31,10 @@
         <van-grid-item :to="{path:'jhm',query:{type:2}}">
           <van-image  width="30px" src="../../../static/my_index/Ways_of_payment@3x.png" />排单币
         </van-grid-item>
-        <van-grid-item>
+        <van-grid-item @click="$toast('正在维护')">
           <van-image width="30px" src="../../../static/my_index/Purse@3x.png" />动态钱包
         </van-grid-item>
-        <van-grid-item>
+        <van-grid-item @click="$toast('正在维护')">
           <van-image width="30px" src="../../../static/my_index/Purse@3x.png" />静态钱包
         </van-grid-item>
         <van-grid-item :to="{path:'jhm',query:{type:1}}">
@@ -51,10 +51,10 @@
         <van-grid-item to="mydeal">
           <van-image width="30px" src="../../../static/my_index/Ways_of_payment@3x.png" />财务明细
         </van-grid-item>
-        <van-grid-item>
+        <van-grid-item @click="$toast('正在维护')">
           <van-image width="30px" src="../../../static/my_index/15@3x.png" />我的奖励
         </van-grid-item>
-        <van-grid-item>
+        <van-grid-item @click="$toast('正在维护')">
           <van-image width="30px" src="../../../static/my_index/16@3x.png" />推荐奖励
         </van-grid-item>
         <van-grid-item :to="{path:'jhm',query:{type:1}}">
