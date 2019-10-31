@@ -104,31 +104,32 @@ export default {
             }
         },
          submit() {
-         var that = this;
-      this.$validator.validateAll().then(function(reslut, field) {
-        if (reslut) {
-          that.$axios
+        //  var that = this;
+      // this.$validator.validateAll().then(function(reslut, field) {
+      //   if (reslut) {
+          this.$axios
             .fetchPost("http://hxlc.ltlfd.cn/home/login/forget_pwd", {
-             phone: that.userPhone,
-             phonecode: that.sms,
-             password: that.password,
-             passworded: that.repeassword
+             phone: this.userPhone,
+             phonecode: this.sms,
+             password: this.password,
+             passworded: this.repeassword
             })
             .then(res => {
               console.log(res);
               if (res.code ===1) {
-                that.$router.push("/Login");
+                this.$router.push("/Login");
               } else {
                 Toast(res.msg);
               }
             });
-        } else {
-          console.log(that.errors)
-          Toast(that.errors.items[0].msg);
-        }
-      });
+        } 
+      //   else {
+      //     console.log(that.errors)
+      //     Toast(that.errors.items[0].msg);
+      //   }
+      // });
     }
-    },
+    // },
    
   }
 </script>

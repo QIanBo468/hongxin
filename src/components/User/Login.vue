@@ -13,7 +13,7 @@
           placeholder="输入账号"
           v-validate="'required'"
           autocomplete="off"
-          :error="errors.has('phone')"
+          :error="errors.has('phones')"
         />
         <van-field
           v-model="password"
@@ -66,30 +66,30 @@ export default {
       //     }
       //   });
 
-      var that = this;
-      this.$validator.validateAll().then(function(reslut, field) {
-        if (reslut) {
-          that.$axios
+      // var that = this;
+      // this.$validator.validateAll().then(function(reslut, field) {
+      //   if (reslut) {
+          this.$axios
             .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
-              account: that.userName,
-                password: that.password
+              account: this.userName,
+                password: this.password
             })
             .then(res => {
               console.log(res);
               if (res.code) {
-                that.$cookies.set('status',res.data.status)
-                that.$cookies.set('accessToken',res.data.token)
-               console.log(that.$cookies.get('accessToken'))
-                that.$router.push("/index");
+                this.$cookies.set('status',res.data.status)
+                this.$cookies.set('accessToken',res.data.token)
+                this.$router.push("/index");
               } else {
                 Toast(res.msg);
               }
-            });
-        } else {
-          console.log(that.errors)
-          Toast(that.errors.items[0].msg);
-        }
-      });
+            })
+        
+      //   else {
+      //     console.log(that.errors)
+      //     Toast(that.errors.items[0].msg);
+      //   }
+      // });
     },
     toregister() {
       this.$router.push("/register");

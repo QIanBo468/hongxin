@@ -49,19 +49,13 @@ const dictionary = {
       email: '邮箱',
       password: '密码',
       task_name: '任务名称',
-      phone: '手机',
-      task_type: '任务类型',
-      task_template: '任务模板',
-      task_tine_type: '时间类型',
-      task_tine_value: '时间类型值',
-      assisting_department: '协助单位',
-      responsible_department: '责任单位',
-      target_area: '目标新增面积',
-      target_cahnge_number: '目标改造数量',
-      implementation_plan: '实施方案',
-      assessment_standard: '考核指标',
-      grading_standard: '评分标准',
-      score: '考核分值'
+      phone: '手机号',
+      captcha: '验证码',
+      account: '手机号',
+      safeword: '支付密码',
+      inviteCode: '邀请码',
+      realName: '姓名',
+      identity: '身份证号'
     }
   }
 }
@@ -74,6 +68,14 @@ Validator.extend('phones', {
   },
   validate: value => {
     return value.length === 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+  }
+})
+Validator.extend('password', {
+  messages: {
+    zh_CN: field => field + '密码必须由数字和字母组成6~20位'
+  },
+  validate: value => {
+    return /^(\w){6,20}$/.test(value)
   }
 })
 Vue.prototype.$axios = api;

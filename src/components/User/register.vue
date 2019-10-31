@@ -97,38 +97,38 @@ export default {
     },
     submit () {
 
-            var that = this
-            this.$validator.validateAll().then(function(result) {
-                if(result){
-                    that.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/regadd',
+            // var that = this
+            // this.$validator.validateAll().then(function(result) {
+            //     if(result){
+                    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/regadd',
                     {
-                        uid: that.userName,
-                        realname: that.xingming,
-                        password: that.password,
-                        passworded: that.repeassword,
-                        secpwd: that.pay,
-                        secpwded: that.pays,
-                        pid: that.tuijian
+                        uid: this.userName,
+                        realname: this.xingming,
+                        password: this.password,
+                        passworded: this.repeassword,
+                        secpwd: this.pay,
+                        secpwded: this.pays,
+                        pid: this.tuijian
                     }).then(res => {
                       console.log(res)
                       // 返回成功状态
-                        if (res.code) {
+                        if (res.code == 1) {
                             Toast('注册成功')
                             // that.$cookies.set('status', res.data.status)
-                            that.$router.push('/login')
+                            this.$router.push('/login')
                             // that.$cookies.set('accessToken', res.data.tokenType + " " + res.data.accessToken , res.data.expiresIn)
                         }else{
                             Toast(res.msg)
                         }
                     })
-                }else{
-                    console.log(that.errors)
-                    Toast(that.errors.items[0].msg)
                 }
-            })
+                // else{
+                //     console.log(that.errors)
+                //     Toast(that.errors.items[0].msg)
+                // }
+       
     }
   }
-};
 </script>
 
 <style lang='less' scope>
