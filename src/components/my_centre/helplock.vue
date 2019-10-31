@@ -2,7 +2,7 @@
   <div class="helplock">
     <van-nav-bar class="jhnav" @click-left="onClickLeft">
       <slot slot="left" name="left">
-        <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
+        <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
       <slot slot="title" name="帮助记录">帮助记录</slot>
     </van-nav-bar>
@@ -472,7 +472,7 @@ export default {
 }
 
 .jhnav {
-  background: none;
+  background: transparent !important;
   margin-bottom: 10px;
   .van-nav-bar__title {
     color: #ffddaa;

@@ -71,6 +71,9 @@ export default {
      font-size:20px;
   }
 }
+.extension-title{
+  background: transparent !important;
+}
 .extension-head {
   margin-top: 3rem;
 }

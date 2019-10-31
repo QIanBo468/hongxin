@@ -2,7 +2,7 @@
   <div class="my_deal">
     <van-nav-bar class="jhnav" @click-left="onClickLeft">
       <slot slot="left" name="left">
-        <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
+        <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
       <slot slot="title" name="个人资料">{{title}}</slot>
     </van-nav-bar>
@@ -152,7 +152,7 @@ export default {
 
 
   .jhnav {
-    background: none;
+    background: transparent !important;
     margin-bottom: 10px;
     .van-nav-bar__title {
       color: #ffddaa;

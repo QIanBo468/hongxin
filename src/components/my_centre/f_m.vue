@@ -1,6 +1,6 @@
 <template>
   <div class="financial_management">
-    <van-nav-bar  title="财务管理" left-arrow @click-left="onClickLeft" />
+    <van-nav-bar class="titels"  title="财务管理" left-arrow @click-left="onClickLeft" />
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
          <van-row type="flex" justify="space-between">
           <van-col span="6" class="acea-row row-center-wrapper">时间</van-col>
@@ -58,7 +58,9 @@ export default {
 </script>
 
 <style  lang='less' scope>
-
+.titels{
+  background: transparent !important;
+}
 .financial_management {
   padding: 0 1rem;
 

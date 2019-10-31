@@ -29,7 +29,7 @@
     <div class="login-register">
       <van-button type="default" class="btn" @click="submit">登录</van-button>
       <div class="logway">
-        <div class="reg" @click="toregister">还没账户，去注册!</div>
+        <!-- <div class="reg" @click="toregister">还没账户，去注册!</div> -->
         <div class="reslut" @click="toreset">忘记密码?</div>
       </div>
     </div>
@@ -77,8 +77,8 @@ export default {
             .then(res => {
               console.log(res);
               if (res.code) {
-                this.$cookies.set('status',res.data.status)
-                this.$cookies.set('accessToken',res.data.token)
+              localStorage.setItem('status',res.data.status)
+              localStorage.setItem('accessToken',res.data.token)
                 this.$router.push("/index");
               } else {
                 Toast(res.msg);
@@ -91,9 +91,9 @@ export default {
       //   }
       // });
     },
-    toregister() {
-      this.$router.push("/register");
-    },
+    // toregister() {
+    //   this.$router.push("/register");
+    // },
     toreset() {
       this.$router.push("/reset");
     }

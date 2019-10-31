@@ -115,7 +115,7 @@ export default {
   padding: 0 20px;
 }
 .integralnav {
-  background: transparent;
+  background: transparent !important;
 }
 .van-nav-bar__title {
   color: #f2c684;

@@ -2,7 +2,7 @@
   <div class="changePassword">
     <van-nav-bar class="jhnav" @click-left="onClickLeft">
       <slot slot="left" name="left">
-        <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
+        <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
       <slot slot="title" name="个人资料">修改密码</slot>
     </van-nav-bar>
@@ -132,7 +132,7 @@ export default {
 .chang-form {
   .van-cell-group {
     margin-top: 1rem;
-    background: transparent;
+    background: transparent !important;
     van-cell {
       background: transparent;
     }

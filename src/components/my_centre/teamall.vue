@@ -2,7 +2,7 @@
   <div class="team-all">
      <van-nav-bar class="jhnav" @click-left="onClickLeft">
       <slot slot="left" name="left">
-        <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
+        <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
       <slot slot="title" name="个人资料">团队全部</slot>
     </van-nav-bar>
@@ -20,7 +20,7 @@
                 round
                 width="80%"
                 height="auto"
-                src="../../../static/images/17-s.png"
+                src="./static/images/17-s.png"
               />
               <div class="font-white">昵称</div>
               <div class="font-yellow">{{item.name}}</div>
@@ -87,6 +87,9 @@ export default {
 </script>
 
 <style  lang='less' scope>
+.jhnav{
+  background: transparent !important;
+}
 .team-all {
   padding: 0 1rem;
 }

@@ -92,7 +92,7 @@ export default {
     text-align: center;
 }
 .jhnav {
-  background: none;
+  background: transparent !important;
   margin-bottom: 10px;
   .van-nav-bar__title {
     color: #ffddaa;

@@ -7,7 +7,7 @@
       @click-right="onClickRight"
     >
       <slot slot="left" name="left">
-        <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
+        <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
 
       <slot slot="title" name="帮助">帮助</slot>
@@ -59,7 +59,7 @@ export default {
 
 <style lang='less' scope>
 .jhnav {
-  background: none;
+  background: transparent !important;
   margin-bottom: 10px;
   .van-nav-bar__title {
     color: #ffddaa;

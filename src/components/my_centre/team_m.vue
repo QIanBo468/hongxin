@@ -2,7 +2,7 @@
   <div class="team">
     <van-nav-bar class="jhnav" @click-left="onClickLeft" @click-right="onClickRight">
       <slot slot="left" name="left">
-        <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
+        <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
       <slot slot="title" name="团队管理">团队管理</slot>
       <slot slot="right" name="right">查看全部</slot>
@@ -19,7 +19,7 @@
         <van-cell v-for="item in teamList" :key="item.ue_id">
          <div class="listbox">
            <div class="useava">
-             <img src="../../../static/images/17-s.png" alt="">
+             <van-image src="./static/images/17-s.png" alt="">
              <span>昵称</span>
              <p>{{item.nickname}}</p>
            </div>
@@ -110,6 +110,9 @@ export default {
 };
 </script>
 <style lang='less' scope>
+.jhnav{
+  background: transparent !important;
+}
 .font-white {
   color: #ffffff;
 }

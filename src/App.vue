@@ -17,6 +17,12 @@ html,body,#app {
   height: 100%;
   background: url(../static/images/BG.png);
 }
+.van-hairline--bottom:after{
+  border: none;
+}
+.van-nav-bar{
+  background: transparent;
+}
 .acea-row {
   display: flex;
   flex-wrap: wrap;

@@ -2,7 +2,7 @@
   <div class="new">
  <van-nav-bar class="ggnav" @click-left="onClickLeft">
       <slot slot="left" name="left">
-        <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
+        <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
       <slot slot="title" name="公告">新闻详情</slot>
     </van-nav-bar>
@@ -41,6 +41,9 @@ export default {
 </script>
 
 <style lang='less' scope>
+.ggnav{
+    background: transparent !important;
+}
     .new{
         padding: 0 11px;
          word-wrap:break-word;

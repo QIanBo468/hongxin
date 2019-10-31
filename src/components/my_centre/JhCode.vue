@@ -2,7 +2,7 @@
   <div class="Jhcode">
     <van-nav-bar class="jhnav" @click-left="onClickLeft">
       <slot slot="left" name="left">
-        <img width="20px" height="20px" src="../../../static/images/left@3x.png" alt />
+        <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
       <slot slot="title" name="激活码管理">激活码管理</slot>
     </van-nav-bar>
@@ -52,7 +52,7 @@ export default {
 .Jhcode {
     padding: 0 11px;
   .jhnav {
-    background: none;
+    background: transparent !important;
     .van-nav-bar__title {
       color: #ffddaa;
     }

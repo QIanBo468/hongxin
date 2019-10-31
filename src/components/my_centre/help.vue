@@ -5,14 +5,12 @@
       width="1.5rem"
       height="1.5rem"
       @click="onClickLeft"
-      src="../../../static/images/left@3x.png"
+      src="./static/images/left@3x.png"
     />
     <van-nav-bar
       class="team-title"
       title="帮助"
-      
       :border="false"
-      
     />
     /<!--right-text="帮助记录"   @click-right="onClickRight"-->
     <div class="help-check acea-row row-center-wrapper">
@@ -131,8 +129,8 @@ export default {
       DynamicNum: "4564", //动态钱包
       staticNum: "2131", //静态钱包
       radio: "1", //单选
-      inactiveIcon: "../../../static/images/check.png",
-      activeIcon: "../../../static/images/checked.png"
+      inactiveIcon: "./static/images/check.png",
+      activeIcon: "./static/images/checked.png"
     };
   },
   created() {

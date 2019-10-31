@@ -165,6 +165,7 @@ export default {
 </script>
 
 <style lang='less' scope>
+
 .pic{
   width: 100%;
 }
@@ -172,7 +173,7 @@ export default {
   color: #ffddaa;
 }
 .indexnav {
-  background: transparent;
+  background: transparent !important;
 }
 .van-nav-bar__title {
   color: #ffddaa;

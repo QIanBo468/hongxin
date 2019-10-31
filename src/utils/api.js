@@ -11,7 +11,7 @@ axios.defaults.headers.post['content-type'] = 'application/x-www-form-urlencoded
 // axios.defaults.baseURL = '/api'
 axios.interceptors.request.use((config) => {
   // this.$cookies.set('status', res.data.status)
-  let token = VueCookies.get('accessToken')
+  let token = localStorage.getItem('accessToken')
   if (token) {
     config.headers.Authorization = token
   }

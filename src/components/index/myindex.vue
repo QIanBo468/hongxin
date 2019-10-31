@@ -15,13 +15,16 @@
     </div>
     <div class="indexitem">
       <span>资料管理</span>
-      <van-grid :border="false" :column-num="2" class="ziliaoicon">
+      <van-grid :border="false" :column-num="3" class="ziliaoicon">
         
         <van-grid-item to="/mydata">
-          <van-image width="30px" src="../../../static/my_index/Folder@3x.png" />资料修改
+          <van-image width="30px" src="./static/my_index/Folder@3x.png" />资料修改
+        </van-grid-item>
+        <van-grid-item to='register'>
+          <van-image width="30px" src="./static/images/user-s.png" />注册
         </van-grid-item>
         <van-grid-item to='changpassword'>
-          <van-image width="30px" src="../../../static/my_index/lock_2@3x.png" />密码修改
+          <van-image width="30px" src="./static/my_index/lock_2@3x.png" />密码修改
         </van-grid-item>
       </van-grid>
     </div>
@@ -29,19 +32,19 @@
       <span>我的钱包</span>
       <van-grid :border="false" :column-num="5" class="ziliaoicon">
         <van-grid-item :to="{path:'jhm',query:{type:2}}">
-          <van-image  width="30px" src="../../../static/my_index/Ways_of_payment@3x.png" />排单币
+          <van-image  width="30px" src="./static/my_index/Ways_of_payment@3x.png" />排单币
         </van-grid-item>
         <van-grid-item @click="$toast('正在维护')">
-          <van-image width="30px" src="../../../static/my_index/Purse@3x.png" />动态钱包
+          <van-image width="30px" src="./static/my_index/Purse@3x.png" />动态钱包
         </van-grid-item>
         <van-grid-item @click="$toast('正在维护')">
-          <van-image width="30px" src="../../../static/my_index/Purse@3x.png" />静态钱包
+          <van-image width="30px" src="./static/my_index/Purse@3x.png" />静态钱包
         </van-grid-item>
         <van-grid-item :to="{path:'jhm',query:{type:1}}">
-            <van-image width="30px" src="../../../static/my_index/Сalendar@3x.png" />激活码管理
+            <van-image width="30px" src="./static/my_index/Сalendar@3x.png" />激活码管理
         </van-grid-item>
         <van-grid-item to="help">
-          <van-image width="30px" src="../../../static/my_index/Page@3x.png" />帮助
+          <van-image width="30px" src="./static/my_index/Page@3x.png" />帮助
         </van-grid-item>
       </van-grid>
     </div>
@@ -49,16 +52,16 @@
       <span>财务管理</span>
       <van-grid :border="false" :column-num="4" class="ziliaoicon">
         <van-grid-item to="mydeal">
-          <van-image width="30px" src="../../../static/my_index/Ways_of_payment@3x.png" />财务明细
+          <van-image width="30px" src="./static/my_index/Ways_of_payment@3x.png" />财务明细
         </van-grid-item>
         <van-grid-item @click="$toast('正在维护')">
-          <van-image width="30px" src="../../../static/my_index/15@3x.png" />我的奖励
+          <van-image width="30px" src="./static/my_index/15@3x.png" />我的奖励
         </van-grid-item>
         <van-grid-item @click="$toast('正在维护')">
-          <van-image width="30px" src="../../../static/my_index/16@3x.png" />推荐奖励
+          <van-image width="30px" src="./static/my_index/16@3x.png" />推荐奖励
         </van-grid-item>
         <van-grid-item :to="{path:'jhm',query:{type:1}}">
-          <van-image width="30px" src="../../../static/my_index/Purse@3x.png" />激活码转账
+          <van-image width="30px" src="./static/my_index/Purse@3x.png" />激活码转账
         </van-grid-item>
       </van-grid>
     </div>
@@ -66,13 +69,13 @@
       <span>其他项目</span>
       <van-grid :border="false" :column-num="3" class="ziliaoicon">
         <van-grid-item to='teamm'>
-          <van-image width="30px" src="../../../static/my_index/18@3x.png" />团队管理
+          <van-image width="30px" src="./static/my_index/18@3x.png" />团队管理
         </van-grid-item>
         <van-grid-item to='extension'>
-          <van-image width="30px" src="../../../static/my_index/17@3x.png" />推广二维码
+          <van-image width="30px" src="./static/my_index/17@3x.png" />推广二维码
         </van-grid-item>
         <van-grid-item to="/gonggao">
-          <van-image width="30px" src="../../../static/my_index/19@3x.png" />公告
+          <van-image width="30px" src="./static/my_index/19@3x.png" />公告
         </van-grid-item>
       </van-grid>
     </div>
@@ -83,6 +86,7 @@
 export default {
   data() {
     return {
+      img:{},
       show: false,
       usexg: {
         name: "大林子",

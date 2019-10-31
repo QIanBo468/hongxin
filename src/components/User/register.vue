@@ -1,20 +1,32 @@
 <template>
   <div id="login">
     <div class="loginindex">
-      <van-nav-bar class="navbar" left-arrow @click-left="onClickLeft"></van-nav-bar>
-      <div class="logo">
-        <p>USDT</p>
-        <span>|</span>
-        <p>注册</p>
+      <!-- <slot slot="right" name="right">查看全部</slot> -->
+      <div class="logos">
+        <div>
+          <van-image
+            class="fuck"
+            width="20px"
+            height="20px"
+            @click="onClickLeft"
+            src="./static/images/left@3x.png"
+          />
+        </div>
+        <div class="cao">
+          <p>USDT</p>
+          <span>|</span>
+          <p>注册</p>
+        </div>
       </div>
-      <div class="redlogin">
+      <div class="redlogins">
         <van-cell-group>
-          <van-field 
-          class="userName" 
-          v-model="userName" 
-          placeholder="输入账号" 
-          v-validate="'required'"
-          autocomplete="off" />
+          <van-field
+            class="userName"
+            v-model="userName"
+            placeholder="输入账号"
+            v-validate="'required'"
+            autocomplete="off"
+          />
           <van-field
             v-model="password"
             class="userName"
@@ -31,30 +43,30 @@
             placeholder="请再次输入密码"
             autocomplete="off"
           />
-           <van-field 
-          class="userName" 
-          v-model="xingming" 
-          placeholder="姓名"
-          maxlength="4"
-          v-validate="'required'"
-          autocomplete="off" />
+          <van-field
+            class="userName"
+            v-model="xingming"
+            placeholder="姓名"
+            maxlength="4"
+            v-validate="'required'"
+            autocomplete="off"
+          />
         </van-cell-group>
       </div>
-      <div class="redlogin">
-         <van-cell-group>
-          <van-field 
-          class="userName" 
-          v-model="pay" 
-          placeholder="输入安全码" 
-          type="password"
-         
-          v-validate="'required|numeric|min:6'"
-          autocomplete="off" />
+      <div class="redlogins">
+        <van-cell-group>
+          <van-field
+            class="userName"
+            v-model="pay"
+            placeholder="输入安全码"
+            type="password"
+            v-validate="'required|numeric|min:6'"
+            autocomplete="off"
+          />
           <van-field
             v-model="pays"
             class="userName"
             type="password"
-         
             v-validate="'required|numeric|min:6'"
             placeholder="再输入安全码"
             autocomplete="off"
@@ -62,8 +74,6 @@
           <van-field
             class="userName"
             v-model="tuijian"
-            
-
             v-validate="'required'"
             placeholder="推荐码"
             autocomplete="off"
@@ -76,115 +86,130 @@
 </template>
 
 <script>
-
-import { Toast } from 'vant'
+import { Toast } from "vant";
 
 export default {
   data() {
     return {
       userName: "",
       password: "",
-      repeassword: '',
-      pay: '',
-      pays:'',
-      tuijian:'',
-      xingming:''
+      repeassword: "",
+      pay: "",
+      pays: "",
+      tuijian: "",
+      xingming: ""
     };
   },
   methods: {
     onClickLeft() {
       this.$router.go(-1);
     },
-    submit () {
-
-            // var that = this
-            // this.$validator.validateAll().then(function(result) {
-            //     if(result){
-                    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/regadd',
-                    {
-                        uid: this.userName,
-                        realname: this.xingming,
-                        password: this.password,
-                        passworded: this.repeassword,
-                        secpwd: this.pay,
-                        secpwded: this.pays,
-                        pid: this.tuijian
-                    }).then(res => {
-                      console.log(res)
-                      // 返回成功状态
-                        if (res.code == 1) {
-                            Toast('注册成功')
-                            // that.$cookies.set('status', res.data.status)
-                            this.$router.push('/login')
-                            // that.$cookies.set('accessToken', res.data.tokenType + " " + res.data.accessToken , res.data.expiresIn)
-                        }else{
-                            Toast(res.msg)
-                        }
-                    })
-                }
-                // else{
-                //     console.log(that.errors)
-                //     Toast(that.errors.items[0].msg)
-                // }
-       
+    submit() {
+      // var that = this
+      // this.$validator.validateAll().then(function(result) {
+      //     if(result){
+      this.$axios
+        .fetchPost("http://hxlc.ltlfd.cn/home/login/regadd", {
+          uid: this.userName,
+          realname: this.xingming,
+          password: this.password,
+          passworded: this.repeassword,
+          secpwd: this.pay,
+          secpwded: this.pays,
+          pid: this.tuijian
+        })
+        .then(res => {
+          console.log(res);
+          // 返回成功状态
+          if (res.code == 1) {
+            Toast("注册成功");
+            // that.$cookies.set('status', res.data.status)
+            this.$router.push("/login");
+            // that.$cookies.set('accessToken', res.data.tokenType + " " + res.data.accessToken , res.data.expiresIn)
+          } else {
+            Toast(res.msg);
+          }
+        });
     }
+    // else{
+    //     console.log(that.errors)
+    //     Toast(that.errors.items[0].msg)
+    // }
   }
+};
 </script>
 
 <style lang='less' scope>
 #login {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: autol;
 }
 .loginindex {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  // justify-content: space-around;
-  box-sizing: border-box;
-  padding: 0 15px;
-  padding-top: 20px;
-  .navbar {
+  // align-items: center;
+  // box-sizing: border-box;
+  padding: 30px 15px 0 15px;
+  // padding-top: 10px;
+  position: relative;
+  .fuck {
+    margin-bottom: 10px;
+  }
+  .navbarss {
     padding: 0;
-    margin: 0;
+    // margin:0 0 40px 0;
+
     background: none;
-    position: fixed;
-    top: 0;
     .van-icon {
       color: #fff;
-      font-size:20px;
+      font-size: 20px;
       padding: 0;
       margin: 0;
     }
   }
-  .logo {
+  .logos {
+    margin: 10px 0 20px 0;
     display: flex;
-    align-items: center;
-    p:last-child {
-      color: #ffddaa;
-      font-size: 18px;
-    }
-    p:first-child {
-      color: #cfa972;
-      font-size: 24px;
-      font-weight: 900;
-      font-style: italic;
-    }
-    span {
-      color: #fff;
-      font-size: 14px;
-      margin: 0 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    .cao {
+      display: flex;
+      align-items: center;
+      p:last-child {
+        color: #ffddaa;
+        font-size: 18px;
+        margin: 0;
+        padding: 0;
+      }
+      p:first-child {
+        color: #cfa972;
+        font-size: 24px;
+        font-weight: 900;
+        font-style: italic;
+        margin: 0;
+        padding: 0;
+      }
+      span {
+        color: #fff;
+        font-size: 14px;
+        margin: 0 15px;
+      }
     }
   }
-  .redlogin {
-    margin-bottom: 20px;
+  .redlogins {
+    margin-bottom: 10px;
     .userName {
       background: none;
-      border:.5px solid #FFDDAA;
+      border: 0.5px solid #ffddaa;
       border-radius: 2px;
       margin: 10px 0;
-      input{
+      input {
         color: #fff;
       }
     }
@@ -203,16 +228,16 @@ export default {
 /deep/.van-cell {
   background: none;
 }
-[class*=van-hairline]::after{
+[class*="van-hairline"]::after {
   position: relative;
 }
-.van-cell{
+.van-cell {
   border: #cfa972;
 }
-.van-cell:not(:last-child)::after{
+.van-cell:not(:last-child)::after {
   border: none;
 }
-.van-nav-bar__left{
+.van-nav-bar__left {
   left: 0;
 }
 </style>
