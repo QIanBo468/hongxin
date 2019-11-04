@@ -2,29 +2,29 @@
   <div class="extension">
     <van-nav-bar class="extension-title" title="推广二维码" left-arrow @click-left="onClickLeft" />
     <div class="extension-head acea-row row-center">
-      <van-image width="13rem" height="5rem" src="../../../static/images/extensionUsdt.png" />
+      <van-image width="13rem" height="5rem" src="./static/images/extensionUsdt.png" />
     </div>
     <div class="extension-con acea-row row-center-wrapper">
       <div class="img-box">
-          <van-image class="image-bottom" width="11rem" src="../../../static/images/extensionBottom.png" />
+          <van-image class="image-bottom" width="11rem" src="./static/images/extensionBottom.png" />
         <van-image width="12rem" height="12.2rem" :src="code.tgurl" />
         <van-image
           class="image-wife"
           width="2rem"
           height="1.9rem"
-          src="../../../static/images/extensionWife.png"
+          src="./static/images/extensionWife.png"
         />
         <van-image
           class="image-sett"
           width="2.4rem"
           height="2.6rem"
-          src="../../../static/images/extensionSetting.png"
+          src="./static/images/extensionSetting.png"
         />
         <van-image
           class="image-hua"
           width="4rem"
           height="4.2rem"
-          src="../../../static/images/extensionHua.png"
+          src="./static/images/extensionHua.png"
         />
       </div>
     </div>

@@ -43,14 +43,6 @@
             placeholder="请再次输入密码"
             autocomplete="off"
           />
-          <van-field
-            class="userName"
-            v-model="xingming"
-            placeholder="姓名"
-            maxlength="4"
-            v-validate="'required'"
-            autocomplete="off"
-          />
         </van-cell-group>
       </div>
       <div class="redlogins">
@@ -74,6 +66,7 @@
           <van-field
             class="userName"
             v-model="tuijian"
+            disabled
             v-validate="'required'"
             placeholder="推荐码"
             autocomplete="off"
@@ -91,7 +84,6 @@ import { Toast } from "vant";
 export default {
   data() {
     return {
-      userName: "",
       password: "",
       repeassword: "",
       pay: "",

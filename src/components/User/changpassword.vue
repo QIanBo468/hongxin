@@ -6,25 +6,69 @@
       </slot>
       <slot slot="title" name="个人资料">修改密码</slot>
     </van-nav-bar>
-    <div class="chang-form">
-      <van-cell-group>
-        <!-- label="用户名" -->
-        <van-field v-model="password" type="password" placeholder="请输原入密码" />
-        <!-- label="密码" -->
-        <van-field v-model="passwordRepeat" type="password" placeholder="再次输入原密码" />
-      </van-cell-group>
-      <van-cell-group>
-        <van-field v-model="newPassword" type="password" placeholder="请输入新密码" />
-        <van-field v-model="newPasswordRepeat" type="password" placeholder="再次输新入密码" />
-      </van-cell-group>
-      <van-cell-group>
-        <van-field v-model="phoneNum" center maxlength=11 clearable placeholder="请输入手机号">
-          <van-button slot="button" size="small" type="primary " @click="codesubmit">{{btntxt}}</van-button>
-        </van-field>
-        <van-field v-model="sms" type="tel" placeholder="请输入手机验证码" />
-        <!-- label="短信验证码" -->
-      </van-cell-group>
-    </div>
+    <van-tabs
+      color="#ffddaa"
+      background="transparent"
+      title-active-color="#ffddaa"
+      title-inactive-color="#fff"
+    >
+      <van-tab title="修改登录密码">
+        <div class="chang-form">
+          <van-cell-group>
+            <!-- label="用户名" -->
+            <van-field v-model="login.password" type="password" placeholder="请输登录密码" />
+            <!-- label="密码" -->
+            <van-field v-model="login.passwordRepeat" type="password" placeholder="再次输入登录密码" />
+          </van-cell-group>
+          <van-cell-group>
+            <van-field v-model="login.newPassword" type="password" placeholder="请输入新密码" />
+            <van-field v-model="login.newPasswordRepeat" type="password" placeholder="再次输新入密码" />
+          </van-cell-group>
+          <van-cell-group>
+            <van-radio-group class="danxuan" v-model="login.radio" checked-color="#ffddaa">
+              <span>密保问题</span>
+              <div>
+                <van-radio name="1">你最喜欢的数字是多少</van-radio>
+                <van-radio name="2">你最爱的人叫什么</van-radio>
+                <van-radio name="3">你最喜欢的颜色</van-radio>
+              </div>
+            </van-radio-group>
+          </van-cell-group>
+          <van-cell-group>
+            <van-field v-model="login.mibao" placeholder="请输入密保密码" />
+          </van-cell-group>
+          <!-- </van-cell-group> -->
+        </div>
+      </van-tab>
+      <van-tab title="修改安全密码">
+        <div class="chang-form">
+          <van-cell-group>
+            <!-- label="用户名" -->
+            <van-field v-model="erji.password" type="password" placeholder="请输安全密码" />
+            <!-- label="密码" -->
+            <van-field v-model="erji.passwordRepeat" type="password" placeholder="再次输入安全密码" />
+          </van-cell-group>
+          <van-cell-group>
+            <van-field v-model="erji.newPassword" type="password" placeholder="请输入新密码" />
+            <van-field v-model="erji.newPasswordRepeat" type="password" placeholder="再次输新入密码" />
+          </van-cell-group>
+          <van-cell-group>
+            <van-radio-group class="danxuan" v-model="erji.radio" checked-color="#ffddaa">
+              <span>密保问题</span>
+              <div>
+                <van-radio name="1">你最喜欢的数字是多少</van-radio>
+                <van-radio name="2">你最爱的人叫什么</van-radio>
+                <van-radio name="3">你最喜欢的颜色</van-radio>
+              </div>
+            </van-radio-group>
+          </van-cell-group>
+          <van-cell-group>
+            <van-field v-model="erji.mibao" placeholder="请输入密保密码" />
+          </van-cell-group>
+          <!-- </van-cell-group> -->
+        </div>
+      </van-tab>
+    </van-tabs>
     <div class="change-request">
       <van-button size="large" color="#ffddaa" @click="submit">
         <span class="btn">确认修改</span>
@@ -34,22 +78,31 @@
 </template>
 
 <script>
-
-import { Toast } from 'vant'
+import { Toast } from "vant";
 
 export default {
   data() {
     return {
-      password: "", //原密码
-      passwordRepeat: "", //原密码确认
-      newPassword: "", //新密码
-      newPasswordRepeat: "", //新密码确认
-      phoneNum: "", //手机号
-      sms: "", //短信验证码
+      login: {
+        radio: "1", // ，密保选项
+        password: "", //原密码
+        passwordRepeat: "", //原密码确认
+        newPassword: "", //新密码
+        newPasswordRepeat: "", //新密码确认
+        mibao: "" //密保
+      },
+      erji: {
+        radio: "1", // ，密保选项
+        password: "", //原密码
+        passwordRepeat: "", //原密码确认
+        newPassword: "", //新密码
+        newPasswordRepeat: "", //新密码确认
+        mibao: "" //密保
+      },
       time: 60,
-      btntxt: '发送验证码',
-      captcha: '验证码',
-      disabled: false,
+      btntxt: "发送验证码",
+      captcha: "验证码",
+      disabled: false
     };
   },
   methods: {
@@ -57,37 +110,34 @@ export default {
       this.$router.go(-1);
     },
     codesubmit() {
-        var phone = this.phoneNum;
-            if(!(/^[1][3,4,5,7,8][0-9]{9}$/.test(phone))){ 
-                Toast("手机号码有误，请重填");  
-                return false; 
-            }
-            if(this.disabled == false){
-                this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/smsend',
-                {
-                    phone: this.phoneNum
-                }).then(res => {
-                  console.log(res)
-                    Toast(res.msg)
-                if(res.code === 1){
-                    this.disabled = true;
-                    var  that = this
-                    var times = setInterval(function() {
-                    that.time--;
-                    if( that.time > 0){
-                        that.btntxt = '重新获取('+ that.time +'s)'
-                    }else{
-                        clearInterval(times)
-                        that.time = 10
-                        that.btntxt = "获取验证码";
-                        that.disabled = false;
-                    } 
-                    }, 1000);
+      if (this.disabled == false) {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/login/smsend", {
+            phone: this.phoneNum
+          })
+          .then(res => {
+            console.log(res);
+            Toast(res.msg);
+            if (res.code === 1) {
+              this.disabled = true;
+              var that = this;
+              var times = setInterval(function() {
+                that.time--;
+                if (that.time > 0) {
+                  that.btntxt = "重新获取(" + that.time + "s)";
+                } else {
+                  clearInterval(times);
+                  that.time = 10;
+                  that.btntxt = "获取验证码";
+                  that.disabled = false;
                 }
-                }).catch( res => {
-                Toast(res.msg)
-                })
+              }, 1000);
             }
+          })
+          .catch(res => {
+            Toast(res.msg);
+          });
+      }
     },
     submit() {
       var that = this;
@@ -148,6 +198,20 @@ export default {
       background: none;
       border: none;
     }
+  }
+}
+.danxuan {
+  margin-bottom: 20px;
+  padding: 5px;
+  display: flex;
+  // flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ffddaa;
+  color: #ffffff;
+  .van-radio__label {
+    color: #ffddaa;
+    font-size: 14px;
   }
 }
 .btn {

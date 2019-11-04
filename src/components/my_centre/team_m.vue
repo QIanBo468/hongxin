@@ -19,7 +19,7 @@
         <van-cell v-for="item in teamList" :key="item.ue_id">
          <div class="listbox">
            <div class="useava">
-             <van-image src="./static/images/17-s.png" alt="">
+             <van-image src="./static/images/17-s.png" alt=""/>
              <span>昵称</span>
              <p>{{item.nickname}}</p>
            </div>
@@ -41,7 +41,7 @@
         </van-cell>
       </van-list>
     </div>
-    <van-popup v-model="show">
+    <van-popup class="teamshow" v-model="show">
       <div class="show">
         <div class="showtitle">.. 我的激活码 ..</div>
         <div class="shownum">
@@ -59,14 +59,10 @@
 export default {
   data() {
     return {
-      teamNum: 11,
+      teamNum: 0,
       show: false,
       pin:null,
-      teamList: [
-        { id: 0, name: "小傻子", phoneNum: "12345678910", type: 1 },
-        { id: 1, name: "小傻子1", phoneNum: "12345678910", type: 0 },
-        { id: 2, name: "小傻子2", phoneNum: "12345678910", type: 1 }
-      ],
+      teamList: [],
       loading: false,
       finished: false
     };
@@ -264,6 +260,14 @@ export default {
 }
 .van-cell{
   margin-bottom: 30px;
+}
+.teamshow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 341px;
+  background-color: transparent  !important;
 }
 .show {
   width: 250px;

@@ -47,28 +47,13 @@ export default {
       password: ""
     };
   },
+  created() {
+    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/getToken').then(res=>{
+      console.log(res)
+    })
+  },
   methods: {
     submit() {
-      // this.$axios
-      //   .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
-      //     // data: {
-      //       account: this.userName,
-      //       password: this.password
-      //     // }
-      //   })
-      //   .then(res => {
-          
-      //     console.log(res);
-      //     if (res.succes) {
-      //       that.$router.push("/index");
-      //     } else {
-      //       Toast(res.msg);
-      //     }
-      //   });
-
-      // var that = this;
-      // this.$validator.validateAll().then(function(reslut, field) {
-      //   if (reslut) {
           this.$axios
             .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
               account: this.userName,

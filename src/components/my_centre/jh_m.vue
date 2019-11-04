@@ -105,14 +105,15 @@
     </div>
 
     <div class="integral-btn">
-      <van-button size="large" color="#ffddaa" @click="submit">保存</van-button>
+      <van-button size="large" color="#ffddaa" @click="submit">转出</van-button>
     </div>
     <div class="intergral-record">
       <div class="intergral-record-title">
         <div class="intergral-record-title-left">
           <div style="width:0px;height:10px; border:1px solid #fff; margin-right:10px;"></div>
           <div>
-            <p style="color:#FFF;">近五次激活码交易记录</p>
+            <p style="color:#FFF;">近五次{{type == 0 ? '弘信积分': (type == 1 ? '激活码管理' : '排单币')}}交易记录</p>
+            <!-- {{type == 0 ? '弘信积分': (type == 1 ? '激活码管理' : '排单币')}} -->
           </div>
         </div>
         <div>
@@ -144,7 +145,7 @@ export default {
   data() {
     return {
       type: 0,
-      integral: 10,
+      integral: null,
       peopleId: null, // 激活码转入id
       peopleNum: null, // 激活码数量
       jifenid: null, // 积分转入id
@@ -157,66 +158,18 @@ export default {
       title: "激活码管理",
       loading: false,
       finished: false,
-      mydata: [
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "激活"
-        },
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "转账"
-        },
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "激活"
-        },
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "转账"
-        },
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "激活"
-        },
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "转账"
-        },
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "转账"
-        },
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "激活"
-        },
-        {
-          time: "2019.10.01",
-          zhanghu: 1234567652,
-          num: 1,
-          way: "转账"
-        }
-      ]
+      mydata: []
     };
   },
   created() {
-    this.type = this.$route.query.type;
+    this.getdata()
+  },
+  methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
+    getdata() {
+  this.type = this.$route.query.type;
     if (this.type == 0) {
       this.$axios
         .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
@@ -247,10 +200,6 @@ export default {
           this.integral = res.data.user.pin;
         }
       });
-  },
-  methods: {
-    onClickLeft() {
-      this.$router.go(-1);
     },
     submit() {
       if (this.type == 0) {
@@ -262,6 +211,7 @@ export default {
           .then(res => {
             console.log(res);
             this.$toast(res.msg);
+             this.getdata()
           });
       } else if (this.type == 1) {
         this.$axios
@@ -272,6 +222,7 @@ export default {
           .then(res => {
             console.log(res);
             this.$toast(res.msg);
+             this.getdata()
           });
       } else {
         this.$axios
@@ -282,6 +233,7 @@ export default {
           .then(res => {
             console.log(res);
             this.$toast(res.msg);
+             this.getdata()
           });
       }
     },
@@ -289,6 +241,7 @@ export default {
       (this.loading = false), (this.finished = true);
     },
     mydeals() {
+      console.log(this.type)
       this.$router.push({path:'mydeal',query:{type: this.type}})
     }
     // onClickRight() {

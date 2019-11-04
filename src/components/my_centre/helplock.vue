@@ -116,9 +116,9 @@
               </div>
               <div class="state">
                 <div @click="queren(item)" :class="[item.zt === '2'? 'blue' : 'red']">{{item.zt == '1'? '未确认' :( item.zt == 2 ? '已完成': '待支付')}}</div>
-                <van-cell @click="showPopup(item)">
-                <div>详细资料</div>
-                </van-cell>
+                <!-- <van-cell> -->
+                <div  @click="showPopup(item)">详细资料</div>
+                <!-- </van-cell> -->
                 <van-image  v-preview="item.pic" v-if="item.zt" width="40px" height="40px" :src="item.pic" />
               </div>
             </div>
@@ -467,7 +467,7 @@ export default {
   border-radius: 15px;
 }
 .van-tabs__nav--card {
-  border-radius: 15px;
+  border-radius: 15px !important;
   border: 1px solid #000;
 }
 

@@ -124,10 +124,10 @@ export default {
       checkNum: 0,
       toPeopleNum: 1000, //提供帮助
       toPeoplesNums: 1000,
-      helpNum: "1132",
+      helpNum: 0,
       acceptNum: "", //接受帮助
-      DynamicNum: "4564", //动态钱包
-      staticNum: "2131", //静态钱包
+      DynamicNum: 0, //动态钱包
+      staticNum: 0, //静态钱包
       radio: "1", //单选
       inactiveIcon: "./static/images/check.png",
       activeIcon: "./static/images/checked.png"

@@ -1,13 +1,25 @@
 <template>
   <div class="index">
-    <van-nav-bar class="indexnav" title="首页"></van-nav-bar>
+    <van-nav-bar class="indexnav" title="首页">
+      <slot name="left" slot="left">
+        <div class="left-title-use">
+          <span>用户：123</span>
+          <span>编号：123456</span>
+           <!-- <p>编号</p> -->
+        </div>
+      </slot>
+    </van-nav-bar>
     <van-swipe :loop="false" :width="300" @change="onChange" class="swiper">
       <van-swipe-item v-for="item of adSwiper" :key="item.id">
         <img class="pic" :src="item.pic" alt />
       </van-swipe-item>
 
       <div class="custom-indicator" slot="indicator">
-        <span v-for="(item, index) of adSwiper" :key="index+1" :class="current == index ?  indicator : ''"></span>
+        <span
+          v-for="(item, index) of adSwiper"
+          :key="index+1"
+          :class="current == index ?  indicator : ''"
+        ></span>
       </div>
     </van-swipe>
 
@@ -18,52 +30,62 @@
       </div>
       <p @click="$router.push('/gonggao')">查看</p>
     </div>
-
+    <span class="bilv">比例汇率:</span>
     <div class="moneytitle">
       <div class="g"></div>
-      <p>我的钱包</p>
+      <p>我的操作项</p>
     </div>
 
-    <!-- 状态列表 -->
-    <van-swipe
-      :loop="false"
-      :width="330"
-      @change="onChange"
-      :show-indicators="false"
-      class="moneyswiper"
-    >
-      <van-swipe-item>
-        <div class="money-item" @click="$router.push({path:'/jhm',query:{type:0}})">
-          <img :src="moneySwiper[0].zuimg" alt />
-          <span>{{moneySwiper[0].zuname}}</span>
+    <van-grid square :column-num="5" class="moneyswiper">
+      <div class="money-item" @click="$router.push({path:'/jhm',query:{type:0}})">
+        <img :src="moneySwiper[0].zuimg" alt />
+        <span>{{moneySwiper[0].zuname}}</span>
+      </div>
+      <div class="money-item" @click="$toast('正在维护')">
+        <img :src="moneySwiper[1].zuimg" alt />
+        <span>{{moneySwiper[1].zuname}}</span>
+      </div>
+      <div class="money-item" @click="$toast('正在维护')">
+        <img :src="moneySwiper[2].zuimg" alt />
+        <span>{{moneySwiper[2].zuname}}</span>
+      </div>
+      <div class="money-item" @click="$router.push({path:'jhm',query:{type:1}})">
+        <img :src="moneySwiper[3].zuimg" alt />
+        <span>{{moneySwiper[3].zuname}}</span>
+      </div>
+      <div class="money-item" @click="$router.push({path:'jhm',query:{type:2}})">
+        <img :src="moneySwiper[4].zuimg" alt />
+        <span>{{moneySwiper[4].zuname}}</span>
+      </div>
+      <!-- <div class="money-item"  @click="$router.push('/help')">
+          <img :src="moneySwiper[5].zuimg" alt />
+          <span>{{moneySwiper[5].zuname}}</span>
         </div>
-        <div class="money-item" @click="$toast('正在维护')">
-          <img :src="moneySwiper[1].zuimg" alt />
-          <span>{{moneySwiper[1].zuname}}</span>
-        </div>
-        <div class="money-item" @click="$toast('正在维护')">
-          <img :src="moneySwiper[2].zuimg" alt />
-          <span>{{moneySwiper[2].zuname}}</span>
-        </div>
-        <div class="money-item" @click="$router.push({path:'jhm',query:{type:1}})">
-          
-            <img :src="moneySwiper[3].zuimg" alt />
-            <span>{{moneySwiper[3].zuname}}</span>
-          
-        </div>
-        
-      </van-swipe-item>
-      <van-swipe-item>
-        <div class="money-item" v-for="item of moneySwiper.slice(4, 6)" :key="item.id" @click="$router.push('/help')">
-          <img :src="item.zuimg" alt />
-          <span>{{item.zuname}}</span>
-        </div>
-      </van-swipe-item>
-    </van-swipe>
+        <div class="money-item"  @click="$router.push('/help')">
+          <img :src="moneySwiper[6].zuimg" alt />
+          <span>{{moneySwiper[6].zuname}}</span>
+      </div>-->
+    </van-grid>
+    <!-- class="moneyswipers moneyswiper" -->
+    <van-grid square :column-num="2" class="moneyswipers">
+      <div>
+        <p>{{moneySwiper[5].zuname}}</p>
+      </div>
+
+      <div>
+       <p>{{moneySwiper[6].zuname}}</p> 
+      </div>
+    </van-grid>
+    <!-- </van-swipe> -->
 
     <!-- 列表 -->
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <div class="moneylist" v-for="(item, index) of list" :key="index+'list'" @click="$router.push({path: '/helplock',query:{ items: item.id,type: 0}})">
+      <div
+        class="moneylist"
+        v-for="(item, index) of list"
+        :key="index+'list'"
+        @click="$router.push({path: '/helplock',query:{ items: item.id,type: 0}})"
+      >
         <div class="list-left">
           <div class="left-active">
             <div class="red"></div>
@@ -76,7 +98,12 @@
           <div class="purse">￥{{item.price}}</div>
         </div>
       </div>
-       <div class="moneylist" v-for="(item, index) of lists" :key="index+'lists'" @click="$router.push({path: '/helplock',query:{ items: item.id, type: 1}})">
+      <div
+        class="moneylist"
+        v-for="(item, index) of lists"
+        :key="index+'lists'"
+        @click="$router.push({path: '/helplock',query:{ items: item.id, type: 1}})"
+      >
         <div class="list-left">
           <div class="left-active">
             <div class="red"></div>
@@ -94,8 +121,7 @@
 </template>
 
 <script>
-
-import { Toast } from 'vant'
+import { Toast } from "vant";
 
 export default {
   data() {
@@ -107,12 +133,21 @@ export default {
         // { id: 3, pic: "./static/images/swiper1@3x.png" }
       ],
       moneySwiper: [
-        { id: 0, zuimg: "./static/images/zujifen.png", zuname: "宏信积分" },
+        { id: 0, zuimg: "./static/images/zujifen.png", zuname: "弘信积分" },
         { id: 1, zuimg: "./static/images/zuqianbao.png", zuname: "静态钱包" },
         { id: 2, zuimg: "./static/images/zuqianbao.png", zuname: "动态钱包" },
         { id: 3, zuimg: "./static/images/zujihuo.png", zuname: "激活码管理" },
-        { id: 4, zuimg: "./static/images/zubangzhu.png", zuname: "寻求帮助" },
-        { id: 5, zuimg: "./static/images/zubangzhu.png", zuname: "寻求帮助" }
+        { id: 4, zuimg: "./static/images/zubangzhu.png", zuname: "排单币管理" },
+        {
+          id: 5,
+          zuimg: "./static/images/zubangzhu.png",
+          zuname: "购买旅游套餐"
+        },
+        {
+          id: 6,
+          zuimg: "./static/images/zubangzhu.png",
+          zuname: "出售旅游套餐"
+        }
       ],
       current: 0,
       indicator: "xuanzhong",
@@ -121,52 +156,48 @@ export default {
       finished: false,
       show: false,
       list: [],
-      lists:[]
+      lists: []
     };
   },
   methods: {
     onChange(index) {
       this.current = index;
     },
-    onLoad(ls,lss) {
+    onLoad(ls, lss) {
       setTimeout(() => {
         // if (this.list.length === ls.length && this.lists.length === lss.length){
-            this.loading = false;
-            this.finished = true;
+        this.loading = false;
+        this.finished = true;
         // }
 
         // 加载状态结束
 
-        
-
         // 数据全部加载完成
         // if (this.list.length >= 4) {
-          
+
         // }
       }, 500);
-    },
- 
+    }
   },
   created() {
     // axios.post()
-    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/home',{
-  
-    }).then(res =>{
-      console.log(res)
-      this.gonggao = res.data.news[0].if_theme
-      this.adSwiper = res.data.banners
-      this.list = res.data.tgbzlist
-      this.lists = res.data.jsbzlist
-      console.log(this.list)
-       this.onLoad(res.data.tgbzlist, res.data.jsbzlist)
-    })
+    this.$axios
+      .fetchPost("http://hxlc.ltlfd.cn/home/index/home", {})
+      .then(res => {
+        console.log(res);
+        this.gonggao = res.data.news[0].if_theme;
+        this.adSwiper = res.data.banners;
+        this.list = res.data.tgbzlist;
+        this.lists = res.data.jsbzlist;
+        console.log(this.list);
+        this.onLoad(res.data.tgbzlist, res.data.jsbzlist);
+      });
   }
 };
 </script>
 
 <style lang='less' scope>
-
-.pic{
+.pic {
   width: 100%;
 }
 .index {
@@ -202,7 +233,24 @@ export default {
     }
   }
 }
-
+.left-title-use{
+  // height: 100%;
+  font-size: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  
+  span{
+    display: inline-block;
+    // flex: 1;
+    line-height: 23px;
+  }
+}
+.bilv{
+  font-size: 14px;
+  margin-left: 15px;
+}
 .gonggao {
   display: flex;
   justify-content: space-between;
@@ -244,20 +292,23 @@ export default {
     font-size: 14px;
   }
 }
+
 .moneyswiper {
   margin-left: 11px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
   .van-swipe-item {
     display: flex;
   }
   .money-item {
-    margin-right: 20px;
+    margin-right: 5px;
     width: 63px;
     //  overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-
+    align-items: stretch;
+    justify-content: center;
     img {
       width: 53px;
       margin-bottom: 5px;
@@ -266,6 +317,27 @@ export default {
       font-size: 12px;
       text-align: center;
     }
+  }
+}
+.moneyswipers {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  > div{
+    width: 40%;
+    height: 40px;
+    background: url('../../../static/images/14@3x.png') no-repeat;
+    background-size: 100%;
+    text-align: center;
+    p{
+      color: rgb(105, 99, 99);
+      line-height: 40px;
+      margin: 0;
+      padding: 0;
+    }
+    // img{
+    //   height: 50px;;
+    // }
   }
 }
 

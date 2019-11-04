@@ -25,6 +25,7 @@ import teamall from '@/components/my_centre/teamall'
 import teamm from '@/components/my_centre/team_m'
 import jhm from '@/components/my_centre/jh_m'
 import news from '@/components/my_centre/news'
+import payment from '@/components/my_centre/payment'
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +42,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: register
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: payment
     },
     {
       path: '/news',
