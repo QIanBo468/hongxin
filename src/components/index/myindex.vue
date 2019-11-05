@@ -7,7 +7,7 @@
           <img :src="usexg.avatar" width="53px" height="53px" alt />
         </div>
         <div class="usename">
-          <span>{{usexg.realname}}</span>
+          <span>{{usexg.nickname}}</span>
           <p>用户编号:{{usexg.account}}</p>
         </div>
       </div>
@@ -17,10 +17,10 @@
       <span>资料管理</span>
       <van-grid :border="false" :column-num="3" class="ziliaoicon">
         
-        <van-grid-item to="/mydata">
+        <van-grid-item @click="$router.push({path: '/mydata',query:{nickname: usexg.nickname,usdt:usexg.usdt}})">
           <van-image width="30px" src="./static/my_index/Folder@3x.png" />资料完善
         </van-grid-item>
-        <van-grid-item to='register'>
+        <van-grid-item @click="$router.push({path:'/register',query:{uid:usexg.ue_id}})">
           <van-image width="30px" src="./static/images/user-s.png" />会员注册
         </van-grid-item>
         <van-grid-item to='changpassword'>
@@ -31,7 +31,7 @@
     <div class="indexitem">
       <span>团队管理</span>
       <van-grid :border="false" :column-num="5" class="ziliaoicon">
-        <van-grid-item to='teamm'>
+        <van-grid-item to='teamxg'>
           <van-image width="30px" src="./static/my_index/18@3x.png" />我的团队
         </van-grid-item>
         <van-grid-item >
@@ -41,7 +41,7 @@
           <van-image width="30px" src="./static/my_index/Purse@3x.png" />未收款会员
         </van-grid-item>
          <van-grid-item to='teamm'>
-          <van-image width="30px" src="./static/my_index/18@3x.png" />便捷开号
+          <van-image width="30px" src="./static/images/user-s.png" />便捷开号
         </van-grid-item>
         <van-grid-item to='teamm'>
           <van-image width="30px" src="./static/my_index/18@3x.png" />我的团队
@@ -88,9 +88,9 @@
           <van-image width="30px" src="./static/my_index/19@3x.png" />公告
         </van-grid-item>
         <van-grid-item to="/gonggao">
-        <van-icon name="share" size="30px" />退出
+        <van-icon name="share" size="30px" />待定
         </van-grid-item>
-         <van-grid-item to="/gonggao">
+         <van-grid-item @click="exit">
         <van-icon name="share" size="30px" color='#f00' />退出
         </van-grid-item>
       </van-grid>
@@ -128,6 +128,11 @@ export default {
   methods: {
     showPopup() {
       this.show = true;
+    },
+    exit() {
+      localStorage.setItem('accessToken',''),
+      localStorage.setItem('status', 0)
+      this.$router.push('/login')
     }
   }
 };

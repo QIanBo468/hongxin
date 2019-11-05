@@ -22,7 +22,7 @@
         <van-cell-group>
           <van-field
             class="userName"
-            v-model="userName"
+            v-model="zhanghao"
             placeholder="输入账号"
             v-validate="'required'"
             autocomplete="off"
@@ -89,8 +89,11 @@ export default {
       pay: "",
       pays: "",
       tuijian: "",
-      xingming: ""
+      zhanghao: ""
     };
+  },
+  created() {
+    this.tuijian = this.$route.query.uid
   },
   methods: {
     onClickLeft() {
@@ -102,8 +105,8 @@ export default {
       //     if(result){
       this.$axios
         .fetchPost("http://hxlc.ltlfd.cn/home/login/regadd", {
-          uid: this.userName,
-          realname: this.xingming,
+          uid: this.zhanghao,
+          // realname: this.xingming,
           password: this.password,
           passworded: this.repeassword,
           secpwd: this.pay,

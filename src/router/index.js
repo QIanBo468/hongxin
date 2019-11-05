@@ -23,6 +23,7 @@ import changpassword from '@/components/User/changpassword'
 import integral from '@/components/my_centre/integral'
 import teamall from '@/components/my_centre/teamall'
 import teamm from '@/components/my_centre/team_m'
+import teamxg from '@/components/my_centre/team_xg'
 import jhm from '@/components/my_centre/jh_m'
 import news from '@/components/my_centre/news'
 import payment from '@/components/my_centre/payment'
@@ -62,6 +63,11 @@ export default new Router({
       path: '/teamall',
       name: 'teamall',
       component: teamall
+    },
+    {
+      path: '/teamxg',
+      name: 'teamxg',
+      component: teamxg
     },
     {
       path: '/teamm',

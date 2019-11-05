@@ -221,7 +221,6 @@ export default {
       this.showdata = item;
     },
     showPopups(item) {
-      
       this.shows = true;
       this.showsdata = item;
       console.log(this.showsdata)
@@ -252,15 +251,15 @@ export default {
 
     // 确认收款
     queren(item){
+      console.log(item.zt)
+      if(item.zt !=2 ){
       this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/home_ddxx_gcz_cl',{
         id: item.id,
         comfir: item.zt
       }).then(res=>{
         console.log(res)
-        if(res.code == 1){
-
-        }
       })
+       }
     }
   }
 };

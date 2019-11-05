@@ -162,44 +162,47 @@ export default {
     };
   },
   created() {
-    this.getdata()
+    this.getdata();
   },
   methods: {
     onClickLeft() {
       this.$router.go(-1);
     },
     getdata() {
-  this.type = this.$route.query.type;
-    if (this.type == 0) {
+      
+      this.type = this.$route.query.type;
+      if (this.type == 0) {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
+          .then(res => {
+            this.mydata = res.data.coinlist;
+          });
+      } else if (this.type == 1) {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/info/pin")
+          .then(res => {
+            console.log(res);
+            this.mydata = res.data.coinlist;
+          });
+      } else {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/info/buycoin")
+          .then(res => {
+            console.log(res);
+            this.mydata = res.data.coinlist;
+          });
+      }
       this.$axios
         .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
         .then(res => {
-          this.mydata = res.data.coinlist;
+          if (this.type === 0) {
+            this.integral = res.data.user.credit3;
+          } else if(this.type === 1){
+            this.integral = res.data.user.pin;
+          } else {
+            this.integral = res.data.user.buycoin;
+          }
         });
-    } else if (this.type == 1) {
-       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/info/pin")
-        .then(res => {
-          console.log(res);
-          this.mydata = res.data.coinlist;
-        });
-    } else {
-       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/info/buycoin")
-        .then(res => {
-          console.log(res);
-          this.mydata = res.data.coinlist;
-        });
-    }
-    this.$axios
-      .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
-      .then(res => {
-        if (this.type === 0) {
-          this.integral = res.data.user.credit3;
-        } else {
-          this.integral = res.data.user.pin;
-        }
-      });
     },
     submit() {
       if (this.type == 0) {
@@ -211,7 +214,7 @@ export default {
           .then(res => {
             console.log(res);
             this.$toast(res.msg);
-             this.getdata()
+            this.getdata();
           });
       } else if (this.type == 1) {
         this.$axios
@@ -222,7 +225,7 @@ export default {
           .then(res => {
             console.log(res);
             this.$toast(res.msg);
-             this.getdata()
+            this.getdata();
           });
       } else {
         this.$axios
@@ -231,9 +234,9 @@ export default {
             num: this.peopleNum
           })
           .then(res => {
-            console.log(res);
+            console.log(123132,res);
             this.$toast(res.msg);
-             this.getdata()
+            this.getdata();
           });
       }
     },
@@ -241,8 +244,8 @@ export default {
       (this.loading = false), (this.finished = true);
     },
     mydeals() {
-      console.log(this.type)
-      this.$router.push({path:'mydeal',query:{type: this.type}})
+      console.log(this.type);
+      this.$router.push({ path: "mydeal", query: { type: this.type } });
     }
     // onClickRight() {
     //   Toast('按钮');

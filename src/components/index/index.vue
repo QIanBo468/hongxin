@@ -30,7 +30,7 @@
       </div>
       <p @click="$router.push('/gonggao')">查看</p>
     </div>
-    <span class="bilv">比例汇率:</span>
+    <span class="bilv">比例汇率:1233</span>
     <div class="moneytitle">
       <div class="g"></div>
       <p>我的操作项</p>
@@ -68,11 +68,11 @@
     </van-grid>
     <!-- class="moneyswipers moneyswiper" -->
     <van-grid square :column-num="2" class="moneyswipers">
-      <div>
+      <div @click="$router.push('/help')">
         <p>{{moneySwiper[5].zuname}}</p>
       </div>
 
-      <div>
+      <div @click="$router.push('/help')">
        <p>{{moneySwiper[6].zuname}}</p> 
       </div>
     </van-grid>
@@ -256,7 +256,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   background: #26263c;
-  margin: 0 11px 10px 13px;
+  // margin: 0 11px 10px 13px;
   padding: 0 10px;
   box-sizing: border-box;
   .ggtitle {

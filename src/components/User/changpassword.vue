@@ -18,7 +18,7 @@
             <!-- label="用户名" -->
             <van-field v-model="login.password" type="password" placeholder="请输登录密码" />
             <!-- label="密码" -->
-            <van-field v-model="login.passwordRepeat" type="password" placeholder="再次输入登录密码" />
+            <!-- <van-field v-model="login.passwordRepeat" type="password" placeholder="再次输入登录密码" /> -->
           </van-cell-group>
           <van-cell-group>
             <van-field v-model="login.newPassword" type="password" placeholder="请输入新密码" />
@@ -35,7 +35,7 @@
             </van-radio-group>
           </van-cell-group>
           <van-cell-group>
-            <van-field v-model="login.mibao" placeholder="请输入密保密码" />
+            <van-field v-model="login.mibao" placeholder="请输入密保答案" />
           </van-cell-group>
           <!-- </van-cell-group> -->
         </div>
@@ -46,7 +46,7 @@
             <!-- label="用户名" -->
             <van-field v-model="erji.password" type="password" placeholder="请输安全密码" />
             <!-- label="密码" -->
-            <van-field v-model="erji.passwordRepeat" type="password" placeholder="再次输入安全密码" />
+            <!-- <van-field v-model="erji.passwordRepeat" type="password" placeholder="再次输入安全密码" /> -->
           </van-cell-group>
           <van-cell-group>
             <van-field v-model="erji.newPassword" type="password" placeholder="请输入新密码" />
@@ -63,7 +63,7 @@
             </van-radio-group>
           </van-cell-group>
           <van-cell-group>
-            <van-field v-model="erji.mibao" placeholder="请输入密保密码" />
+            <van-field v-model="erji.mibao" placeholder="请输入密保答案" />
           </van-cell-group>
           <!-- </van-cell-group> -->
         </div>
@@ -86,7 +86,7 @@ export default {
       login: {
         radio: "1", // ，密保选项
         password: "", //原密码
-        passwordRepeat: "", //原密码确认
+        // passwordRepeat: "", //原密码确认
         newPassword: "", //新密码
         newPasswordRepeat: "", //新密码确认
         mibao: "" //密保
@@ -146,7 +146,7 @@ export default {
           that.$axios
             .fetchPost("http://hxlc.ltlfd.cn/home/info/changePwd", {
               newpwd: that.newPassword,
-              secnewpwd: that.newPasswordRepeat,
+              // secnewpwd: that.newPasswordRepeat,
               phone: that.phoneNum,
               phonecode: that.sms
             })

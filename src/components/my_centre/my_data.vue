@@ -7,9 +7,9 @@
       <slot slot="title" name="个人资料">个人资料</slot>
     </van-nav-bar>
     <div class="name">
-      <van-cell-group>
+      <!-- <van-cell-group>
         <van-field v-model="mydata.name" placeholder="请输入姓名" label="姓名" input-align="right" />
-      </van-cell-group>
+      </van-cell-group> -->
       <van-cell-group>
         <van-field v-model="mydata.nicheng" placeholder="请输入昵称" label="昵称" input-align="right" />
       </van-cell-group>
@@ -33,10 +33,10 @@
       </van-cell-group>
       <van-cell-group>
         <van-field
-          v-model="mydata.pay"
-          placeholder="请输入密保密码"
-          label="密保密码"
-          :error="errors.has('password')"
+          v-model="mydata.mibao"
+          placeholder="请输入密保答案"
+          label="密保答案"
+         
           input-align="right"
         />
       </van-cell-group>
@@ -61,8 +61,9 @@ export default {
   data() {
     return {
       radio: "1",
+      dataNickname:'',
       mydata: {
-        name: "",
+        // name: "",
         nicheng: "",
         usdt: "",
         phone: null,
@@ -70,6 +71,10 @@ export default {
         mibao:'',
       }
     };
+  },
+  created() {
+    this.mydata.nicheng = this.$route.query.nickname
+    this.mydata.usdt  = this.$route.query.usdt
   },
   methods: {
     onClickLeft() {
@@ -81,16 +86,18 @@ export default {
         if (reslut) {
           that.$axios
             .fetchPost("http://hxlc.ltlfd.cn/home/info/editUser", {
-              realname: that.mydata.name,
+              realname: that.mydata.nicheng,
               nickname: that.mydata.nicheng,
-              phone: that.mydata.phone,
+              // phone: that.mydata.phone,
               secpwd: that.mydata.pay,
-              usdt: that.mydata.usdt
+              usdt: that.mydata.usdt,
+              encrypt_problem:that.radio,
+              encrypt_answers:that.mibao
             })
             .then(res => {
               console.log(res);
               if (res.code === 1) {
-                that.$router.push("/Login");
+                that.$router.push("/myindex");
               } else {
                 Toast(res.msg);
               }
