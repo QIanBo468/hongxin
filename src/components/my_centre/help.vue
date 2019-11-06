@@ -13,8 +13,7 @@
       :border="false"
     />
     /<!--right-text="帮助记录"   @click-right="onClickRight"-->
-    <div class="help-check acea-row row-center-wrapper">
-      <!-- class="help-check-item  acea-row row-center-wrapper" -->
+    <!-- <div class="help-check acea-row row-center-wrapper">
       <div
         class="help-check-item acea-row row-center-wrapper"
         v-bind:class="checkNum==0? 'check' :'' "
@@ -25,7 +24,8 @@
         v-bind:class="checkNum==1? 'check' :'' "
         v-on:click="check(1)"
       >接受帮助</div>
-    </div>
+    </div> -->
+
     <div class="help-head acea-row row-center-wrapper" v-show="checkNum==0">
       <div class="help-contnet-head-left">已提供帮助(元)</div>
       <div class="help-contnet-head-cont">
@@ -134,6 +134,8 @@ export default {
     };
   },
   created() {
+    console.log(this.$route.query.type)
+    this.checkNum = this.$route.query.type
     // buysum 总数  credit1 静态钱包 2 动态 3积分
     this.$axios.fetchPost("http://hxlc.ltlfd.cn/home/jsbz/jsbz").then(res => {
       console.log(res);

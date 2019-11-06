@@ -180,6 +180,9 @@ export default {
   }
 }
 .chang-form {
+   .van-cell{
+    background: transparent !important;
+  }
   .van-cell-group {
     margin-top: 1rem;
     background: transparent !important;

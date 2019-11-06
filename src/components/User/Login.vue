@@ -42,34 +42,51 @@ import { Toast } from "vant";
 export default {
   data() {
     return {
-      
       userName: "",
       password: ""
     };
   },
   created() {
-    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/getToken').then(res=>{
-      console.log(res)
-    })
+    let logintoken;
+    this.$axios
+      .fetchPost("http://hxlc.ltlfd.cn/home/login/getToken")
+      .then(res => {
+        // console.log(res)
+        console.log(res);
+        if (res.code) {
+          logintoken = res.token;
+          localStorage.setItem("status", res.data.status);
+          localStorage.setItem("accessToken", res.data.token);
+          this.$router.push("/index");
+        }
+      });
   },
+  // this.$axios
+  //         .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
+  //           account: this.userName,
+  //             password: this.password
+  //         })
+  //         .then(res => {
+
+  //         })
   methods: {
     submit() {
-          this.$axios
-            .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
-              account: this.userName,
-                password: this.password
-            })
-            .then(res => {
-              console.log(res);
-              if (res.code) {
-              localStorage.setItem('status',res.data.status)
-              localStorage.setItem('accessToken',res.data.token)
-                this.$router.push("/index");
-              } else {
-                Toast(res.msg);
-              }
-            })
-        
+      this.$axios
+        .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
+          account: this.userName,
+          password: this.password
+        })
+        .then(res => {
+          console.log(res);
+          if (res.code) {
+            localStorage.setItem("status", res.data.status);
+            localStorage.setItem("accessToken", res.data.token);
+            this.$router.push("/index");
+          } else {
+            Toast(res.msg);
+          }
+        });
+
       //   else {
       //     console.log(that.errors)
       //     Toast(that.errors.items[0].msg);

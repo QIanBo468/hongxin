@@ -27,6 +27,7 @@ import teamxg from '@/components/my_centre/team_xg'
 import jhm from '@/components/my_centre/jh_m'
 import news from '@/components/my_centre/news'
 import payment from '@/components/my_centre/payment'
+import kaihao from '@/components/my_centre/kaihao'
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +49,11 @@ export default new Router({
       path: '/payment',
       name: 'payment',
       component: payment
+    },
+    {
+      path: '/kaihao',
+      name: 'kaihao',
+      component: kaihao
     },
     {
       path: '/news',

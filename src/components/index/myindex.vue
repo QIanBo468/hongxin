@@ -11,7 +11,10 @@
           <p>用户编号:{{usexg.account}}</p>
         </div>
       </div>
-      <div class="active">会员</div>
+      <div class="blackup" v-if="blackup=='true'" @click="blackuplogin">
+        返回上级
+      </div>
+      <div class="active">{{usexg.level == 0 ? '会员' : (usexg.level == 1 ? '铂金账户' : '钻石账户')}}</div>
     </div>
     <div class="indexitem">
       <span>资料管理</span>
@@ -40,11 +43,11 @@
         <van-grid-item to="payment">
           <van-image width="30px" src="./static/my_index/Purse@3x.png" />未收款会员
         </van-grid-item>
-         <van-grid-item to='teamm'>
+         <van-grid-item @click="$router.push({path:'/kaihao',query:{uid:usexg.ue_id}})">
           <van-image width="30px" src="./static/images/user-s.png" />便捷开号
         </van-grid-item>
-        <van-grid-item to='teamm'>
-          <van-image width="30px" src="./static/my_index/18@3x.png" />我的团队
+        <van-grid-item @click="$toast('正在维护')">
+          <van-image width="30px" src="./static/my_index/18@3x.png" />待定
         </van-grid-item>
         <!-- <van-grid-item @click="$toast('正在维护')">
           <van-image width="30px" src="./static/my_index/Purse@3x.png" />购买旅游套餐明细
@@ -87,9 +90,9 @@
         <van-grid-item to="/gonggao">
           <van-image width="30px" src="./static/my_index/19@3x.png" />公告
         </van-grid-item>
-        <van-grid-item to="/gonggao">
+        <van-grid-item @click="$toast('暂未开放')">
         <van-icon name="share" size="30px" />待定
-        </van-grid-item>
+        </van-grid-item >
          <van-grid-item @click="exit">
         <van-icon name="share" size="30px" color='#f00' />退出
         </van-grid-item>
@@ -109,10 +112,13 @@ export default {
         bianhao: 1234567,
         active: "会员",
         auther: "./static/my_index/auther.png"
-      }
+      },
+      blackup:false
     };
   },
   created () {
+    this.blackup = localStorage.getItem('oldactive')
+    console.log(this.blackup)
     this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/personal')
     .then(res=>{
       console.log(res)
@@ -132,7 +138,17 @@ export default {
     exit() {
       localStorage.setItem('accessToken',''),
       localStorage.setItem('status', 0)
+      this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/logout').then(res=>{
+        console.log(res)
+      })
       this.$router.push('/login')
+    },
+    blackuplogin() {
+      let shangji = localStorage.getItem('oldaccessToken')
+      localStorage.setItem('accessToken', shangji)
+      localStorage.setItem("status", 1);
+      localStorage.setItem('oldactive',false)
+      this.$router.push("/index");
     }
   }
 };
@@ -183,6 +199,13 @@ export default {
           color: #0b0b1f;
         }
       }
+    }
+    .blackup{
+      font-size: 14px;
+      background: #0b0b1f;
+      color: #ffddaa;
+      border-radius: 10px;
+      padding: 5px;
     }
     .active {
       background: #0b0b1f;

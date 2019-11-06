@@ -3,9 +3,9 @@
     <van-nav-bar class="indexnav" title="首页">
       <slot name="left" slot="left">
         <div class="left-title-use">
-          <span>用户：123</span>
-          <span>编号：123456</span>
-           <!-- <p>编号</p> -->
+          <span>用户：{{usexg.nickname}}</span>
+          <span>编号：{{usexg.account}}</span>
+          <!-- <p>编号</p> -->
         </div>
       </slot>
     </van-nav-bar>
@@ -30,7 +30,7 @@
       </div>
       <p @click="$router.push('/gonggao')">查看</p>
     </div>
-    <span class="bilv">比例汇率:1233</span>
+    <span class="bilv">比例汇率:{{usexg.rate}}</span>
     <div class="moneytitle">
       <div class="g"></div>
       <p>我的操作项</p>
@@ -41,15 +41,15 @@
         <img :src="moneySwiper[0].zuimg" alt />
         <span>{{moneySwiper[0].zuname}}</span>
       </div>
-      <div class="money-item" @click="$toast('正在维护')">
+      <div class="money-item" @click="$router.push({path:'/mydeal',query:{type:3}})">
         <img :src="moneySwiper[1].zuimg" alt />
         <span>{{moneySwiper[1].zuname}}</span>
       </div>
-      <div class="money-item" @click="$toast('正在维护')">
+      <div class="money-item" @click="$router.push({path:'/mydeal',query:{type:4}})">
         <img :src="moneySwiper[2].zuimg" alt />
         <span>{{moneySwiper[2].zuname}}</span>
       </div>
-      <div class="money-item" @click="$router.push({path:'jhm',query:{type:1}})">
+      <div class="money-item" @click="$router.push({path:'jhcode',query:{type:1}})">
         <img :src="moneySwiper[3].zuimg" alt />
         <span>{{moneySwiper[3].zuname}}</span>
       </div>
@@ -68,12 +68,12 @@
     </van-grid>
     <!-- class="moneyswipers moneyswiper" -->
     <van-grid square :column-num="2" class="moneyswipers">
-      <div @click="$router.push('/help')">
+      <div @click="$router.push({path:'/help',query:{type:0}})">
         <p>{{moneySwiper[5].zuname}}</p>
       </div>
 
-      <div @click="$router.push('/help')">
-       <p>{{moneySwiper[6].zuname}}</p> 
+      <div @click="$router.push({path:'/help',query:{type:1}})">
+        <p>{{moneySwiper[6].zuname}}</p>
       </div>
     </van-grid>
     <!-- </van-swipe> -->
@@ -156,7 +156,8 @@ export default {
       finished: false,
       show: false,
       list: [],
-      lists: []
+      lists: [],
+      usexg:{}
     };
   },
   methods: {
@@ -164,7 +165,7 @@ export default {
       this.current = index;
     },
     onLoad(ls, lss) {
-      setTimeout(() => {
+      // setTimeout(() => {
         // if (this.list.length === ls.length && this.lists.length === lss.length){
         this.loading = false;
         this.finished = true;
@@ -176,7 +177,7 @@ export default {
         // if (this.list.length >= 4) {
 
         // }
-      }, 500);
+      // }, 500);
     }
   },
   created() {
@@ -191,6 +192,14 @@ export default {
         this.lists = res.data.jsbzlist;
         console.log(this.list);
         this.onLoad(res.data.tgbzlist, res.data.jsbzlist);
+      });
+    this.$axios
+      .fetchPost("http://hxlc.ltlfd.cn/home/index/personal")
+      .then(res => {
+        console.log(res);
+        if (res.code == 1) {
+          this.usexg = res.data;
+        }
       });
   }
 };
@@ -233,21 +242,21 @@ export default {
     }
   }
 }
-.left-title-use{
+.left-title-use {
   // height: 100%;
   font-size: 8px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  
-  span{
+
+  span {
     display: inline-block;
     // flex: 1;
     line-height: 23px;
   }
 }
-.bilv{
+.bilv {
   font-size: 14px;
   margin-left: 15px;
 }
@@ -298,6 +307,7 @@ export default {
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
   .van-swipe-item {
     display: flex;
   }
@@ -323,13 +333,13 @@ export default {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  > div{
+  > div {
     width: 40%;
     height: 40px;
-    background: url('../../../static/images/14@3x.png') no-repeat;
+    background: url("../../../static/images/14@3x.png") no-repeat;
     background-size: 100%;
     text-align: center;
-    p{
+    p {
       color: rgb(105, 99, 99);
       line-height: 40px;
       margin: 0;
@@ -467,5 +477,8 @@ export default {
 }
 .van-cell {
   padding: 0;
+}
+[class*=van-hairline]:after{
+  border: none !important;
 }
 </style>

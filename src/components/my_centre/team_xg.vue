@@ -26,19 +26,19 @@
           </div>
            <div class="direct-content">
             <span>昵称</span>
-            <p>{{item.usename}}</p>
+            <p>{{item.nickname}}</p>
           </div>
-           <!-- <div class="direct-content">
+           <div class="direct-content">
             <span>排单币余额</span>
             <p>{{item.balance}}</p>
-          </div> -->
-           <div class="direct-content">
-            <span>注册时间</span>
-            <p>{{item.time}}</p>
           </div>
-           <div class="direct-content">
-            <span>状态</span>
-            <p  :style="{color:item.active === 0 ? '#f00': '#00FFFF'}">{{item.active === 0 ? '未激活': '已完成'}}</p>
+           <!-- <div class="direct-content">
+            <span>注册时间</span>
+            <p>{{item.reg_time}}</p>
+          </div> -->
+           <div class="direct-content"  @click="jinru(item)">
+            <span>{{item.ishosting == 0 ? '未托管' : '进入'}}</span>
+            <!-- <p  :style="{color:item.active === 0 ? '#f00': '#00FFFF'}">{{item.active === 0 ? '未激活': '已完成'}}</p> -->
           </div>
         </div>
         </van-list>
@@ -57,19 +57,19 @@
           </div>
            <div class="direct-content">
             <span>昵称</span>
-            <p>{{item.usename}}</p>
+            <p>{{item.nickname}}</p>
           </div>
-           <!-- <div class="direct-content">
+           <div class="direct-content">
             <span>排单币余额</span>
             <p>{{item.balance}}</p>
+          </div>
+           <!-- <div class="direct-content">
+            <span>注册时间</span>
+            <p>{{item.reg_time}}</p>
           </div> -->
            <div class="direct-content">
-            <span>注册时间</span>
-            <p>{{item.time}}</p>
-          </div>
-           <div class="direct-content">
-            <span>状态</span>
-            <p :style="{color:item.active === 0 ? '#f00': '#00FFFF'}">{{item.active === 0 ? '未激活': '已完成'}}</p>
+            <span>{{item.ishosting == 0 ? '未托管' : '进入'}}</span>
+            <!-- <p :style="{color:item.isactive === 0 ? '#f00': '#00FFFF'}">{{item.isactive === 0 ? '未激活': '已完成'}}</p> -->
           </div>
         </div>
         </van-list>
@@ -86,36 +86,58 @@ export default {
        loading: false,
       finished: false,
       directlist:[
-        {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
-        {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1},
-        {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
-        {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1}
+        // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
+        // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1},
+        // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
+        // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1}
       ],
       indirectlist: [
-        {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
-        {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1},
-        {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
-        {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1}
+        // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
+        // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1},
+        // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
+        // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1}
 
       ]
     };
   },
   created() {
-    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/myuser/team').then(res=>{
-      console.log(res)
-    })
+    
   },
   methods:{
     onClickLeft(){
       this.$router.go(-1)
     },
      onLoad() {
-        // 加载状态结束
+       this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/myuser/team').then(res=>{
+      if (res.code == 1){
+        console.log(res)
+        this.directlist = res.data.onelist
+        this.indirectlist.concat(res.data.twolist,res.data.threelist,res.data.fourlist,res.data.fivelist)
+        // console.log(this.indirectlist)
         this.loading = false;
-
-        // 数据全部加载完成
-     
-          this.finished = true;
+        this.finished = true;
+      }
+    })     
+  },
+  jinru(item){
+    console.log(item)
+    let oldstorage
+    if (item.ishosting == 1){
+ this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/loginhost',{
+      account: item.account,
+       password: item.pwd
+    }).then(res=>{
+      if (res.code == 1){
+          oldstorage = localStorage.getItem('accessToken')
+          localStorage.setItem('oldaccessToken', oldstorage)
+          localStorage.setItem('oldactive', true)
+          localStorage.setItem("status", 1);
+          localStorage.setItem("accessToken", res.data.token);
+          this.$router.push("/index");
+      }
+    })
+    }
+   
   }
 }
 }
@@ -126,6 +148,7 @@ export default {
     color: #ffddaa;
     padding: 10px;
     .direct{
+      
       display: flex;
       justify-content: space-between;
       background: #1C1C51;
@@ -133,18 +156,20 @@ export default {
       padding: 5px 5px;
       border-radius: 8px;
       .direct-content{
+        flex: 1;
         font-size: 14px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         > p{
           color: #fff;
           padding: 0;
           margin: 5px 0;
-          font-size: 12px;
+          font-size: 10px;
         }
       }
+      
     }
   }
 
