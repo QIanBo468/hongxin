@@ -244,7 +244,7 @@ export default {
 }
 .left-title-use {
   // height: 100%;
-  font-size: 8px;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -254,6 +254,7 @@ export default {
     display: inline-block;
     // flex: 1;
     line-height: 23px;
+    font-size: 14px;
   }
 }
 .bilv {

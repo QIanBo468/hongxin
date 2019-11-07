@@ -4,128 +4,159 @@
       <slot slot="left" name="left">
         <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
-      <slot slot="title" name="帮助记录">帮助记录</slot>
+      <slot slot="title" name="帮助记录">明细记录</slot>
     </van-nav-bar>
 
-    <van-tabs
+    <!-- <van-tabs
       class="helptab"
       type="card"
       background="none"
       title-active-color="#000"
       color="#F2C684"
       v-model="actives"
+    >-->
+    <!-- <van-tab title="提供帮助" name="t"> -->
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+      v-if="type == 0"
     >
-      <van-tab title="提供帮助" name="t">
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <div class="help-content" v-for="item of usestate" :key="item.id">
-            <div class="cont-top">
-              <div
-                class="arrow"
-              >
-              <p>￥{{item.jb}}</p>
-                <van-icon name="exchange" /></div>
-              <div class="cont-left">
-                <img width="58px" height="58px" :src="item.pavatar" alt />
-                <div class="seter">
-                  <div>
-                    <div class="g"></div>
-                    <span>{{item.pname}}</span>
-                  </div>
-                  <div class="clear">
-                    <div class="g"></div>
-                    <span>{{item.p_user}}</span>
-                  </div>
-                </div>
+      <div class="help-content" v-for="item of pstate" :key="item.id">
+        <div class="cont-top">
+          <div class="arrow">
+            <p>￥{{item.jb}}</p>
+            <van-icon name="exchange" />
+          </div>
+          <div class="cont-left">
+            <img width="58px" height="58px" :src="item.pavatar" alt />
+            <div class="seter">
+              <div>
+                <div class="g"></div>
+                <span>{{item.pname}}</span>
               </div>
-              <div class="cont-right">
-                <img width="58px" height="58px" :src="item.gavatar" alt />
-                <div class="seter">
-                  <div>
-                    <span>{{item.gname}}</span>
-                    <div class="g"></div>
-                  </div>
-                  <div class="clear">
-                    <span>{{item.g_user}}</span>
-                    <div class="g"></div>
-                  </div>
-                </div>
+              <div class="clear">
+                <div class="g"></div>
+                <span>{{item.p_user}}</span>
               </div>
             </div>
-            <div class="cont-bottom">
-              <div class="useid">
-                <p>打款时间: {{item.dakuan}}</p>
-                <div class="danhaotime">
-                  <div>单号：{{item.id}}</div>
-                  <div>{{item.date}}</div>
-                </div>
+          </div>
+          <div class="cont-right">
+            <img width="58px" height="58px" :src="item.gavatar" alt />
+            <div class="seter">
+              <div>
+                <span>{{item.gname}}</span>
+                <div class="g"></div>
               </div>
-              <div class="state">
-                <div @click="showPopups(item)" :class="[item.zt === '2'? 'blue' : 'red']">{{item.zt == '1'? '待确认' :( item.zt == 2 ? '已完成': '去支付')}}</div>
+              <div class="clear">
+                <span>{{item.g_user}}</span>
+                <div class="g"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cont-bottom">
+          <div class="useid">
+            <p>打款时间: {{item.dakuan}}</p>
+            <div class="danhaotime">
+              <div>单号：{{item.id}}</div>
+              <div>{{item.date}}</div>
+            </div>
+          </div>
+          <div class="state">
+            <div
+              @click="showPopups(item)"
+              :class="[item.zt === '2'? 'blue' : 'red']"
+            >{{item.zt == '1'? '待确认' :( item.zt == 2 ? '已完成': '去支付')}}</div>
 
-                <van-cell @click="showPopup(item)">
-                  <div>详细资料</div>
-                </van-cell>
-                <img  v-preview="item.pic" v-if="item.zt" width="40px" height="40px" :src="item.pic" alt="">
+            <!-- <van-cell > -->
+            <div @click="showPopup(item)">详细资料</div>
+            <!-- </van-cell> -->
+            <van-image
+              v-preview="item.pic"
+              v-if="item.zt"
+              width="40px"
+              height="40px"
+              :src="item.pic"
+              alt
+            />
+          </div>
+        </div>
+      </div>
+    </van-list>
+    <!-- </van-tab> -->
+    <!-- <van-tab title="接受帮助" name="j"> -->
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+      v-if="type ==1"
+    >
+      <div class="help-content" v-for="item of pstate" :key="item.id">
+        <div class="cont-top">
+          <div class="arrow">
+            <p>￥{{item.jb}}</p>
+            <van-icon name="exchange" />
+          </div>
+          <div class="cont-left">
+            <!-- <img width="58px" height="58px" :src="item.pavatar" alt /> -->
+            <div class="seter">
+              <div>
+                <div class="g"></div>
+                <span>{{item.pname}}</span>
+              </div>
+              <div class="clear">
+                <div class="g"></div>
+                <span>{{item.p_user}}</span>
               </div>
             </div>
           </div>
-        </van-list>
-      </van-tab>
-      <van-tab title="接受帮助" name="j">
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <div class="help-content" v-for="item of pstate" :key="item.id">
-            <div class="cont-top">
-              <div class="arrow">
-                <p>￥{{item.jb}}</p>
-                <van-icon name="exchange" />
+          <div class="cont-right">
+            <!-- <img width="58px" height="58px" :src="item.pavatar" alt /> -->
+            <div class="seter">
+              <div>
+                <span>{{item.gname}}</span>
+                <div class="g"></div>
               </div>
-              <div class="cont-left">
-                <img width="58px" height="58px" :src="item.pavatar" alt />
-                <div class="seter">
-                  <div>
-                    <div class="g"></div>
-                    <span>{{item.pname}}</span>
-                  </div>
-                  <div class="clear">
-                    <div class="g"></div>
-                    <span>{{item.p_user}}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="cont-right">
-                <img width="58px" height="58px" :src="item.pavatar" alt />
-                <div class="seter">
-                  <div>
-                    <span>{{item.gname}}</span>
-                    <div class="g"></div>
-                  </div>
-                  <div class="clear">
-                    <span>{{item.g_user}}</span>
-                    <div class="g"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="cont-bottom">
-              <div class="useid">
-                <p>打款时间: {{item.dakuan}}</p>
-                <div class="danhaotime">
-                  <div>单号：{{item.id}}</div>
-                  <div>{{item.date}}</div>
-                </div>
-              </div>
-              <div class="state">
-                <div @click="queren(item)" :class="[item.zt === '2'? 'blue' : 'red']">{{item.zt == '1'? '未确认' :( item.zt == 2 ? '已完成': '待支付')}}</div>
-                <!-- <van-cell> -->
-                <div  @click="showPopup(item)">详细资料</div>
-                <!-- </van-cell> -->
-                <van-image  v-preview="item.pic" v-if="item.zt" width="40px" height="40px" :src="item.pic" />
+              <div class="clear">
+                <span>{{item.g_user}}</span>
+                <div class="g"></div>
               </div>
             </div>
           </div>
-        </van-list>
-      </van-tab>
-    </van-tabs>
+        </div>
+        <div class="cont-bottom">
+          <div class="useid">
+            <p>打款时间: {{item.dakuan}}</p>
+            <div class="danhaotime">
+              <div>单号：{{item.id}}</div>
+              <div>{{item.date}}</div>
+            </div>
+          </div>
+          <div class="state">
+            <div
+              @click="queren(item)"
+              :class="[item.zt === '2'? 'blue' : 'red']"
+            >{{item.zt == '1'? '未确认' :( item.zt == 2 ? '已完成': '待支付')}}</div>
+
+            <div @click="showPopup(item)">详细资料</div>
+
+            <van-image
+              v-preview="item.pic"
+              v-if="item.zt"
+              width="40px"
+              height="40px"
+              :src="item.pic"
+              alt
+            />
+          </div>
+        </div>
+      </div>
+    </van-list>
+    <!-- </van-tab> -->
+    <!-- </van-tabs> -->
     <van-popup v-model="show" close-icon="close" closeable close-icon-position="top-right">
       <div class="shows">
         <div class="use">
@@ -155,7 +186,7 @@
     <van-popup v-model="shows" close-icon="close" closeable close-icon-position="top-right">
       <div class="pou">
         <p>上传截图凭证</p>
-        <van-uploader preview-size=150 :max-count=1 v-model="fileList" multiple />
+        <van-uploader preview-size="150" :max-count="1" v-model="fileList" multiple />
         <van-button class="btn" @click="paysubmit" type="default" color="#ffddaa">确认提交</van-button>
       </div>
     </van-popup>
@@ -163,17 +194,17 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+import { Toast } from "vant";
 export default {
   data() {
     return {
       show: false,
       shows: false,
       showdata: {},
-      showsdata:{},
+      showsdata: {},
       usestate: [],
-      fileList:[],
-      shoukuanimg:{},
+      fileList: [],
+      shoukuanimg: {},
       loading: false,
       finished: false,
       pstate: [],
@@ -186,31 +217,6 @@ export default {
   created() {
     this.id = this.$route.query.items;
     this.type = this.$route.query.type;
-    if (this.type === 0) {
-      this.actives = "t";
-      this.$axios
-        .fetchGet("http://hxlc.ltlfd.cn/home/tgbz/transaction", {
-          id: this.id
-        })
-        .then(res => {
-          console.log(res)
-          res.data.data.forEach(item => {
-            this.usestate.push(item);
-          });
-        });
-    } else {
-      console.log(this.type);
-      this.$axios
-        .fetchGet("http://hxlc.ltlfd.cn/home/jsbz/transaction", {
-          id: this.id
-        })
-        .then(res => {
-          res.data.data.forEach(item => {
-            this.pstate.push(item);
-            console.log(this.pstate);
-          });
-        });
-    }
   },
   methods: {
     onClickLeft() {
@@ -221,45 +227,77 @@ export default {
       this.showdata = item;
     },
     showPopups(item) {
-      this.shows = true;
-      this.showsdata = item;
-      console.log(this.showsdata)
+      if (item.zt != 2) {
+        this.shows = true;
+        this.showsdata = item;
+        console.log(this.showsdata);
+      }
     },
     onLoad() {
-      setTimeout(() => {
-        this.loading = false;
-        this.finished = true;
-      }, 500);
+      if (this.type == 0) {
+        this.actives = "t";
+        this.$axios
+          .fetchGet("http://hxlc.ltlfd.cn/home/tgbz/transaction", {
+            id: this.id
+          })
+          .then(res => {
+            console.log(res);
+            res.data.data.forEach(item => {
+              this.pstate.push(item);
+              console.log(this.pstate);
+            });
+            this.loading = false;
+            this.finished = true;
+          });
+      } else {
+        this.$axios
+          .fetchGet("http://hxlc.ltlfd.cn/home/jsbz/transaction", {
+            id: this.id
+          })
+          .then(res => {
+            console.log(res);
+            res.data.data.forEach(item => {
+              this.pstate.push(item);
+              console.log(this.pstate);
+            });
+            this.loading = false;
+            this.finished = true;
+          });
+      }
     },
     paysubmit() {
-      var that = this
-      console.log(this.showsdata.id)
-      if(this.fileList){
-        this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/home_ddxx_pcz_cl',{
-          id: this.showsdata.id,
-          id_pic_1: this.fileList
-        }).then(res=>{
-          console.log(res)
-          if (res.code ==1){
-            that.showsdata.zt = 1
-            that.shows = false
-            // that.payqueren()
-          }
-        })
+      var that = this;
+      console.log(this.showsdata.id);
+      if (this.fileList) {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/index/home_ddxx_pcz_cl", {
+            id: this.showsdata.id,
+            id_pic_1: this.fileList
+          })
+          .then(res => {
+            console.log(res);
+            if (res.code == 1) {
+              that.showsdata.zt = 1;
+              that.shows = false;
+              // that.payqueren()
+            }
+          });
       }
     },
 
     // 确认收款
-    queren(item){
-      console.log(item.zt)
-      if(item.zt !=2 ){
-      this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/home_ddxx_gcz_cl',{
-        id: item.id,
-        comfir: item.zt
-      }).then(res=>{
-        console.log(res)
-      })
-       }
+    queren(item) {
+      console.log(item.zt);
+      if (item.zt != 2) {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/index/home_ddxx_gcz_cl", {
+            id: item.id,
+            comfir: item.zt
+          })
+          .then(res => {
+            console.log(res);
+          });
+      }
     }
   }
 };
@@ -303,13 +341,13 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      p{
+      p {
         color: #000;
         z-index: 9;
         margin: 0;
         padding: 0;
       }
-      .van-icon{
+      .van-icon {
         font-size: 16px;
       }
     }
@@ -437,7 +475,7 @@ export default {
         line-height: 25px;
         color: #0b0b1f;
       }
-      img{
+      img {
         z-index: 99;
       }
       .red {
@@ -486,14 +524,13 @@ export default {
 
 // 详细信息
 .van-popup {
-    width: 60%;
+  width: 60%;
   height: 60%;
   // background: #fff;
   border-radius: 8px;
   padding: 5px;
 }
 .shows {
-
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -513,7 +550,7 @@ export default {
 }
 
 // 支付弹窗
-.pou{
+.pou {
   width: 100%;
   height: 100%;
   position: relative;
@@ -521,18 +558,18 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  p{
-    
-    margin: 0 0 50px 0;;padding: 0;
+  p {
+    margin: 0 0 50px 0;
+    padding: 0;
   }
-  .van-uploader{
+  .van-uploader {
     width: 100%;
     height: 100%;
     position: relative;
     display: flex;
     justify-content: center;
   }
-  .btn{
+  .btn {
     position: absolute;
     bottom: 10%;
     left: 50%;

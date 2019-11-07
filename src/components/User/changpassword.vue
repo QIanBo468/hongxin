@@ -16,13 +16,13 @@
         <div class="chang-form">
           <van-cell-group>
             <!-- label="用户名" -->
-            <van-field v-model="login.password" type="password" placeholder="请输登录密码" />
+            <van-field v-model="login.password"  maxlength=16 type="password" placeholder="请输登录密码" />
             <!-- label="密码" -->
             <!-- <van-field v-model="login.passwordRepeat" type="password" placeholder="再次输入登录密码" /> -->
           </van-cell-group>
           <van-cell-group>
-            <van-field v-model="login.newPassword" type="password" placeholder="请输入新密码" />
-            <van-field v-model="login.newPasswordRepeat" type="password" placeholder="再次输新入密码" />
+            <van-field v-model="login.newPassword"  maxlength=16 type="password" placeholder="请输入新密码" />
+            <van-field v-model="login.newPasswordRepeat"  maxlength=16 type="password" placeholder="再次输新入密码" />
           </van-cell-group>
           <van-cell-group>
             <van-radio-group class="danxuan" v-model="login.radio" checked-color="#ffddaa">
@@ -35,7 +35,7 @@
             </van-radio-group>
           </van-cell-group>
           <van-cell-group>
-            <van-field v-model="login.mibao" placeholder="请输入密保答案" />
+            <van-field v-model="login.mibao"  maxlength=16 placeholder="请输入密保答案" />
           </van-cell-group>
           <!-- </van-cell-group> -->
         </div>
@@ -44,16 +44,16 @@
         <div class="chang-form">
           <van-cell-group>
             <!-- label="用户名" -->
-            <van-field v-model="erji.password" type="password" placeholder="请输安全密码" />
+            <van-field v-model="erji.password" type="password"  maxlength=16 placeholder="请输安全密码" />
             <!-- label="密码" -->
             <!-- <van-field v-model="erji.passwordRepeat" type="password" placeholder="再次输入安全密码" /> -->
           </van-cell-group>
           <van-cell-group>
-            <van-field v-model="erji.newPassword" type="password" placeholder="请输入新密码" />
-            <van-field v-model="erji.newPasswordRepeat" type="password" placeholder="再次输新入密码" />
+            <van-field v-model="erji.newPassword" type="password"  maxlength=16 placeholder="请输入新密码" />
+            <van-field v-model="erji.newPasswordRepeat"  maxlength=16 type="password" placeholder="再次输新入密码" />
           </van-cell-group>
           <van-cell-group>
-            <van-radio-group class="danxuan" v-model="erji.radio" checked-color="#ffddaa">
+            <van-radio-group class="danxuan" v-model="erji.radio"  maxlength=16 checked-color="#ffddaa">
               <span>密保问题</span>
               <div>
                 <van-radio name="1">你最喜欢的数字是多少</van-radio>
@@ -63,7 +63,7 @@
             </van-radio-group>
           </van-cell-group>
           <van-cell-group>
-            <van-field v-model="erji.mibao" placeholder="请输入密保答案" />
+            <van-field v-model="erji.mibao"  maxlength=16 placeholder="请输入密保答案" />
           </van-cell-group>
           <!-- </van-cell-group> -->
         </div>

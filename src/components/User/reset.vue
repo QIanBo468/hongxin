@@ -13,10 +13,11 @@
             class="userName"
             v-model="userPhone"
             placeholder="输入手机号"
+             maxlength=11
             v-validate="'required|phones'"
             autocomplete="off"
           />
-          <van-field class="userName" v-model="sms" center placeholder="请输入短信验证码">
+          <van-field class="userName" v-model="sms"  maxlength=6 center placeholder="请输入短信验证码">
             <van-button
               class="smsbtn"
               slot="button"
@@ -29,6 +30,7 @@
             v-model="password"
             class="userName"
             type="password"
+             maxlength=16
             v-validate="'required'"
             placeholder="请输入密码"
             autocomplete="off"
@@ -37,6 +39,7 @@
             class="userName"
             v-model="repeassword"
             type="password"
+             maxlength=16
             v-validate="'required'"
             placeholder="请再次输入密码"
             autocomplete="off"

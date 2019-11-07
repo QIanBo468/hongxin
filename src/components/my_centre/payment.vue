@@ -4,20 +4,25 @@
       <slot slot="left" name="left">
         <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
-      <slot slot="title" name="个人资料">未打款会员</slot>
+      <slot slot="title" name="个人资料">{{this.active == 0 ? '未打款会员':'未收款会员'}}</slot>
     </van-nav-bar>
-    <van-tabs v-model="active"
-     color="#ffddaa"
-    background='transparent'
-    title-active-color='#ffddaa'
-    title-inactive-color='#fff'
-     >
-      <van-tab title="标签 1">内容 1</van-tab>
-      <van-tab title="标签 2">内容 2</van-tab>
-      <van-tab title="标签 3">内容 3</van-tab>
-      <van-tab title="标签 4">内容 4</van-tab>
-      <van-tab title="标签 5">内容 5</van-tab>
-    </van-tabs>
+
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <div class="mingxi" v-for="(item, index) of list" :key="index">
+        <div class="mingxi-content">
+          <span>账号</span>
+          <p>{{item.account}}</p>
+        </div>
+        <div class="mingxi-content">
+          <span>昵称</span>
+          <p>{{item.nickname}}</p>
+        </div>
+        <div class="mingxi-content">
+          <span>状态</span>
+          <p style="color:#f00">{{item.isactive != 1? '已完成': '交易中'}}</p>
+        </div>
+      </div>
+    </van-list>
   </div>
 </template>
 
@@ -25,13 +30,46 @@
 export default {
   data() {
     return {
-      active: 0
+      loading: false,
+      finished: false,
+      active: 0,
+      list: [{ dakuan: "", shoukuan: "" }]
     };
   },
-  methods:{
-      onClickLeft() {
-          this.$router.go(-1)
+  created() {
+    this.active = this.$route.query.type;
+    console.log(this.active);
+    // this.onLoad();
+  },
+  methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
+    onLoad() {
+      if (this.active == 0) {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/myuser/buyTeam")
+          .then(res => {
+            console.log(res);
+            if (res.code == 1) {
+              this.list = res.data.onelist;
+              this.loading = false
+              this.finished = true
+            }
+          });
+      } else {
+        this.$axios
+          .fetchPost("http://hxlc.ltlfd.cn/home/myuser/sellTeam")
+          .then(res => {
+            console.log(res);
+            if (res.code == 1) {
+              this.list = res.data.onelist;
+              this.loading = false
+              this.finished = true
+            }
+          });
       }
+    }
   }
 };
 </script>
@@ -41,7 +79,29 @@ export default {
   width: 100%;
   height: 100%;
   color: #ffddaa;
-  padding:0 10px;
+  padding: 0 10px;
+}
+.mingxi {
+  display: flex;
+  justify-content: space-between;
+  background: #1c1c51;
+  margin-top: 10px;
+  padding: 5px 5px;
+  border-radius: 8px;
+  .mingxi-content {
+    flex: 1;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    > p {
+      color: #fff;
+      padding: 0;
+      margin: 5px 0;
+      font-size: 10px;
+    }
+  }
 }
 
 .jhnav {

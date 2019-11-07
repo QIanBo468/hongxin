@@ -28,6 +28,7 @@ import jhm from '@/components/my_centre/jh_m'
 import news from '@/components/my_centre/news'
 import payment from '@/components/my_centre/payment'
 import kaihao from '@/components/my_centre/kaihao'
+import detail from '@/components/my_centre/detail_buy'
 Vue.use(Router)
 
 export default new Router({
@@ -49,6 +50,11 @@ export default new Router({
       path: '/payment',
       name: 'payment',
       component: payment
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: detail
     },
     {
       path: '/kaihao',

@@ -24,6 +24,7 @@
             class="userName"
             v-model="zhanghao"
             placeholder="输入账号"
+            maxlength=16
             v-validate="'required'"
             autocomplete="off"
           />
@@ -31,6 +32,7 @@
             v-model="password"
             class="userName"
             type="password"
+             maxlength=16
             v-validate="'required'"
             placeholder="请输入密码"
             autocomplete="off"
@@ -39,6 +41,7 @@
             class="userName"
             v-model="repeassword"
             type="password"
+             maxlength=16
             v-validate="'required'"
             placeholder="请再次输入密码"
             autocomplete="off"
@@ -52,6 +55,7 @@
             v-model="pay"
             placeholder="输入安全码"
             type="password"
+             maxlength=16
             v-validate="'required|numeric|min:6'"
             autocomplete="off"
           />
@@ -59,6 +63,7 @@
             v-model="pays"
             class="userName"
             type="password"
+             maxlength=16
             v-validate="'required|numeric|min:6'"
             placeholder="再输入安全码"
             autocomplete="off"
@@ -67,6 +72,7 @@
             class="userName"
             v-model="tuijian"
             disabled
+             maxlength=16
             v-validate="'required'"
             placeholder="推荐码"
             autocomplete="off"

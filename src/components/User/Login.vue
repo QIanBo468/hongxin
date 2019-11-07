@@ -13,6 +13,7 @@
           placeholder="输入账号"
           v-validate="'required'"
           autocomplete="off"
+           maxlength=16
           :error="errors.has('phones')"
         />
         <van-field
@@ -21,6 +22,7 @@
           type="password"
           v-validate="'required'"
           placeholder="请输入密码"
+           maxlength=16
           :error="errors.has('password')"
           autocomplete="off"
         />

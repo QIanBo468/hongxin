@@ -37,13 +37,13 @@
         <van-grid-item to='teamxg'>
           <van-image width="30px" src="./static/my_index/18@3x.png" />我的团队
         </van-grid-item>
-        <van-grid-item >
+        <van-grid-item :to="{path:'/payment',query:{type: 0}}">
           <van-image  width="30px" src="./static/my_index/Ways_of_payment@3x.png" />未打款会员
         </van-grid-item>
-        <van-grid-item to="payment">
+        <van-grid-item :to="{path:'/payment',query:{type: 1}}">
           <van-image width="30px" src="./static/my_index/Purse@3x.png" />未收款会员
         </van-grid-item>
-         <van-grid-item @click="$router.push({path:'/kaihao',query:{uid:usexg.ue_id}})">
+         <van-grid-item @click="$router.push({path:'/kaihao',query:{uid:usexg.account}})">
           <van-image width="30px" src="./static/images/user-s.png" />便捷开号
         </van-grid-item>
         <van-grid-item @click="$toast('正在维护')">
@@ -63,13 +63,13 @@
     <div class="indexitem">
       <span>财务管理</span>
       <van-grid :border="false" :column-num="5" class="ziliaoicon">
-        <van-grid-item to="mydeal">
+        <van-grid-item :to="{path:'/detail',query:{type: 2}}">
           <van-image width="30px" src="./static/my_index/Ways_of_payment@3x.png" />财务明细
         </van-grid-item>
-        <van-grid-item @click="$toast('正在维护')">
+        <van-grid-item :to="{path:'/detail',query:{type: 0}}">
           <van-image width="30px" src="./static/my_index/15@3x.png" />购买明细
         </van-grid-item>
-        <van-grid-item @click="$toast('正在维护')">
+        <van-grid-item :to="{path:'/detail',query:{type: 1}}">
           <van-image width="30px" src="./static/my_index/16@3x.png" />出售明细
         </van-grid-item>
         <van-grid-item :to="{path:'jhm',query:{type:1}}">

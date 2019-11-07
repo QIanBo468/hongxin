@@ -7,12 +7,8 @@
       @click="onClickLeft"
       src="./static/images/left@3x.png"
     />
-    <van-nav-bar
-      class="team-title"
-      title="帮助"
-      :border="false"
-    />
-    /<!--right-text="帮助记录"   @click-right="onClickRight"-->
+    <van-nav-bar class="team-title" :title="checkNum == 0 ? '购买旅游套餐':'出售旅游套餐'" :border="false" />/
+    <!--right-text="帮助记录"   @click-right="onClickRight"-->
     <!-- <div class="help-check acea-row row-center-wrapper">
       <div
         class="help-check-item acea-row row-center-wrapper"
@@ -24,13 +20,13 @@
         v-bind:class="checkNum==1? 'check' :'' "
         v-on:click="check(1)"
       >接受帮助</div>
-    </div> -->
+    </div>-->
 
     <div class="help-head acea-row row-center-wrapper" v-show="checkNum==0">
-      <div class="help-contnet-head-left">已提供帮助(元)</div>
+      <div class="help-contnet-head-left">购买金额</div>
       <div class="help-contnet-head-cont">
-        <span>{{helpNum}}.</span>
-        <span style="font-size:14px;margin-left:-9px;">00</span>
+        <span>1000</span>
+        <!-- <span style="font-size:14px;margin-left:-9px;">00</span> -->
       </div>
     </div>
     <div class="accept-head acea-row row-between-wrapper" v-show="checkNum==1">
@@ -52,7 +48,7 @@
     <div class="help-table">
       <div v-show="checkNum==0">
         <van-cell title="排单币" value="1个" :border="false" />
-        <van-cell-group>
+        <!-- <van-cell-group>
           <van-field
             v-model="toPeopleNum"
             type="number"
@@ -63,19 +59,20 @@
             placeholder="输入金额"
             disabled
           />
-        </van-cell-group>
+        </van-cell-group>-->
         <van-button size="large" color="#ffddaa" style="color:#000;" @click="paidansub">确认</van-button>
       </div>
+
       <div v-show="checkNum==1">
-        <van-cell title="排单币" class="accept-check" :border="false">
-          <div>
+        <van-cell class="accept-check" :border="false">
+          <div class="help-xx">
             <van-radio-group v-model="radio" class="acea-row row-between-wrapper">
               <van-radio
-                name="1"
+                name="2"
                 class="acea-row row-center-wrapper"
-                :class="radio==1?'check':'checked'"
+                :class="radio==2?'check':'checked'"
               >
-                动态奖金
+                静态钱包
                 <img
                   slot="icon"
                   slot-scope="props"
@@ -83,11 +80,11 @@
                 />
               </van-radio>
               <van-radio
-                name="2"
+                name="1"
                 class="acea-row row-center-wrapper"
-                :class="radio==2?'check':'checked'"
+                :class="radio==1?'check':'checked'"
               >
-                静态奖金
+                动态钱包
                 <img
                   slot="icon"
                   slot-scope="props"
@@ -104,8 +101,8 @@
             label-width="60%"
             input-align="right"
             label-class="integral-input-text"
-            label="提供帮助"
-            placeholder="1000"
+            label="出售金额"
+            placeholder="输入金额"
           />
         </van-cell-group>
         <van-button size="large" color="#ffddaa" style="color:#000;" @click="tixiansub">确认</van-button>
@@ -115,36 +112,28 @@
 </template>
 
 <script>
-
-import { Toast } from 'vant'
+import { Toast } from "vant";
 
 export default {
   data() {
     return {
       checkNum: 0,
       toPeopleNum: 1000, //提供帮助
-      toPeoplesNums: 1000,
+      toPeoplesNums: 0,
       helpNum: 0,
       acceptNum: "", //接受帮助
       DynamicNum: 0, //动态钱包
       staticNum: 0, //静态钱包
-      radio: "1", //单选
+      radio: "2", //单选
       inactiveIcon: "./static/images/check.png",
       activeIcon: "./static/images/checked.png"
     };
   },
   created() {
-    console.log(this.$route.query.type)
-    this.checkNum = this.$route.query.type
+    console.log(this.$route.query.type);
+    this.checkNum = this.$route.query.type;
     // buysum 总数  credit1 静态钱包 2 动态 3积分
-    this.$axios.fetchPost("http://hxlc.ltlfd.cn/home/jsbz/jsbz").then(res => {
-      console.log(res);
-      if (res.code == 1) {
-        this.helpNum = res.data.user.buysum;
-        this.DynamicNum = res.data.user.credit2;
-        this.staticNum = res.data.user.credit1;
-      }
-    });
+    this.pinnum();
   },
   methods: {
     onClickLeft() {
@@ -154,6 +143,16 @@ export default {
       } else {
         this.$router.go(-1);
       }
+    },
+    pinnum() {
+      this.$axios.fetchPost("http://hxlc.ltlfd.cn/home/jsbz/jsbz").then(res => {
+        console.log(res);
+        if (res.code == 1) {
+          this.helpNum = res.data.user.buysum;
+          this.DynamicNum = res.data.user.credit2;
+          this.staticNum = res.data.user.credit1;
+        }
+      });
     },
     onClickRight() {
       this.$router.push("/helplock");
@@ -166,10 +165,11 @@ export default {
         .then(res => {
           console.log(res);
           this.$toast(res.msg);
+          this.pinnum();
         });
     },
     tixiansub() {
-      if (this.radio === 1) {
+      if (this.radio == 1) {
         this.$axios
           .fetchPost("http://hxlc.ltlfd.cn/home/jsbz/jsbzcl", {
             sellmoney: this.toPeoplesNums,
@@ -177,7 +177,8 @@ export default {
           })
           .then(res => {
             console.log(res);
-            Toast(res.msg)
+            Toast(res.msg);
+            this.pinnum();
           });
       } else {
         this.$axios
@@ -187,7 +188,8 @@ export default {
           })
           .then(res => {
             console.log(res);
-            Toast(res.msg)
+            Toast(res.msg);
+            this.pinnum();
           });
       }
     },
@@ -260,6 +262,7 @@ export default {
   }
   .accept-head {
     margin-top: 1rem;
+    display: flex;
     .accept-head-left,
     .accept-head-right {
       width: 10.4rem;
@@ -300,6 +303,10 @@ export default {
     }
   }
   .accept-check {
+    .help-xx {
+      display: flex;
+      justify-content: space-around;
+    }
     //  border: 1px solid #ffddaa;
     .van-cell__title {
       width: 3rem;

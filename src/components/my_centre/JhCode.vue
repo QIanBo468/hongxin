@@ -8,7 +8,7 @@
     </van-nav-bar>
 
     <div class="integral-contnet">
-      <div class="integral-contnet-head">
+      <div class="integral-contnet-head" @click="$router.push({path:'mydeal',qeury:{type: 1}})">
         <div class="integral-contnet-head-left">激活码余额(个)</div>
         <div class="integral-contnet-head-cont">{{integral}}</div>
         <div class="integral-contnet-head-right"></div>
@@ -55,8 +55,8 @@
           <p>{{item.reg_time}}</p>
         </div>
         <div class="jh-content"  @click="showPopup(item.account)">
-          <span>状态</span>
-          <p :style="{color: item.isactive ==1 ? '#f00': '#fff' }">去激活</p>
+          <!-- <span>状态</span> -->
+          <p :style="{color: item.isactive ==1 ? '#f00': '#fff' }">激活</p>
         </div>
         <!-- <span>{{item.isactive}}</span> -->
         <!-- <span :class="[item.isactive == 1 ? 'blue' : 'red']">激活</span> -->
@@ -207,7 +207,13 @@ export default {
           color: #fff;
           padding: 0;
           margin: 5px 0;
-          font-size: 10px;
+          font-size: 14px;
+        }
+      }
+      .jh-content:last-child{
+        align-self: center;
+        p{
+          font-size: 16px;
         }
       }
     }

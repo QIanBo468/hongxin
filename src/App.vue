@@ -25,7 +25,7 @@ html,body,#app {
 }
 .acea-row {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 .acea-row.row-top {
   align-items: flex-start;

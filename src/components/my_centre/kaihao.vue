@@ -4,22 +4,22 @@
       <slot slot="left" name="left">
         <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
-      <slot slot="title" name="个人资料">便携开号</slot>
+      <slot slot="title" name="个人资料">便捷开号</slot>
     </van-nav-bar>
 
         <div class="kh-form">
         <van-cell-group>
             <!-- label="用户名" -->
-            <van-field v-model="khindex.newid"  placeholder="请输入账号" />
+            <van-field v-model="khindex.newid"  placeholder="请设置一个新的账号" />
             <!-- label="密码" -->
             <!-- <van-field v-model="login.passwordRepeat" type="password" placeholder="再次输入登录密码" /> -->
           </van-cell-group>
           <van-cell-group>
             <van-field v-model="khindex.uid" disabled  placeholder="推荐人账号" />
-            <van-field v-model="khindex.pay"  placeholder="请输入安全密码" />
+            <van-field v-model="khindex.pay"  placeholder="请输入本账号安全密码" />
           </van-cell-group>
           </div>
-        <van-button class="kh-btn" @click="submit">确认</van-button>
+        <van-button color="#ffddaa" class="kh-btn" @click="submit">确认</van-button>
   </div>
 </template>
 
@@ -50,7 +50,11 @@ methods:{
       }).then(res=>{
         console.log(res)
         if(res.code ==1){
-
+          this.khindex.newid = '',
+          this.khindex.pay = ''
+          this.$toast(res.msg)
+        } else {
+          this.$toast(res.msg)
         }
       })
   }
@@ -92,6 +96,10 @@ methods:{
   margin-top: 100px;
   font-size: 16px;
   font-weight: bold;
+  
+}
+.van-button__text{
+color: #000;
 }
 
 .jhnav {

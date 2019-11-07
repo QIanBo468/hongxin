@@ -175,6 +175,7 @@ export default {
         this.$axios
           .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
           .then(res => {
+            console.log(res)
             this.mydata = res.data.coinlist;
           });
       } else if (this.type == 1) {
