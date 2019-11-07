@@ -81,7 +81,7 @@
       </van-grid>
     </div>
     <div class="indexitem">
-      <span>其他项目</span>
+      <span>其他</span>
       <van-grid :border="false" :column-num="4" class="ziliaoicon">
        
         <van-grid-item @click="$toast('暂未开放')">

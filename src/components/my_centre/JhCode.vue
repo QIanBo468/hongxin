@@ -8,7 +8,7 @@
     </van-nav-bar>
 
     <div class="integral-contnet">
-      <div class="integral-contnet-head" @click="$router.push({path:'mydeal',qeury:{type: 1}})">
+      <div class="integral-contnet-head" @click="$router.push({path:'mydeal',query:{type: 1}})">
         <div class="integral-contnet-head-left">激活码余额(个)</div>
         <div class="integral-contnet-head-cont">{{integral}}</div>
         <div class="integral-contnet-head-right"></div>
