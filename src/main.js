@@ -14,6 +14,7 @@ Vue.use(vuePicturePreview)
 
 Vue.prototype.$axios = api
 import api from './utils/api'
+import './utils/rem.js'
 import VeeValidate, { Validator } from 'vee-validate'
 import zh from 'vee-validate/dist/locale/zh_CN'// 引入中文文件
 // 配置中文
