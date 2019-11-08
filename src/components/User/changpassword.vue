@@ -7,12 +7,13 @@
       <slot slot="title" name="个人资料">修改密码</slot>
     </van-nav-bar>
     <van-tabs
+    v-model="active"
       color="#ffddaa"
       background="transparent"
       title-active-color="#ffddaa"
       title-inactive-color="#fff"
     >
-      <van-tab title="修改登录密码">
+      <van-tab title="修改登录密码" >
         <div class="chang-form">
           <van-cell-group>
             <!-- label="用户名" -->
@@ -83,6 +84,7 @@ import { Toast } from "vant";
 export default {
   data() {
     return {
+      active:0,
       login: {
         radio: "1", // ，密保选项
         password: "", //原密码
@@ -109,60 +111,30 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
-    codesubmit() {
-      if (this.disabled == false) {
-        this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/login/smsend", {
-            phone: this.phoneNum
-          })
-          .then(res => {
-            console.log(res);
-            Toast(res.msg);
-            if (res.code === 1) {
-              this.disabled = true;
-              var that = this;
-              var times = setInterval(function() {
-                that.time--;
-                if (that.time > 0) {
-                  that.btntxt = "重新获取(" + that.time + "s)";
-                } else {
-                  clearInterval(times);
-                  that.time = 10;
-                  that.btntxt = "获取验证码";
-                  that.disabled = false;
-                }
-              }, 1000);
-            }
-          })
-          .catch(res => {
-            Toast(res.msg);
-          });
-      }
-    },
     submit() {
-      var that = this;
-      this.$validator.validateAll().then(function(reslut, field) {
-        if (reslut) {
-          that.$axios
-            .fetchPost("http://hxlc.ltlfd.cn/home/info/changePwd", {
-              newpwd: that.newPassword,
-              // secnewpwd: that.newPasswordRepeat,
-              phone: that.phoneNum,
-              phonecode: that.sms
-            })
-            .then(res => {
-              console.log(res);
-              if (res.code === 1) {
-                that.$router.push("/Login");
-              } else {
-                Toast(res.msg);
-              }
-            });
-        } else {
-          console.log(that.errors);
-          Toast(that.errors.items[0].msg);
-        }
-      });
+      if(this.active == 0){
+        this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/info/changePwd',{
+          oldpwd: this.login.password,
+          newpwd: this.login.newPassword,
+          secnewpwd:this.login.newPasswordRepeat,
+          encrypt_problem: this.login.radio,
+          encrypt_answers:this.login.mibao
+        }).then(res=>{
+          console.log(res)
+          this.$toast(res.msg)
+        })
+      } else {
+        this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/info/change_secpwd',{
+          oldpwd: this.erji.password,
+          newpwd: this.erji.newPassword,
+          secnewpwd:this.erji.newPasswordRepeat,
+          encrypt_problem: this.erji.radio,
+          encrypt_answers:this.erji.mibao
+        }).then(res=>{
+          console.log(res)
+          this.$toast(res.msg)
+        })
+      }
     }
   }
 };
