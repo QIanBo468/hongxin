@@ -8,7 +8,7 @@
     </van-nav-bar>
     <div class="head">{{wenzhang.if_theme}}</div>
     <span class="time">{{wenzhang.if_time}}</span>
-    <p>{{wenzhang.if_content}}</p>
+    <div class="newscont" v-html="wenzhang.if_content"></div>
     
   </div>
 </template>
@@ -55,9 +55,20 @@ export default {
         .time{
             color: #a6a6a6;
             font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
         }
         p{
             color: #a6a6a6
+        }
+        .newscont{
+             span{
+color: #ccc !important;
+            } 
+            img{
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     }
 </style>

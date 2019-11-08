@@ -1,6 +1,6 @@
 <template>
   <div class="gonggaos">
-   <van-nav-bar class="jhnav" @click-left="onClickLeft" @click-right="onClickRight">
+   <van-nav-bar class="jhnav" @click-left="onClickLeft">
       <slot slot="left" name="left">
         <van-image width="20px" height="20px" src="./static/images/left@3x.png" alt />
       </slot>
@@ -11,10 +11,10 @@
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="gg_content" v-for="(item, index) of list" :key="index">
           <div class="cont">
-            <p>{{item.if_theme}}</p>
+            <p v-html="item.if_theme"></p>
             <span>{{item.if_time}}</span>
           </div>
-          <div @click="submit(item)">点击查看</div>
+          <div class="chakan" @click="submit(item)">点击查看</div>
         </div>
       </van-list>
     </div>
@@ -102,9 +102,9 @@ export default {
       font-size: 12px;
     }
   }
-  a {
+  .chakan{
     color: #4594f0;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 .van-hairline--bottom::after {
