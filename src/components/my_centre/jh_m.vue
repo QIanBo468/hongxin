@@ -130,7 +130,7 @@
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <div class="dealtitle" v-for="(item, index) of mydata" :key="index">
             <span>{{item.time}}</span>
-            <span>{{item.zhanghu}}</span>
+            <span>{{item.ug_othraccount ? item.ug_othraccount : item.zhanghu}}</span>
             <span>{{item.num}}</span>
             <span :class="[item.way =='激活' ? 'blue' : 'red']">{{item.way}}</span>
           </div>
@@ -151,7 +151,7 @@ export default {
       jifenid: null, // 积分转入id
       jifennum: null, // 积分数量
       dealtype: {
-        dzhanghu: "接受账户",
+        dzhanghu: "转入/转出",
         dnum: "数量",
         dway: "方式"
       },
@@ -196,6 +196,7 @@ export default {
       this.$axios
         .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
         .then(res => {
+          console.log(res)
           if (this.type === 0) {
             this.integral = res.data.user.credit3;
           } else if(this.type === 1){
@@ -231,8 +232,8 @@ export default {
       } else {
         this.$axios
           .fetchPost("http://hxlc.ltlfd.cn/home/info/buycoin", {
-            account: this.peopleId,
-            num: this.peopleNum
+            account: this.jifenid,
+            num: this.jifennum,
           })
           .then(res => {
             console.log(123132,res);
