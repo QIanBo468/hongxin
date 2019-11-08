@@ -67,11 +67,11 @@
           <div class="state">
             <div
               @click="showPopups(item)"
-              :class="[item.zt === '2'? 'blue' : 'red']"
+              :class="['state-cont',item.zt === '2'? 'blue' : 'red']"
             >{{item.zt == '1'? '待确认' :( item.zt == 2 ? '已完成': '去支付')}}</div>
 
             <!-- <van-cell > -->
-            <div @click="showPopup(item)">详细资料</div>
+            <div class="state-cont" @click="showPopup(item)">详细资料</div>
             <!-- </van-cell> -->
             <van-image
               v-preview="item.pic"
@@ -138,10 +138,10 @@
           <div class="state">
             <div
               @click="queren(item)"
-              :class="[item.zt === '2'? 'blue' : 'red']"
+              :class="['state-cont',item.zt === '2'? 'blue' : 'red']"
             >{{item.zt == '1'? '未确认' :( item.zt == 2 ? '已完成': '待支付')}}</div>
 
-            <div @click="showPopup(item)">详细资料</div>
+            <div class="state-cont" @click="showPopup(item)">详细资料</div>
 
             <van-image
               v-preview="item.pic"
@@ -418,7 +418,7 @@ export default {
           font-size: 14px;
           display: flex;
           justify-content: flex-end;
-          align-items: center;
+          align-items: flex-end;
           //   margin-top: 16px;
         }
         .clear {
@@ -463,9 +463,9 @@ export default {
     .state {
       flex: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-around;
-      div {
+      .state-cont {
         width: 60px;
         height: 25px;
         border-radius: 12.5px;

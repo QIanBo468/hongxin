@@ -21,11 +21,13 @@
         @click="$router.push({path: '/helplock',query:{ items: item.id,type:activetype}})"
       >
         <div class="list-left">
+          <p>编号:{{item.timeid}}</p>
           <div class="left-active">
+            
             <div class="red"></div>
             {{item.note}}
           </div>
-          <p>{{item.user}}</p>
+          
         </div>
         <div class="list-right">
           <p class="right-time">{{item.date}}</p>
@@ -53,7 +55,7 @@
         </div>
       </div>
     </van-list>
-    <div class="yijian" @mousedown="submit" v-if="activetype ==2">一键收割</div>
+    <div class="yijian" @mousedown="submit" v-if="activetype ==2">一键收获</div>
   </div>
 </template>
 
@@ -153,7 +155,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
     .left-active {
+
       display: flex;
       align-items: center;
       .red {
@@ -164,7 +168,7 @@ export default {
         margin-right: 5px;
       }
       color: #0b0b1f;
-      font-size: 12px;
+      font-size: 15px;
     }
     p {
       font-size: 14px;

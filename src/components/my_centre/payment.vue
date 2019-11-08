@@ -19,7 +19,7 @@
         </div>
         <div class="mingxi-content">
           <span>状态</span>
-          <p style="color:#f00">{{item.isactive != 1? '已完成': '交易中'}}</p>
+          <p style="color:#f00">{{item.pd_zt != 1? '未支付': '已支付'}}</p>
         </div>
       </div>
     </van-list>
