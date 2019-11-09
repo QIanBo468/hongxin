@@ -29,6 +29,7 @@ import news from '@/components/my_centre/news'
 import payment from '@/components/my_centre/payment'
 import kaihao from '@/components/my_centre/kaihao'
 import detail from '@/components/my_centre/detail_buy'
+import jingtai from '@/components/my_centre/jingtai'
 Vue.use(Router)
 
 export default new Router({
@@ -45,6 +46,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: register
+    },
+    {
+      path: '/jingtai',
+      name: 'jingtai',
+      component: jingtai
     },
     {
       path: '/payment',

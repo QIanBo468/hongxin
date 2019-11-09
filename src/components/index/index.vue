@@ -41,11 +41,11 @@
         <img :src="moneySwiper[0].zuimg" alt />
         <span>{{moneySwiper[0].zuname}}</span>
       </div>
-      <div class="money-item" @click="$router.push({path:'/mydeal',query:{type:3}})">
+      <div class="money-item" @click="$router.push({path:'/jingtai',query:{type:3}})">
         <img :src="moneySwiper[1].zuimg" alt />
         <span>{{moneySwiper[1].zuname}}</span>
       </div>
-      <div class="money-item" @click="$router.push({path:'/mydeal',query:{type:4}})">
+      <div class="money-item" @click="$router.push({path:'/jingtai',query:{type:4}})">
         <img :src="moneySwiper[2].zuimg" alt />
         <span>{{moneySwiper[2].zuname}}</span>
       </div>

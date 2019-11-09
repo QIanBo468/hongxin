@@ -129,7 +129,9 @@ export default {
 #login {
   width: 100%;
   height: 100%;
-  background: #000;
+  background: url(../../../static/images/1.gif);
+  background-size: 100%;
+  // opacity: .5;
   .loginlog{
     width: 100%;
     display: flex;

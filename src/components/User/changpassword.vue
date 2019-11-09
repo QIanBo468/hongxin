@@ -41,11 +41,11 @@
           <!-- </van-cell-group> -->
         </div>
       </van-tab>
-      <van-tab title="修改安全密码">
+      <van-tab title="修改二级密码">
         <div class="chang-form">
           <van-cell-group>
             <!-- label="用户名" -->
-            <van-field v-model="erji.password" type="password"  maxlength=16 placeholder="请输安全密码" />
+            <van-field v-model="erji.password" type="password"  maxlength=16 placeholder="请输二级密码" />
             <!-- label="密码" -->
             <!-- <van-field v-model="erji.passwordRepeat" type="password" placeholder="再次输入安全密码" /> -->
           </van-cell-group>

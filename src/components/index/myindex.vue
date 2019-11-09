@@ -25,7 +25,7 @@
         >
           <van-image width="30px" src="./static/my_index/Folder@3x.png" />资料完善
         </van-grid-item>
-        <van-grid-item @click="$router.push({path:'/register',query:{uid:usexg.ue_id}})">
+        <van-grid-item @click="$router.push({path:'/register',query:{uid:usexg.account}})">
           <van-image width="30px" src="./static/images/user-s.png" />会员注册
         </van-grid-item>
         <van-grid-item to="changpassword">

@@ -53,7 +53,7 @@
           <van-field
             class="userName"
             v-model="pay"
-            placeholder="输入安全码"
+            placeholder="输入二级密码"
             type="password"
              maxlength=16
             v-validate="'required|numeric|min:6'"
@@ -65,7 +65,7 @@
             type="password"
              maxlength=16
             v-validate="'required|numeric|min:6'"
-            placeholder="再输入安全码"
+            placeholder="再输入二级密码"
             autocomplete="off"
           />
           <van-field
@@ -74,7 +74,7 @@
             disabled
              maxlength=16
             v-validate="'required'"
-            placeholder="推荐码"
+            placeholder="推荐人账户"
             autocomplete="off"
           />
         </van-cell-group>

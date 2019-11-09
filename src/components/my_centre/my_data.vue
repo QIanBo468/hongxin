@@ -43,8 +43,8 @@
       <van-cell-group>
         <van-field
           v-model="mydata.pay"
-          placeholder="请输入安全密码"
-          label="安全密码"
+          placeholder="请输入二级密码"
+          label="二级密码"
           :error="errors.has('password')"
           input-align="right"
         />
