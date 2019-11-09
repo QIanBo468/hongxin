@@ -55,7 +55,7 @@
         </div>
       </div>
     </van-list>
-    <div class="yijian" @mousedown="submit" v-if="activetype ==2">一键收获</div>
+    <!-- <div class="yijian" @mousedown="submit" v-if="activetype == 2">一键收获</div> -->
   </div>
 </template>
 

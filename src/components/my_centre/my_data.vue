@@ -51,6 +51,7 @@
       </van-cell-group>
     </div>
     <button class="btn" @click="submit">保存</button>
+    <p class="zhushi">注: 资料只可自行完善一次，请认真填写!</p>
   </div>
 </template>
 
@@ -162,5 +163,8 @@ export default {
 }
 .van-hairline--bottom::after {
   border: none;
+}
+.zhushi{
+  color: #f00;
 }
 </style>

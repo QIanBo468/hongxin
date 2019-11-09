@@ -13,7 +13,7 @@
         <div class="integral-contnet-head-cont">{{integral}}</div>
         <div class="integral-contnet-head-right"></div>
       </div>
-      <div>
+
         <van-cell-group>
           <van-field
             v-model="peopleId"
@@ -24,8 +24,6 @@
             placeholder="输入账号"
           />
         </van-cell-group>
-      </div>
-      <div>
         <van-cell-group>
           <van-field
             v-model="peopleNum"
@@ -36,7 +34,17 @@
             placeholder="输入数量"
           />
         </van-cell-group>
-      </div>
+        <van-cell-group>
+          <van-field
+            v-model="peopleNum"
+            label-width="60%"
+            input-align="right"
+            label-class="integral-input-text"
+            label="转入激活码数量"
+            placeholder="输入数量"
+          />
+        </van-cell-group>
+      <!-- </div> -->
     </div>
     <!-- 积分展示 -->
     <div class="integral-contnet" v-else-if="type == 0">
@@ -45,7 +53,7 @@
         <div class="integral-contnet-head-cont">{{integral}}</div>
         <div class="integral-contnet-head-right"></div>
       </div>
-      <div>
+
         <van-cell-group>
           <van-field
             v-model="jifenid"
@@ -56,8 +64,8 @@
             placeholder="输入账号"
           />
         </van-cell-group>
-      </div>
-      <div>
+      <!-- </div> -->
+
         <van-cell-group>
           <van-field
             v-model="jifennum"
@@ -68,7 +76,17 @@
             placeholder="输入数量"
           />
         </van-cell-group>
-      </div>
+        <van-cell-group>
+          <van-field
+            v-model="erji"
+            label-width="60%"
+            input-align="right"
+            label-class="integral-input-text"
+            label="输入二级密码"
+            placeholder="输入密码"
+          />
+        </van-cell-group>
+      <!-- </div> -->
     </div>
 
     <!-- 排单币展示 -->
@@ -78,7 +96,7 @@
         <div class="integral-contnet-head-cont">{{integral}}</div>
         <div class="integral-contnet-head-right"></div>
       </div>
-      <div>
+      <!-- <div> -->
         <van-cell-group>
           <van-field
             v-model="jifenid"
@@ -89,8 +107,8 @@
             placeholder="输入账号"
           />
         </van-cell-group>
-      </div>
-      <div>
+      <!-- </div> -->
+      <!-- <div> -->
         <van-cell-group>
           <van-field
             v-model="jifennum"
@@ -101,7 +119,17 @@
             placeholder="输入数量"
           />
         </van-cell-group>
-      </div>
+        <van-cell-group>
+          <van-field
+            v-model="erji"
+            label-width="60%"
+            input-align="right"
+            label-class="integral-input-text"
+            label="输入二级密码"
+            placeholder="输入密码"
+          />
+        </van-cell-group>
+      <!-- </div> -->
     </div>
 
     <div class="integral-btn">
@@ -150,6 +178,7 @@ export default {
       peopleNum: null, // 激活码数量
       jifenid: null, // 积分转入id
       jifennum: null, // 积分数量
+      erji:'',   //二级密码
       dealtype: {
         dzhanghu: "转入/转出",
         dnum: "数量",
@@ -211,7 +240,8 @@ export default {
         this.$axios
           .fetchPost("http://hxlc.ltlfd.cn/home/info/integral", {
             account: this.jifenid,
-            num: this.jifennum
+            num: this.jifennum,
+            secpwd: this.erji
           })
           .then(res => {
             console.log(res);
@@ -222,7 +252,8 @@ export default {
         this.$axios
           .fetchPost("http://hxlc.ltlfd.cn/home/info/pin", {
             account: this.peopleId,
-            num: this.peopleNum
+            num: this.peopleNum,
+            secpwd: this.erji
           })
           .then(res => {
             console.log(res);
@@ -234,6 +265,7 @@ export default {
           .fetchPost("http://hxlc.ltlfd.cn/home/info/buycoin", {
             account: this.jifenid,
             num: this.jifennum,
+            secpwd: this.erji
           })
           .then(res => {
             console.log(123132,res);

@@ -12,7 +12,7 @@
     color='#ffddaa'
     background='transparent'
     >
-      <van-tab title="直接推荐账户">
+      <van-tab :title="zongshu">
         <van-list
   v-model="loading"
   :finished="finished"
@@ -30,7 +30,7 @@
           </div>
            <div class="direct-content">
             <span>排单币余额</span>
-            <p>{{item.balance}}</p>
+            <p>{{item.buycoin}}</p>
           </div>
            <!-- <div class="direct-content">
             <span>注册时间</span>
@@ -43,7 +43,7 @@
         </div>
         </van-list>
       </van-tab>
-      <van-tab title="关联伙伴账户">
+      <van-tab :title=zongshus>
                <van-list
   v-model="loading"
   :finished="finished"
@@ -85,6 +85,10 @@ export default {
       active: 2,
        loading: false,
       finished: false,
+      num:null,
+      numed: null,
+      zongshu:'',
+      zongshus:'',
       directlist:[
         // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
         // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1},
@@ -116,6 +120,9 @@ export default {
         // console.log(this.indirectlist)
         this.loading = false;
         this.finished = true;
+        this.num = res.data.onenum
+        this.zongshu = '直接推荐账户('+ this.num+')',
+        this.zongshus = '关联伙伴账户('+res.data.othernum+')'
       }
     })     
   },

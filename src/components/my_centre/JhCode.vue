@@ -13,7 +13,7 @@
         <div class="integral-contnet-head-cont">{{integral}}</div>
         <div class="integral-contnet-head-right"></div>
       </div>
-      <div>
+      <!-- <div> -->
         <van-cell-group>
           <van-field
             v-model="peopleId"
@@ -24,8 +24,8 @@
             placeholder="输入账号"
           />
         </van-cell-group>
-      </div>
-      <div>
+      <!-- </div> -->
+      <!-- <div> -->
         <van-cell-group>
           <van-field
             v-model="peopleNum"
@@ -36,7 +36,17 @@
             placeholder="输入数量"
           />
         </van-cell-group>
-      </div>
+        <van-cell-group>
+          <van-field
+            v-model="erji"
+            label-width="60%"
+            input-align="right"
+            label-class="integral-input-text"
+            label="输入二级密码"
+            placeholder="输入密码"
+          />
+        </van-cell-group>
+      <!-- </div> -->
     </div>
     <div class="integral-btn">
       <van-button size="large" color="#ffddaa" @click="submit">转出</van-button>
@@ -88,6 +98,7 @@ export default {
       integral: "",
       peopleId: "",
       peopleNum: "",
+      erji:'',
       mydata: [],
       show:false,
       clksub:null
@@ -108,7 +119,8 @@ export default {
       this.$axios
         .fetchPost("http://hxlc.ltlfd.cn/home/info/pin", {
           account: this.peopleId,
-          num: this.peopleNum
+          num: this.peopleNum,
+          secpwd: this.erji
         })
         .then(res => {
           console.log(res);
@@ -124,6 +136,7 @@ export default {
         this.show = false
         if(res.data.code ==1 ){
           this.onLoad()
+          this.$toast(res.data.msg)
         } else {
           this.$toast(res.data.msg)
         }
@@ -203,11 +216,12 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        > p{
+        p{
           color: #fff;
           padding: 0;
           margin: 5px 0;
           font-size: 14px;
+          text-align: center;
         }
       }
       .jh-content:last-child{

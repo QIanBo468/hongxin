@@ -1,9 +1,12 @@
 <template>
   <div id="login">
     <div class="logo">
-      <p>USDT</p>
+      <p>HXLL</p>
       <span>|</span>
       <p>登录</p>
+    </div>
+    <div class="loginlog">
+      <img src='../../../static/images/log.png'/>
     </div>
     <div class="redlogin">
       <van-cell-group>
@@ -26,6 +29,21 @@
           :error="errors.has('password')"
           autocomplete="off"
         />
+         </van-cell-group>
+         <van-cell-group class="tuxing">
+         <van-field
+          v-model="yanzheng"
+          class="userName"
+          type="password"
+          v-validate="'required'"
+          placeholder="数字验证码"
+           maxlength=16
+          :error="errors.has('password')"
+          autocomplete="off"
+        >
+         </van-field>
+         <van-image class="txyanzheng" width="84px" height="44px;" :src="imgs" @click="imgs ='http://hxlc.ltlfd.cn//Home/Login/verify?'+Math.random()" />
+
       </van-cell-group>
     </div>
     <div class="login-register">
@@ -45,7 +63,9 @@ export default {
   data() {
     return {
       userName: "",
-      password: ""
+      password: "",
+      yanzheng:null,
+      imgs:'http://hxlc.ltlfd.cn//Home/Login/verify'
     };
   },
   created() {
@@ -109,6 +129,28 @@ export default {
 #login {
   width: 100%;
   height: 100%;
+  background: #000;
+  .loginlog{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    img{
+      width: 50%;
+    }
+  }
+  .tuxing{
+    .userName{
+      flex: 6;
+      margin-right: 15px;
+    }
+    display: flex;
+    align-items: center;
+    .txyanzheng{
+      flex: 3;
+      height: 44px;
+      margin-left: 10px;
+    }
+  }
 }
 #login {
   width: 100%;
@@ -190,5 +232,8 @@ export default {
   /deep/.van-cell {
     background: none;
   }
+}
+[class*=van-hairline]::after{
+  border: none;
 }
 </style>

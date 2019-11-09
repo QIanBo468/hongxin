@@ -97,8 +97,13 @@
       <div class="help-content" v-for="item of pstate" :key="item.id">
         <div class="cont-top">
           <div class="arrow">
-            <p>￥{{item.jb}}</p>
-            <van-icon name="exchange" />
+               
+            <p>{{item.usdt}}</p>
+            <!-- <van-icon name="exchange" /> -->
+            ≈
+            <p>
+           ￥{{item.jb}}
+            </p>
           </div>
           <div class="cont-left">
             <!-- <img width="58px" height="58px" :src="item.pavatar" alt /> -->
@@ -280,6 +285,7 @@ export default {
               that.showsdata.zt = 1;
               that.shows = false;
               // that.payqueren()
+              this.onLoad()
             }
           });
       }
@@ -296,6 +302,7 @@ export default {
           })
           .then(res => {
             console.log(res);
+            this.onLoad()
           });
       }
     }
@@ -346,6 +353,7 @@ export default {
         z-index: 9;
         margin: 0;
         padding: 0;
+        font-size: 12px;
       }
       .van-icon {
         font-size: 16px;
