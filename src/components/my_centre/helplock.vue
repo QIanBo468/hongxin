@@ -26,8 +26,12 @@
       <div class="help-content" v-for="item of pstate" :key="item.id">
         <div class="cont-top">
           <div class="arrow">
-            <p>￥{{item.jb}}</p>
-            <van-icon name="exchange" />
+             <p>≈{{item.usdt}}</p>
+            <!-- <van-icon name="exchange" /> -->
+            USDT
+            <p>
+           ￥{{item.jb}}
+            </p>
           </div>
           <div class="cont-left">
             <img width="58px" height="58px" :src="item.pavatar" alt />
@@ -98,9 +102,9 @@
         <div class="cont-top">
           <div class="arrow">
                
-            <p>{{item.usdt}}</p>
+            <p>≈{{item.usdt}}</p>
             <!-- <van-icon name="exchange" /> -->
-            ≈
+            USDT
             <p>
            ￥{{item.jb}}
             </p>
@@ -183,7 +187,7 @@
           <span>{{showdata.id}}</span>
         </div>
         <div class="use">
-          <p>UDST地址</p>
+          <p>USDT地址</p>
           <span>{{showdata.usdt}}</span>
         </div>
       </div>
@@ -230,6 +234,7 @@ export default {
     showPopup(item) {
       this.show = true;
       this.showdata = item;
+      console.log(this.showdata);
     },
     showPopups(item) {
       if (item.zt != 2) {
@@ -281,6 +286,7 @@ export default {
           })
           .then(res => {
             console.log(res);
+            this.$toast(res.msg)
             if (res.code == 1) {
               that.showsdata.zt = 1;
               that.shows = false;
@@ -301,6 +307,7 @@ export default {
             comfir: item.zt
           })
           .then(res => {
+            this.$toast(res.msg)
             console.log(res);
             this.onLoad()
           });
@@ -348,6 +355,7 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      font-size: 14px;
       p {
         color: #000;
         z-index: 9;

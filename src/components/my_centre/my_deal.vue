@@ -51,6 +51,8 @@ export default {
       this.title = '动态钱包'
     } else if ( this.type == 3){
       this.title = '静态钱包'
+    } else if (this. type == 1){
+      this.title = '激活码记录'
     }
   },
   methods: {
