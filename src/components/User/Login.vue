@@ -34,7 +34,6 @@
          <van-field
           v-model="yanzheng"
           class="userName"
-          type="password"
           v-validate="'required'"
           placeholder="数字验证码"
            maxlength=4
@@ -92,6 +91,9 @@ export default {
 
   //         })
   methods: {
+    tuxing() {
+
+    },
     submit() {
       this.$axios
         .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
@@ -106,7 +108,7 @@ export default {
             localStorage.setItem("accessToken", res.data.token);
             this.$router.push("/index");
           } else {
-            this.imgs = this.imgs
+            this.imgs = 'http://hxlc.ltlfd.cn//Home/Login/verify?'+Math.random()
             Toast(res.msg);
           }
         });
@@ -129,13 +131,14 @@ export default {
 
 <style lang='less' scope>
 #login {
-  width: 100%;
-  height: 100%;
+  width: 165px;
+  height: 176px;
   background: url(../../../static/images/1.gif);
   background-size: 100%;
   // opacity: .5;
   .loginlog{
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     img{
