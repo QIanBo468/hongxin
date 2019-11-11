@@ -20,8 +20,8 @@
           </van-cell-group>
           </div>
         <van-button color="#ffddaa" class="kh-btn" @click="submit">确认</van-button>
-        <p class="zhushi">注: 您只需要为准备新开的账号设置一个登录账号名称，输入本章好的安全密码即可生成一个直推账户
-          ,此操作将直接扣除本账号的一个激活码，资料信息，USDIT地址自动复制本账户
+        <p class="zhushi">注: 您只需要为准备新开的账号设置一个登录账号名称，输入本账号的安全密码即可生成一个直推账户
+          ,此操作将直接扣除本账号的一个激活码，资料信息，USDT地址自动复制本账户
         </p>
   </div>
 </template>

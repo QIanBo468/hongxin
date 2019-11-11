@@ -7,15 +7,6 @@
       <slot slot="title" name="帮助记录">明细记录</slot>
     </van-nav-bar>
 
-    <!-- <van-tabs
-      class="helptab"
-      type="card"
-      background="none"
-      title-active-color="#000"
-      color="#F2C684"
-      v-model="actives"
-    >-->
-    <!-- <van-tab title="提供帮助" name="t"> -->
     <van-list
       v-model="loading"
       :finished="finished"
@@ -27,7 +18,6 @@
         <div class="cont-top">
           <div class="arrow">
              <p>≈{{item.usdt}}</p>
-            <!-- <van-icon name="exchange" /> -->
             USDT
             <p>
            ￥{{item.jb}}
@@ -40,10 +30,10 @@
                 <div class="g"></div>
                 <span>{{item.pname}}</span>
               </div>
-              <div class="clear">
+              <!-- <div class="clear">
                 <div class="g"></div>
                 <span>{{item.p_user}}</span>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="cont-right">
@@ -53,10 +43,10 @@
                 <span>{{item.gname}}</span>
                 <div class="g"></div>
               </div>
-              <div class="clear">
+              <!-- <div class="clear">
                 <span>{{item.g_user}}</span>
                 <div class="g"></div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -102,7 +92,7 @@
         <div class="cont-top">
           <div class="arrow">
                
-            <p>≈{{item.usdt}}</p>
+            <p>≈{{item.usdtprice}}</p>
             <!-- <van-icon name="exchange" /> -->
             USDT
             <p>
@@ -116,10 +106,10 @@
                 <div class="g"></div>
                 <span>{{item.pname}}</span>
               </div>
-              <div class="clear">
+              <!-- <div class="clear">
                 <div class="g"></div>
                 <span>{{item.p_user}}</span>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="cont-right">
@@ -129,10 +119,10 @@
                 <span>{{item.gname}}</span>
                 <div class="g"></div>
               </div>
-              <div class="clear">
+              <!-- <div class="clear">
                 <span>{{item.g_user}}</span>
                 <div class="g"></div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -164,33 +154,42 @@
         </div>
       </div>
     </van-list>
-    <!-- </van-tab> -->
-    <!-- </van-tabs> -->
     <van-popup v-model="show" close-icon="close" closeable close-icon-position="top-right">
       <div class="shows">
         <div class="use">
-          <p>提供帮助者</p>
-          <span>{{showdata.pname}}</span>
-          <p>账号</p>
-          <span>{{showdata.p_user}}</span>
+          <p>打款方昵称:</p>{{showdata.pname}}
         </div>
         <div class="use">
-          <p>接受帮助者</p>
-          <span>{{showdata.gname}}</span>
-          <p>账号</p>
-          <span>{{showdata.g_user}}</span>
+          <!-- <span></span> -->
+          <p>打款方推荐人昵称:</p>{{showdata.pnickname}}
+          <!-- <span></span> -->
+        </div>
+        <div class="use">
+          <p>收款方昵称:</p>{{showdata.gname}}
+          <!-- <span></span> -->
+           </div>
+           <div class="use">
+          <p>收款方推荐人昵称:</p>{{showdata.gnickname}}
+ 
         </div>
         <div class="dingdan">
-          <p>打款时间</p>
+          <p>订单生成时间:</p>
           <span>{{showdata.date}}</span>
-          <p>单号</p>
+          <p>订单号</p>
           <span>{{showdata.id}}</span>
         </div>
-        <div class="use">
+        <div class="user">
+          <div>
           <p>USDT地址</p>
           <span>{{showdata.usdt}}</span>
+          </div>
+          <p @click="copy(showdata.usdt)">复制地址</p>
         </div>
+        
       </div>
+
+
+
     </van-popup>
     <van-popup v-model="shows" close-icon="close" closeable close-icon-position="top-right">
       <div class="pou">
@@ -237,9 +236,9 @@ export default {
       console.log(this.showdata);
     },
     showPopups(item) {
-      if (item.zt != 2) {
+      if (item.zt != 2 && item.zt!=1) {
         this.shows = true;
-        this.showsdata = item;
+        this.showdsata = item;
         console.log(this.showsdata);
       }
     },
@@ -290,6 +289,7 @@ export default {
             if (res.code == 1) {
               that.showsdata.zt = 1;
               that.shows = false;
+              this.$router.go(0)
               // that.payqueren()
               this.onLoad()
             }
@@ -300,7 +300,7 @@ export default {
     // 确认收款
     queren(item) {
       console.log(item.zt);
-      if (item.zt != 2) {
+      if (item.zt == 1 ) {
         this.$axios
           .fetchPost("http://hxlc.ltlfd.cn/home/index/home_ddxx_gcz_cl", {
             id: item.id,
@@ -309,9 +309,22 @@ export default {
           .then(res => {
             this.$toast(res.msg)
             console.log(res);
+            this.$router.go(0)
             this.onLoad()
           });
       }
+    },
+    copy (num) {
+      this.show = true
+      this.$toast('已复制')
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+      input.setAttribute('value', num)
+      input.select()
+      if (document.execCommand('copy')) {
+        document.execCommand('copy')
+      }
+      document.body.removeChild(input)
     }
   }
 };
@@ -393,6 +406,7 @@ export default {
         padding-top: 16px;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         div {
           font-size: 14px;
           display: flex;
@@ -429,12 +443,12 @@ export default {
         padding-top: 16px;
         display: flex;
         flex-direction: column;
-
+justify-content: center;
         div {
           font-size: 14px;
           display: flex;
           justify-content: flex-end;
-          align-items: flex-end;
+          align-items: center;
           //   margin-top: 16px;
         }
         .clear {
@@ -547,15 +561,24 @@ export default {
   padding: 5px;
 }
 .shows {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-
+  background: #212243;
+  .use{
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    color: #d4850e;
+    margin-bottom: 10px;
+  }
   p {
-    color: #000;
+    color: #fff;
     margin: 5px;
-    font-size: 16px;
+    font-size: 14px;
   }
   span {
     font-size: 13px;
@@ -564,7 +587,17 @@ export default {
     margin-left: 10px;
   }
 }
-
+.user{
+  display: flex;
+  flex-direction: column;
+  > div{
+    display: flex;
+    align-items: center;
+  }
+  p{
+    font-size: 12px;
+  }
+}
 // 支付弹窗
 .pou {
   width: 100%;

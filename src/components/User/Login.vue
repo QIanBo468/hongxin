@@ -37,7 +37,7 @@
           type="password"
           v-validate="'required'"
           placeholder="数字验证码"
-           maxlength=16
+           maxlength=4
           :error="errors.has('password')"
           autocomplete="off"
         >
@@ -96,7 +96,8 @@ export default {
       this.$axios
         .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
           account: this.userName,
-          password: this.password
+          password: this.password,
+          verCode: this.yanzheng
         })
         .then(res => {
           console.log(res);
@@ -105,6 +106,7 @@ export default {
             localStorage.setItem("accessToken", res.data.token);
             this.$router.push("/index");
           } else {
+            this.imgs = this.imgs
             Toast(res.msg);
           }
         });

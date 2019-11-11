@@ -75,10 +75,10 @@
         <van-grid-item :to="{path:'/detail',query:{type: 1}}">
           <van-image width="30px" src="./static/my_index/16@3x.png" />出售明细
         </van-grid-item>
-        <van-grid-item :to="{path:'jhm',query:{type:1}}">
+        <van-grid-item @click="$toast('未开放')">
           <van-image width="30px" src="./static/my_index/Purse@3x.png" />激活码转账
         </van-grid-item>
-        <van-grid-item @click="$toast('正在维护')">
+        <van-grid-item @click="$toast('未开放')">
           <van-image width="30px" src="./static/my_index/16@3x.png" />待定
         </van-grid-item>
       </van-grid>
@@ -92,7 +92,7 @@
         <van-grid-item to="/gonggao">
           <van-image width="30px" src="./static/my_index/19@3x.png" />公告
         </van-grid-item>
-        <van-grid-item @click="$toast('暂未开放')">
+        <van-grid-item @click="$toast('未开放')">
           <van-icon name="share" size="30px" />待定
         </van-grid-item>
         <van-grid-item @click="exit">
@@ -100,18 +100,19 @@
         </van-grid-item>
       </van-grid>
     </div>
-    <van-popup class="pop" v-model="show">
-      <div class="exit" @click="show = false">x</div>
+    <van-popup class="pop" close-icon="close" closeable close-icon-position="top-right" v-model="show">
+      <div>
+      <!-- <div class="exit" @click="show = false">x</div> -->
       <div class="option">
         <van-radio-group class="xuanxiang" v-model="radio" checked-color='#f00'>
           <van-radio name=0>开启托管</van-radio>
-          <van-radio name=1></van-radio>取消托管</van-radio>
+          <van-radio name=1>取消托管</van-radio>
         </van-radio-group>
       </div>
                   <p>提示：开启托管后，推荐人可无需密码登录到您的账户，需谨慎操作</p>
 
       <button class="btn" @click="tuoguans">确认选择</button>
-
+      </div>
     </van-popup>
   </div>
 </template>
@@ -284,13 +285,18 @@ export default {
 }
 .pop{
   box-sizing: border-box;
-  padding: 20px 10px;
+  padding: 50px 10px 10px 10px;
   background: #ffddaa;
   width: 200px;
   height: 300px;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
+  > div{
+    width: 100%;
+    height: 100%;
+    background: #ffddaa;
+  }
   .exit{
     width: 20px;
     text-align: center;
