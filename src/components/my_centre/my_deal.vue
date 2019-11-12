@@ -17,7 +17,7 @@
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="dealtitle" v-for="(item, index) of mydata" :key="index">
           <span>{{item.createtime}}</span>
-          <span>{{item.account}}</span>
+          <span>{{item.ug_othraccount}}</span>
           <span>{{item.money}}</span>
           <span :class="[item.status ==1 ? 'blue' : 'red']">{{item.ug_note}}</span>
         </div>

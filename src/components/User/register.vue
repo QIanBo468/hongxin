@@ -125,7 +125,7 @@ export default {
           if (res.code == 1) {
             Toast("注册成功");
             // that.$cookies.set('status', res.data.status)
-            this.$router.push("/login");
+            this.$router.go(-1);
             // that.$cookies.set('accessToken', res.data.tokenType + " " + res.data.accessToken , res.data.expiresIn)
           } else {
             Toast(res.msg);

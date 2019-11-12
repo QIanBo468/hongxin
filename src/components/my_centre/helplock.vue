@@ -154,7 +154,7 @@
         </div>
       </div>
     </van-list>
-    <van-popup v-model="show" close-icon="close" closeable close-icon-position="top-right">
+    <van-popup class="help-pop" v-model="show" close-icon="close" closeable close-icon-position="top-right">
       <div class="shows">
         <div class="use">
           <p>打款方昵称:</p>{{showdata.pname}}
@@ -183,7 +183,7 @@
           <p>USDT地址</p>
           <span>{{showdata.usdt}}</span>
           </div>
-          <p @click="copy(showdata.usdt)">复制地址</p>
+          <button class="userbtn" @click="copy(showdata.usdt)">复制地址</button>
         </div>
         
       </div>
@@ -553,7 +553,7 @@ justify-content: center;
 }
 
 // 详细信息
-.van-popup {
+.help-pop {
   width: 60%;
   height: 60%;
   // background: #fff;
@@ -596,6 +596,14 @@ justify-content: center;
   }
   p{
     font-size: 12px;
+  }
+  .userbtn{
+    font-size: 12px;
+    width: 80px;
+    height: 20px;
+    border: none;
+    background: #ffddaa;
+    border-radius: 6px;
   }
 }
 // 支付弹窗

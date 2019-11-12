@@ -181,6 +181,7 @@ export default {
           if (res.code == 1) {
             this.usexg = res.data;
             this.tuoguan = res.data.ishosting;
+            this.radio = res.data.ishosting;
           }
         });
     }
@@ -284,17 +285,19 @@ export default {
   }
 }
 .pop{
-  box-sizing: border-box;
-  padding: 50px 10px 10px 10px;
+
+ 
   background: #ffddaa;
-  width: 200px;
-  height: 300px;
+  width: 220px;
+  height: 310px;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
   > div{
+      box-sizing: border-box;
     width: 100%;
     height: 100%;
+     padding: 50px 10px 10px 10px;
     background: #ffddaa;
   }
   .exit{

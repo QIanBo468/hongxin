@@ -41,7 +41,7 @@
               <span>密保问题</span>
               <div>
                 <van-radio name="1">你最喜欢的数字是多少</van-radio>
-                <van-radio name="2">你最爱的人叫什么</van-radio>
+                <van-radio name="2">你的初中老师叫什么</van-radio>
                 <van-radio name="3">你最喜欢的颜色</van-radio>
               </div>
             </van-radio-group>

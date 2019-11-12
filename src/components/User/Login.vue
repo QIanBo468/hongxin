@@ -6,7 +6,7 @@
       <p>登录</p>
     </div>
     <div class="loginlog">
-      <img src='../../../static/images/log.png'/>
+      <img src='../../../static/images/logo.png'/>
     </div>
     <div class="redlogin">
       <van-cell-group>
@@ -133,7 +133,7 @@ export default {
 #login {
   width: 165px;
   height: 176px;
-  background: url(../../../static/images/1.gif);
+  background: url(../../../static/images/2.gif) no-repeat no-repeat;
   background-size: 100%;
   // opacity: .5;
   .loginlog{

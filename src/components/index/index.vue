@@ -157,7 +157,7 @@ export default {
       show: false,
       list: [],
       lists: [],
-      usexg:{}
+      usexg: {}
     };
   },
   methods: {
@@ -166,32 +166,40 @@ export default {
     },
     onLoad(ls, lss) {
       // setTimeout(() => {
-        // if (this.list.length === ls.length && this.lists.length === lss.length){
-        this.loading = false;
-        this.finished = true;
-        // }
+      // if (this.list.length === ls.length && this.lists.length === lss.length){
+      this.loading = false;
+      this.finished = true;
+      // }
 
-        // 加载状态结束
+      // 加载状态结束
 
-        // 数据全部加载完成
-        // if (this.list.length >= 4) {
+      // 数据全部加载完成
+      // if (this.list.length >= 4) {
 
-        // }
+      // }
       // }, 500);
     }
   },
   created() {
     // axios.post()
+    let that  = this
     this.$axios
       .fetchPost("http://hxlc.ltlfd.cn/home/index/home", {})
       .then(res => {
         console.log(res);
-        this.gonggao = res.data.news[0].if_theme;
-        this.adSwiper = res.data.banners;
-        this.list = res.data.tgbzlist;
-        this.lists = res.data.jsbzlist;
-        console.log(this.list);
-        this.onLoad(res.data.tgbzlist, res.data.jsbzlist);
+        if (res.code == 1) {
+          this.gonggao = res.data.news[0].if_theme;
+          this.adSwiper = res.data.banners;
+          this.list = res.data.tgbzlist;
+          this.lists = res.data.jsbzlist;
+          console.log(this.list);
+          this.onLoad(res.data.tgbzlist, res.data.jsbzlist);
+        } else if(res.code == 2) {
+          this.$toast(res.msg);
+          setTimeout(function() {
+            that.$router.push("/mydata");
+          },1500);
+        }
       });
     this.$axios
       .fetchPost("http://hxlc.ltlfd.cn/home/index/personal")
@@ -479,7 +487,7 @@ export default {
 .van-cell {
   padding: 0;
 }
-[class*=van-hairline]:after{
+[class*="van-hairline"]:after {
   border: none !important;
 }
 </style>
