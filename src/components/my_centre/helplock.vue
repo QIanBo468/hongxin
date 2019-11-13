@@ -17,7 +17,7 @@
       <div class="help-content" v-for="item of pstate" :key="item.id">
         <div class="cont-top">
           <div class="arrow">
-             <p>≈{{item.usdt}}</p>
+             <p>≈{{item.usdtprice}}</p>
             USDT
             <p>
            ￥{{item.jb}}

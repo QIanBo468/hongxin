@@ -6,7 +6,7 @@
       <p>登录</p>
     </div>
     <div class="loginlog">
-      <img src='../../../static/images/logo.png'/>
+      <img width="100px" height="200px" src='../../../static/images/logo.png'/>
     </div>
     <div class="redlogin">
       <van-cell-group>
