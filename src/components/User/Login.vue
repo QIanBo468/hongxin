@@ -137,8 +137,9 @@ export default {
   background-size: 100%;
   // opacity: .5;
   .loginlog{
-    width: 100%;
-    height: 100%;
+    // width: 345px;
+    // // height: 100%;
+    // height: 300px;
     display: flex;
     justify-content: center;
     img{

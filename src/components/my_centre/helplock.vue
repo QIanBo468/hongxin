@@ -17,11 +17,8 @@
       <div class="help-content" v-for="item of pstate" :key="item.id">
         <div class="cont-top">
           <div class="arrow">
-             <p>≈{{item.usdtprice}}</p>
-            USDT
-            <p>
-           ￥{{item.jb}}
-            </p>
+            <p>≈{{item.usdtprice}}</p>USDT
+            <p>￥{{item.jb}}</p>
           </div>
           <div class="cont-left">
             <img width="58px" height="58px" :src="item.pavatar" alt />
@@ -33,7 +30,7 @@
               <!-- <div class="clear">
                 <div class="g"></div>
                 <span>{{item.p_user}}</span>
-              </div> -->
+              </div>-->
             </div>
           </div>
           <div class="cont-right">
@@ -46,7 +43,7 @@
               <!-- <div class="clear">
                 <span>{{item.g_user}}</span>
                 <div class="g"></div>
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
@@ -91,13 +88,10 @@
       <div class="help-content" v-for="item of pstate" :key="item.id">
         <div class="cont-top">
           <div class="arrow">
-               
             <p>≈{{item.usdtprice}}</p>
             <!-- <van-icon name="exchange" /> -->
             USDT
-            <p>
-           ￥{{item.jb}}
-            </p>
+            <p>￥{{item.jb}}</p>
           </div>
           <div class="cont-left">
             <!-- <img width="58px" height="58px" :src="item.pavatar" alt /> -->
@@ -109,7 +103,7 @@
               <!-- <div class="clear">
                 <div class="g"></div>
                 <span>{{item.p_user}}</span>
-              </div> -->
+              </div>-->
             </div>
           </div>
           <div class="cont-right">
@@ -122,7 +116,7 @@
               <!-- <div class="clear">
                 <span>{{item.g_user}}</span>
                 <div class="g"></div>
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
@@ -154,23 +148,32 @@
         </div>
       </div>
     </van-list>
-    <van-popup class="help-pop" v-model="show" close-icon="close" closeable close-icon-position="top-right">
+    <van-popup
+      class="help-pop"
+      v-model="show"
+      close-icon="close"
+      closeable
+      close-icon-position="top-right"
+    >
       <div class="shows">
         <div class="use">
-          <p>打款方昵称:</p>{{showdata.pname}}
+          <p>打款方昵称:</p>
+          {{showdata.pname}}
         </div>
         <div class="use">
           <!-- <span></span> -->
-          <p>打款方推荐人昵称:</p>{{showdata.pnickname}}
+          <p>打款方推荐人昵称:</p>
+          {{showdata.pnickname}}
           <!-- <span></span> -->
         </div>
         <div class="use">
-          <p>收款方昵称:</p>{{showdata.gname}}
+          <p>收款方昵称:</p>
+          {{showdata.gname}}
           <!-- <span></span> -->
-           </div>
-           <div class="use">
-          <p>收款方推荐人昵称:</p>{{showdata.gnickname}}
- 
+        </div>
+        <div class="use">
+          <p>收款方推荐人昵称:</p>
+          {{showdata.gnickname}}
         </div>
         <div class="dingdan">
           <p>订单生成时间:</p>
@@ -180,21 +183,20 @@
         </div>
         <div class="user">
           <div>
-          <p>USDT地址</p>
-          <span>{{showdata.usdt}}</span>
+            <p>USDT地址</p>
+            <span>{{showdata.usdt}}</span>
           </div>
           <button class="userbtn" @click="copy(showdata.usdt)">复制地址</button>
         </div>
-        
       </div>
-
-
-
     </van-popup>
     <van-popup v-model="shows" close-icon="close" closeable close-icon-position="top-right">
       <div class="pou">
         <p>上传截图凭证</p>
-        <van-uploader preview-size="150" :max-count="1" v-model="fileList" multiple />
+        <div>
+          <van-uploader preview-size="80px" :max-count="1" v-model="fileList" multiple />
+          <van-circle v-if="jindutiao" v-model="currentRate" :rate="currentRates" :speed="100" :text="text" />
+        </div>
         <van-button class="btn" @click="paysubmit" type="default" color="#ffddaa">确认提交</van-button>
       </div>
     </van-popup>
@@ -219,8 +221,16 @@ export default {
       id: null,
       type: null,
       actives: "j",
-      state: "已付款"
+      state: "已付款",
+      currentRate: 0,
+      currentRates: 0,
+      jindutiao: false
     };
+  },
+  computed: {
+    text() {
+      return this.currentRate.toFixed(0) + "%";
+    }
   },
   created() {
     this.id = this.$route.query.items;
@@ -236,9 +246,9 @@ export default {
       console.log(this.showdata);
     },
     showPopups(item) {
-      if (item.zt != 2 && item.zt!=1) {
+      if (item.zt != 2 ) {
         this.shows = true;
-        this.showdsata = item;
+        this.showsdata = item;
         console.log(this.showsdata);
       }
     },
@@ -284,15 +294,28 @@ export default {
             id_pic_1: this.fileList
           })
           .then(res => {
-            console.log(res);
-            this.$toast(res.msg)
-            if (res.code == 1) {
+            
+            this.jindutiao = true
+            this.currentRates = 30
+            this.currentRates = 100
+            setTimeout(function(){
+              console.log(res);
+              if (res.code == 1 && that.currentRates) {
               that.showsdata.zt = 1;
               that.shows = false;
-              this.$router.go(0)
+              that.$router.go(0);
               // that.payqueren()
-              this.onLoad()
+              that.onLoad();
+              that.$toast(res.msg);
+              that.jindutiao = false
+              that.currentRates = 0
+            } else {
+              that.$toast(res.msg)
+              that.jindutiao = false
+              that.currentRates = 0
             }
+            },2000)
+           
           });
       }
     },
@@ -300,31 +323,31 @@ export default {
     // 确认收款
     queren(item) {
       console.log(item.zt);
-      if (item.zt == 1 ) {
+      if (item.zt == 1) {
         this.$axios
           .fetchPost("http://hxlc.ltlfd.cn/home/index/home_ddxx_gcz_cl", {
             id: item.id,
             comfir: item.zt
           })
           .then(res => {
-            this.$toast(res.msg)
+            this.$toast(res.msg);
             console.log(res);
-            this.$router.go(0)
-            this.onLoad()
+            this.$router.go(0);
+            this.onLoad();
           });
       }
     },
-    copy (num) {
-      this.show = true
-      this.$toast('已复制')
-      const input = document.createElement('input')
-      document.body.appendChild(input)
-      input.setAttribute('value', num)
-      input.select()
-      if (document.execCommand('copy')) {
-        document.execCommand('copy')
+    copy(num) {
+      this.show = true;
+      this.$toast("已复制");
+      const input = document.createElement("input");
+      document.body.appendChild(input);
+      input.setAttribute("value", num);
+      input.select();
+      if (document.execCommand("copy")) {
+        document.execCommand("copy");
       }
-      document.body.removeChild(input)
+      document.body.removeChild(input);
     }
   }
 };
@@ -443,7 +466,7 @@ export default {
         padding-top: 16px;
         display: flex;
         flex-direction: column;
-justify-content: center;
+        justify-content: center;
         div {
           font-size: 14px;
           display: flex;
@@ -568,7 +591,7 @@ justify-content: center;
   justify-content: space-around;
   align-items: flex-start;
   background: #212243;
-  .use{
+  .use {
     font-size: 13px;
     display: flex;
     align-items: center;
@@ -587,17 +610,17 @@ justify-content: center;
     margin-left: 10px;
   }
 }
-.user{
+.user {
   display: flex;
   flex-direction: column;
-  > div{
+  > div {
     display: flex;
     align-items: center;
   }
-  p{
+  p {
     font-size: 12px;
   }
-  .userbtn{
+  .userbtn {
     font-size: 12px;
     width: 80px;
     height: 20px;
@@ -608,20 +631,21 @@ justify-content: center;
 }
 // 支付弹窗
 .pou {
-  width: 100%;
-  height: 100%;
+  width: 200px;
+  height: 400px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  padding-top: 20px;
+  // justify-content: space-around;
   p {
     margin: 0 0 50px 0;
     padding: 0;
   }
   .van-uploader {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     position: relative;
     display: flex;
     justify-content: center;

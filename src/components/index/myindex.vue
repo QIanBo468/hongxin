@@ -192,6 +192,7 @@ export default {
 <style lang='less' scope>
 .my_index {
   padding: 0 11px;
+  overflow-y: auto;
   .mi_nav {
     background: transparent;
     .van-nav-bar__title {

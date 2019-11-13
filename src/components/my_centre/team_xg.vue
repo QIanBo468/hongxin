@@ -36,8 +36,9 @@
             <span>注册时间</span>
             <p>{{item.reg_time}}</p>
           </div> -->
-           <div class="direct-content"  @click="jinru(item)">
+           <div  v-if="loginstatus ==0" class="direct-content"  @click="jinru(item)">
             <span>{{item.ishosting == 0 ? '未托管' : '进入'}}</span>
+            <!-- <span v-else>未托管</span> -->
             <!-- <p  :style="{color:item.active === 0 ? '#f00': '#00FFFF'}">{{item.active === 0 ? '未激活': '已完成'}}</p> -->
           </div>
         </div>
@@ -89,6 +90,7 @@ export default {
       numed: null,
       zongshu:'',
       zongshus:'',
+      loginstatus:'',
       directlist:[
         // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:0},
         // {account:18866668888,usename:'usdt',balance:100,time:'2019-11-5 14:01',active:1},
@@ -116,6 +118,7 @@ export default {
       if (res.code == 1){
         console.log(res)
         this.directlist = res.data.onelist
+        this.loginstatus = res.data.loginstatus
         this.indirectlist.concat(res.data.twolist,res.data.threelist,res.data.fourlist,res.data.fivelist)
         // console.log(this.indirectlist)
         this.loading = false;
