@@ -68,7 +68,7 @@
             <span>注册时间</span>
             <p>{{item.reg_time}}</p>
           </div> -->
-           <div class="direct-content">
+           <div v-if="item.ishosting" class="direct-content">
             <span>{{item.ishosting == 0 ? '未托管' : '进入'}}</span>
             <!-- <p :style="{color:item.isactive === 0 ? '#f00': '#00FFFF'}">{{item.isactive === 0 ? '未激活': '已完成'}}</p> -->
           </div>
@@ -119,8 +119,8 @@ export default {
         console.log(res)
         this.directlist = res.data.onelist
         this.loginstatus = res.data.loginstatus
-        this.indirectlist.concat(res.data.twolist,res.data.threelist,res.data.fourlist,res.data.fivelist)
-        // console.log(this.indirectlist)
+        this.indirectlist = this.indirectlist.concat(res.data.twolist,res.data.threelist,res.data.fourlist,res.data.fivelist)
+        console.log(this.indirectlist)
         this.loading = false;
         this.finished = true;
         this.num = res.data.onenum

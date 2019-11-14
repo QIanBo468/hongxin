@@ -1,5 +1,6 @@
 <template>
   <div id="login">
+    <div class="gif">
     <div class="logo">
       <p>HXLL</p>
       <span>|</span>
@@ -51,6 +52,7 @@
         <!-- <div class="reg" @click="toregister">还没账户，去注册!</div> -->
         <div class="reslut" @click="toreset">忘记密码?</div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -133,8 +135,10 @@ export default {
 #login {
   width: 165px;
   height: 176px;
-  background: url(../../../static/images/2.gif) no-repeat no-repeat;
-  background-size: 100%;
+  
+
+  display: flex;
+  flex-direction: column;
   // opacity: .5;
   .loginlog{
     // width: 345px;
@@ -167,7 +171,18 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   box-sizing: border-box;
+  // 
+  .gif{
+    // width: 100%;
+    height: 100%;
+    background: url(../../../static/images/3.gif) no-repeat;
+    
+    background-color:rgba(0, 0, 0, 1);
+  background-position-y: 100%;
+  background-size: 100%  100%;
   padding: 0 20px;
+  // mix-blend-mode: darken;
+  }
   .navbar {
     padding: 0;
     margin: 0;

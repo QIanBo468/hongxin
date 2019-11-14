@@ -154,6 +154,7 @@ export default {
 .chang-form {
    .van-cell{
     background: transparent !important;
+    color: #fff;
   }
   .van-cell-group {
     margin-top: 1rem;
@@ -174,6 +175,9 @@ export default {
       border: none;
     }
   }
+}
+.van-field__control{
+  color: #fff !important;
 }
 .danxuan {
   margin-bottom: 20px;
