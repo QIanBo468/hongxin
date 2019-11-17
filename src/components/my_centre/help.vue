@@ -48,6 +48,7 @@
     <div class="help-table">
       <div v-show="checkNum==0">
         <van-cell title="排单币" value="1个" :border="false" />
+        <p>注: 新账户首次排单，需手动操作，一次生成两单，消耗两个排单币，以后由系统自动排单，注意保持账户上排单币充足即可</p>
         <!-- <van-cell-group>
           <van-field
             v-model="toPeopleNum"
@@ -300,6 +301,9 @@ export default {
     .van-field__control,
     .van-cell__value {
       color: #ffffff;
+    }
+    p{
+      color: #f00;
     }
   }
   .accept-check {

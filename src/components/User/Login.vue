@@ -175,7 +175,7 @@ export default {
   .gif{
     // width: 100%;
     height: 100%;
-    background: url(../../../static/images/3.gif) no-repeat;
+    background: url(../../../static/images/2.gif) no-repeat;
     
     background-color:rgba(0, 0, 0, 1);
   background-position-y: 100%;

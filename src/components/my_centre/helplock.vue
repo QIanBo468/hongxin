@@ -59,7 +59,7 @@
             <div
               @click="showPopups(item)"
               :class="['state-cont',item.zt === '2'? 'blue' : 'red']"
-            >{{item.zt == '1'? '待确认' :( item.zt == 2 ? '已完成': '去支付')}}</div>
+            >{{item.zt == '1'? '待确认' :( item.zt == 2 ? '已完成': (item.creditpay ==1 ? '积分支付' : '去支付'))}}</div>
 
             <!-- <van-cell > -->
             <div class="state-cont" @click="showPopup(item)">详细资料</div>
@@ -246,10 +246,17 @@ export default {
       console.log(this.showdata);
     },
     showPopups(item) {
-      if (item.zt != 2 ) {
+      if (item.zt != 2 && item.creditpay !=1) {
         this.shows = true;
         this.showsdata = item;
         console.log(this.showsdata);
+      } else if(item.creditpay ==1){
+        this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/creditPay',{
+          id : item.id
+        }).then(res=>{
+          this.$toast(res.msg)
+          this.$router.go(0)
+        })
       }
     },
     onLoad() {

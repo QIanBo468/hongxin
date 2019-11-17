@@ -9,7 +9,7 @@
         </div>
       </slot>
     </van-nav-bar>
-    <van-swipe :loop="false" :width="300" @change="onChange" class="swiper">
+    <van-swipe  @change="onChange" :autoplay="3000" class="swiper">
       <van-swipe-item v-for="item of adSwiper" :key="item.id">
         <img class="pic" :src="item.pic" alt />
       </van-swipe-item>
@@ -30,7 +30,7 @@
       </div>
       <p @click="$router.push('/gonggao')">查看</p>
     </div>
-    <span class="bilv">比例汇率:{{usexg.rate}}</span>
+    <span class="bilv">比例汇率: 1 USDT ≈ {{usexg.rate}}RMB</span>
     <div class="moneytitle">
       <div class="g"></div>
       <p>我的操作项</p>
@@ -107,7 +107,7 @@
         <div class="list-left">
           <div class="left-active">
             <div class="red"></div>
-            {{item.note}}
+            {{item.note}}{{item.yid == 1 ? '(积分支付)': ''}}
           </div>
           <p>{{item.user}}</p>
         </div>
