@@ -23,6 +23,8 @@
           </van-cell-group>
           <van-cell-group>
             <van-field v-model="login.newPassword"  maxlength=16 type="password" placeholder="请输入新密码" />
+            </van-cell-group>
+            <van-cell-group>
             <van-field v-model="login.newPasswordRepeat"  maxlength=16 type="password" placeholder="再次输新入密码" />
           </van-cell-group>
           <van-cell-group>
@@ -51,6 +53,8 @@
           </van-cell-group>
           <van-cell-group>
             <van-field v-model="erji.newPassword" type="password"  maxlength=16 placeholder="请输入新密码" />
+            </van-cell-group>
+            <van-cell-group>
             <van-field v-model="erji.newPasswordRepeat"  maxlength=16 type="password" placeholder="再次输新入密码" />
           </van-cell-group>
           <van-cell-group>

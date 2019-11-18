@@ -93,7 +93,7 @@ export default {
               secpwd: that.mydata.pay,
               usdt: that.mydata.usdt,
               encrypt_problem:that.radio,
-              encrypt_answers:that.mibao
+              encrypt_answers:that.mydata.mibao
             })
             .then(res => {
               console.log(res);
