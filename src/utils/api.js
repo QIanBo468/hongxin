@@ -29,6 +29,10 @@ axios.interceptors.response.use((res) => {
     // Toast('登录异常，请重新登录')
     router.push({name: 'Login'})
   }
+  if (res.data.code == 0 && res.data.msg == '非工作时间！') {
+    Toast('非工作时间!')
+    router.push({name: 'Login'})
+  }
   // if (VueCookies.get('status') != 1) {
   //   Toast('认证状态')
   //   router.push({name: 'Login'})

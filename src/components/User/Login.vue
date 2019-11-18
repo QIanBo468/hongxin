@@ -2,7 +2,7 @@
   <div id="login">
     <div class="gif">
     <div class="logo">
-      <p>HXLL</p>
+      <p>HXLY</p>
       <span>|</span>
       <p>登录</p>
     </div>

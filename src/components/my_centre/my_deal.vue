@@ -39,20 +39,18 @@ export default {
       title: "全部交易记录",
       loading: false,
       finished: false,
-      mydata: [
-      
-      ]
+      mydata: []
     };
   },
   created() {
     this.type = this.$route.query.type;
-    console.log(this.type);
-    if(this.type == 4 ){
-      this.title = '动态钱包'
-    } else if ( this.type == 3){
-      this.title = '静态钱包'
-    } else if (this. type == 1){
-      this.title = '激活码记录'
+    console.log(this.type, typeof this.type);
+    if (this.type == 4) {
+      this.title = "动态钱包";
+    } else if (this.type == 3) {
+      this.title = "静态钱包";
+    } else if (this.type == 1) {
+      this.title = "激活码记录";
     }
   },
   methods: {
@@ -61,15 +59,10 @@ export default {
     },
     onLoad() {
       let posttype;
+
       switch (this.type) {
-        case 0:
-          posttype = "credit3"; // 积分
-          break;
         case 1:
           posttype = "pin"; //  激活码
-          break;
-        case 2:
-          posttype = "buycoin"; //排单币
           break;
         case 4:
           posttype = "credit2"; //动态收益
@@ -78,6 +71,11 @@ export default {
           posttype = "credit1"; //静态收益
           break;
       }
+      if (this.type == "0") {
+        posttype = "credit3"; // 积分
+      } else if (this.type == "2") {
+        posttype = "buycoin"; //排单币
+      }
       this.$axios
         .fetchGet("http://hxlc.ltlfd.cn/home/info/buycoin_log", {
           type: posttype
@@ -85,7 +83,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.code == 1) {
-            this.mydata = res.data.data.loglist
+            this.mydata = res.data.data.loglist;
             this.loading = false;
             this.finished = true;
           }

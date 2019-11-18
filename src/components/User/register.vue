@@ -31,7 +31,7 @@
           <van-field
             v-model="password"
             class="userName"
-            type="password"
+            
              maxlength=16
             v-validate="'required'"
             placeholder="请输入密码"
@@ -40,7 +40,7 @@
           <van-field
             class="userName"
             v-model="repeassword"
-            type="password"
+            
              maxlength=16
             v-validate="'required'"
             placeholder="请再次输入密码"
@@ -54,7 +54,7 @@
             class="userName"
             v-model="pay"
             placeholder="输入二级密码"
-            type="password"
+            
              maxlength=16
             v-validate="'required|numeric|min:6'"
             autocomplete="off"
@@ -62,7 +62,7 @@
           <van-field
             v-model="pays"
             class="userName"
-            type="password"
+            
              maxlength=16
             v-validate="'required|numeric|min:6'"
             placeholder="再输入二级密码"

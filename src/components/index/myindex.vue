@@ -267,7 +267,7 @@ export default {
     }
     .van-grid-item__content {
       background: transparent;
-      font-size: 14px;
+      font-size: 12px;
       box-sizing: border-box;
       padding: 0;
     }
