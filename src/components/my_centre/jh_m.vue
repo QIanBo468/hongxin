@@ -14,36 +14,36 @@
         <div class="integral-contnet-head-right"></div>
       </div>
 
-        <van-cell-group>
-          <van-field
-            v-model="peopleId"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="转入激活码到"
-            placeholder="输入账号"
-          />
-        </van-cell-group>
-        <van-cell-group>
-          <van-field
-            v-model="peopleNum"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="转入激活码数量"
-            placeholder="输入数量"
-          />
-        </van-cell-group>
-        <van-cell-group>
-          <van-field
-            v-model="peopleNum"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="转入激活码数量"
-            placeholder="输入数量"
-          />
-        </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="peopleId"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="转入激活码到"
+          placeholder="输入账号"
+        />
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="peopleNum"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="转入激活码数量"
+          placeholder="输入数量"
+        />
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="peopleNum"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="转入激活码数量"
+          placeholder="输入数量"
+        />
+      </van-cell-group>
       <!-- </div> -->
     </div>
     <!-- 积分展示 -->
@@ -54,38 +54,38 @@
         <div class="integral-contnet-head-right"></div>
       </div>
 
-        <van-cell-group>
-          <van-field
-            v-model="jifenid"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="转入弘信积分到"
-            placeholder="输入账号"
-          />
-        </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="jifenid"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="转入弘信积分到"
+          placeholder="输入账号"
+        />
+      </van-cell-group>
       <!-- </div> -->
 
-        <van-cell-group>
-          <van-field
-            v-model="jifennum"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="转入弘信积分数量"
-            placeholder="输入数量"
-          />
-        </van-cell-group>
-        <van-cell-group>
-          <van-field
-            v-model="erji"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="输入二级密码"
-            placeholder="输入密码"
-          />
-        </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="jifennum"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="转入弘信积分数量"
+          placeholder="输入数量"
+        />
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="erji"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="输入二级密码"
+          placeholder="输入密码"
+        />
+      </van-cell-group>
       <!-- </div> -->
     </div>
 
@@ -97,38 +97,38 @@
         <div class="integral-contnet-head-right"></div>
       </div>
       <!-- <div> -->
-        <van-cell-group>
-          <van-field
-            v-model="jifenid"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="转入排单币到"
-            placeholder="输入账号"
-          />
-        </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="jifenid"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="转入排单币到"
+          placeholder="输入账号"
+        />
+      </van-cell-group>
       <!-- </div> -->
       <!-- <div> -->
-        <van-cell-group>
-          <van-field
-            v-model="jifennum"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="转入排单币数量"
-            placeholder="输入数量"
-          />
-        </van-cell-group>
-        <van-cell-group>
-          <van-field
-            v-model="erji"
-            label-width="60%"
-            input-align="right"
-            label-class="integral-input-text"
-            label="输入二级密码"
-            placeholder="输入密码"
-          />
-        </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="jifennum"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="转入排单币数量"
+          placeholder="输入数量"
+        />
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="erji"
+          label-width="60%"
+          input-align="right"
+          label-class="integral-input-text"
+          label="输入二级密码"
+          placeholder="输入密码"
+        />
+      </van-cell-group>
       <!-- </div> -->
     </div>
 
@@ -178,7 +178,7 @@ export default {
       peopleNum: null, // 激活码数量
       jifenid: null, // 积分转入id
       jifennum: null, // 积分数量
-      erji:'',   //二级密码
+      erji: "", //二级密码
       dealtype: {
         dzhanghu: "转入/转出",
         dnum: "数量",
@@ -198,37 +198,36 @@ export default {
       this.$router.go(-1);
     },
     getdata() {
-      
       this.type = this.$route.query.type;
       if (this.type == 0) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
+          .fetchPost("http://hxly.czxxyk.cn/home/info/integral")
           .then(res => {
-            console.log(res)
+            console.log(res);
             this.mydata = res.data.coinlist;
           });
       } else if (this.type == 1) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/info/pin")
+          .fetchPost("http://hxly.czxxyk.cn/home/info/pin")
           .then(res => {
             console.log(res);
             this.mydata = res.data.coinlist;
           });
       } else {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/info/buycoin")
+          .fetchPost("http://hxly.czxxyk.cn/home/info/buycoin")
           .then(res => {
             console.log(res);
             this.mydata = res.data.coinlist;
           });
       }
       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/info/integral")
+        .fetchPost("http://hxly.czxxyk.cn/home/info/integral")
         .then(res => {
-          console.log(res)
+          console.log(res);
           if (this.type === 0) {
             this.integral = res.data.user.credit3;
-          } else if(this.type === 1){
+          } else if (this.type === 1) {
             this.integral = res.data.user.pin;
           } else {
             this.integral = res.data.user.buycoin;
@@ -238,7 +237,7 @@ export default {
     submit() {
       if (this.type == 0) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/info/integral", {
+          .fetchPost("http://hxly.czxxyk.cn/home/info/integral", {
             account: this.jifenid,
             num: this.jifennum,
             secpwd: this.erji
@@ -247,10 +246,13 @@ export default {
             console.log(res);
             this.$toast(res.msg);
             this.getdata();
+            if (res.code == 0) {
+              this.$router.go(0);
+            }
           });
       } else if (this.type == 1) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/info/pin", {
+          .fetchPost("http://hxly.czxxyk.cn/home/info/pin", {
             account: this.peopleId,
             num: this.peopleNum,
             secpwd: this.erji
@@ -259,18 +261,24 @@ export default {
             console.log(res);
             this.$toast(res.msg);
             this.getdata();
+            if (res.code == 0) {
+              this.$router.go(0);
+            }
           });
       } else {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/info/buycoin", {
+          .fetchPost("http://hxly.czxxyk.cn/home/info/buycoin", {
             account: this.jifenid,
             num: this.jifennum,
             secpwd: this.erji
           })
           .then(res => {
-            console.log(123132,res);
+            console.log(123132, res);
             this.$toast(res.msg);
             this.getdata();
+            if (res.code == 0) {
+              this.$router.go(0);
+            }
           });
       }
     },

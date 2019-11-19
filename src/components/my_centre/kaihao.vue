@@ -47,7 +47,7 @@ methods:{
     
   },
   submit(){
-      this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/info/addQuickUser',{
+      this.$axios.fetchPost('http://hxly.czxxyk.cn/home/info/addQuickUser',{
         account:this.khindex.newid,
          secpwd: this.khindex.pay
       }).then(res=>{

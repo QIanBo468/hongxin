@@ -77,7 +77,7 @@ export default {
         posttype = "buycoin"; //排单币
       }
       this.$axios
-        .fetchGet("http://hxlc.ltlfd.cn/home/info/buycoin_log", {
+        .fetchGet("http://hxly.czxxyk.cn/home/info/buycoin_log", {
           type: posttype
         })
         .then(res => {

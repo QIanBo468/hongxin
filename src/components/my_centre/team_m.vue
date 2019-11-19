@@ -68,7 +68,7 @@ export default {
     };
   },
   created() {
-    this.$axios.fetchPost("http://hxlc.ltlfd.cn/home/myuser/team").then(res => {
+    this.$axios.fetchPost("http://hxly.czxxyk.cn/home/myuser/team").then(res => {
       if (res.code == 1) {
         console.log(res);
         this.teamNum = res.data.teamcount;

@@ -117,7 +117,7 @@ export default {
     },
     submit() {
       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/info/pin", {
+        .fetchPost("http://hxly.czxxyk.cn/home/info/pin", {
           account: this.peopleId,
           num: this.peopleNum,
           secpwd: this.erji
@@ -129,7 +129,7 @@ export default {
         });
     },
     jihuosubmit() {
-      this.$axios.fetchGet('http://hxlc.ltlfd.cn/home/info/activeOp',
+      this.$axios.fetchGet('http://hxly.czxxyk.cn/home/info/activeOp',
       {account: this.clksub})
       .then(res=>{
         console.log(res)
@@ -148,7 +148,7 @@ export default {
       this.finished = true
     },
     getdata() {
-      this.$axios.fetchPost("http://hxlc.ltlfd.cn/home/info/pin").then(res => {
+      this.$axios.fetchPost("http://hxly.czxxyk.cn/home/info/pin").then(res => {
         console.log(res);
         this.integral = res.data.user.pin;
         this.mydata = res.data.onelist;

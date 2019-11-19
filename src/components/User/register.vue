@@ -13,7 +13,7 @@
           />
         </div>
         <div class="cao">
-          <p>USDT</p>
+          <p>HXLY</p>
           <span>|</span>
           <p>注册</p>
         </div>
@@ -65,7 +65,7 @@
             
              maxlength=16
             v-validate="'required|numeric|min:6'"
-            placeholder="再输入二级密码"
+            placeholder="请再次输入二级密码"
             autocomplete="off"
           />
           <van-field
@@ -110,7 +110,7 @@ export default {
       // this.$validator.validateAll().then(function(result) {
       //     if(result){
       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/login/regadd", {
+        .fetchPost("http://hxly.czxxyk.cn/home/login/regadd", {
           uid: this.zhanghao,
           // realname: this.xingming,
           password: this.password,

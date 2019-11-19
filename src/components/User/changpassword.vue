@@ -117,7 +117,7 @@ export default {
     },
     submit() {
       if(this.active == 0){
-        this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/info/changePwd',{
+        this.$axios.fetchPost('http://hxly.czxxyk.cn/home/info/changePwd',{
           oldpwd: this.login.password,
           newpwd: this.login.newPassword,
           secnewpwd:this.login.newPasswordRepeat,
@@ -128,7 +128,7 @@ export default {
           this.$toast(res.msg)
         })
       } else {
-        this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/info/change_secpwd',{
+        this.$axios.fetchPost('http://hxly.czxxyk.cn/home/info/change_secpwd',{
           oldpwd: this.erji.password,
           newpwd: this.erji.newPassword,
           secnewpwd:this.erji.newPasswordRepeat,

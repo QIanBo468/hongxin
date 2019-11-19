@@ -86,7 +86,7 @@ export default {
       this.$validator.validateAll().then(function(reslut, field) {
         if (reslut) {
           that.$axios
-            .fetchPost("http://hxlc.ltlfd.cn/home/info/editUser", {
+            .fetchPost("http://hxly.czxxyk.cn/home/info/editUser", {
               realname: that.mydata.nicheng,
               nickname: that.mydata.nicheng,
               // phone: that.mydata.phone,

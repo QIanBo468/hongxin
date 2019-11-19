@@ -146,7 +146,7 @@ export default {
       }
     },
     pinnum() {
-      this.$axios.fetchPost("http://hxlc.ltlfd.cn/home/jsbz/jsbz").then(res => {
+      this.$axios.fetchPost("http://hxly.czxxyk.cn/home/jsbz/jsbz").then(res => {
         console.log(res);
         if (res.code == 1) {
           this.helpNum = res.data.user.buysum;
@@ -160,7 +160,7 @@ export default {
     },
     paidansub() {
       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/tgbz/tgbzcl", {
+        .fetchPost("http://hxly.czxxyk.cn/home/tgbz/tgbzcl", {
           amount: this.toPeopleNum
         })
         .then(res => {
@@ -172,7 +172,7 @@ export default {
     tixiansub() {
       if (this.radio == 1) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/jsbz/jsbzcl", {
+          .fetchPost("http://hxly.czxxyk.cn/home/jsbz/jsbzcl", {
             sellmoney: this.toPeoplesNums,
             selltype: 2002
           })
@@ -183,7 +183,7 @@ export default {
           });
       } else {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/jsbz/jsbzcl", {
+          .fetchPost("http://hxly.czxxyk.cn/home/jsbz/jsbzcl", {
             sellmoney: this.toPeoplesNums,
             selltype: 2001
           })

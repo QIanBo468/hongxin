@@ -31,7 +31,7 @@ export default {
     };
   },
   created() {
-    this.$axios.fetchGet("http://hxlc.ltlfd.cn/home/info/news").then(res => {
+    this.$axios.fetchGet("http://hxly.czxxyk.cn/home/info/news").then(res => {
       console.log(res);
       if (res.data.code == 1) {
         this.list = res.data.data.newlist;

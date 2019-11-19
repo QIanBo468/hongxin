@@ -42,7 +42,7 @@
           autocomplete="off"
         >
          </van-field>
-         <van-image class="txyanzheng" width="84px" height="44px;" :src="imgs" @click="imgs ='http://hxlc.ltlfd.cn//Home/Login/verify?'+Math.random()" />
+         <van-image class="txyanzheng" width="84px" height="44px;" :src="imgs" @click="imgs ='http://hxly.czxxyk.cn//Home/Login/verify?'+Math.random()" />
 
       </van-cell-group>
     </div>
@@ -66,13 +66,13 @@ export default {
       userName: "",
       password: "",
       yanzheng:null,
-      imgs:'http://hxlc.ltlfd.cn//Home/Login/verify'
+      imgs:'http://hxly.czxxyk.cnHome/Login/verify'
     };
   },
   created() {
     let logintoken;
     this.$axios
-      .fetchPost("http://hxlc.ltlfd.cn/home/login/getToken")
+      .fetchPost("http://hxly.czxxyk.cnhome/login/getToken")
       .then(res => {
         // console.log(res)
         console.log(res);
@@ -85,7 +85,7 @@ export default {
       });
   },
   // this.$axios
-  //         .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
+  //         .fetchPost("http://hxly.czxxyk.cn/home/login/logincl", {
   //           account: this.userName,
   //             password: this.password
   //         })
@@ -98,7 +98,7 @@ export default {
     },
     submit() {
       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/login/logincl", {
+        .fetchPost("http://hxly.czxxyk.cn/home/login/logincl", {
           account: this.userName,
           password: this.password,
           verCode: this.yanzheng
@@ -110,7 +110,7 @@ export default {
             localStorage.setItem("accessToken", res.data.token);
             this.$router.push("/index");
           } else {
-            this.imgs = 'http://hxlc.ltlfd.cn//Home/Login/verify?'+Math.random()
+            this.imgs = 'http://hxly.czxxyk.cn//Home/Login/verify?'+Math.random()
             Toast(res.msg);
           }
         });

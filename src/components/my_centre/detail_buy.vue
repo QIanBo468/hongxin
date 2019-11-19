@@ -80,7 +80,7 @@ export default {
     onLoad() {
       if (this.activetype == 0) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/tgbz/buylist")
+          .fetchPost("http://hxly.czxxyk.cn/home/tgbz/buylist")
           .then(res => {
             console.log(res);
             if (res.code == 1) {
@@ -91,7 +91,7 @@ export default {
           });
       } else if (this.activetype == 1) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/jsbz/selllist")
+          .fetchPost("http://hxly.czxxyk.cn/home/jsbz/selllist")
           .then(res => {
             console.log(res);
             if (res.code == 1) {
@@ -102,7 +102,7 @@ export default {
           });
       } else {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/info/freeze_log")
+          .fetchPost("http://hxly.czxxyk.cn/home/info/freeze_log")
           .then(res => {
             console.log(res);
             if (res.code == 1) {
@@ -114,7 +114,7 @@ export default {
       }
     },
     submit(){
-      this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/info/finish_settle')
+      this.$axios.fetchPost('http://hxly.czxxyk.cn/home/info/finish_settle')
       .then(res=>{
         console.log(res)
         if(res.code ==1){

@@ -3,7 +3,7 @@
     <div class="loginindex">
       <van-nav-bar class="navbar" left-arrow @click-left="onClickLeft"></van-nav-bar>
       <div class="logo">
-        <p>USDT</p>
+        <p>HXLY</p>
         <span>|</span>
         <p>忘记密码</p>
       </div>
@@ -84,7 +84,7 @@ export default {
     //     //         return false; 
     //     //     }
     //         // if(this.disabled == false){
-    //             this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/smsend',
+    //             this.$axios.fetchPost('http://hxly.czxxyk.cn/home/login/smsend',
     //             {
     //                 phone: this.userPhone
     //             }).then(res => {
@@ -115,7 +115,7 @@ export default {
       // this.$validator.validateAll().then(function(reslut, field) {
       //   if (reslut) {
           this.$axios
-            .fetchPost("http://hxlc.ltlfd.cn/home/login/forget_pwd", {
+            .fetchPost("http://hxly.czxxyk.cn/home/login/forget_pwd", {
              account: this.userPhone,
              encrypt_problem: this.radio,
              encrypt_answers:this.mibao,

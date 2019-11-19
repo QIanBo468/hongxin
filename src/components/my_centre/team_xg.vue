@@ -114,7 +114,7 @@ export default {
       this.$router.go(-1)
     },
      onLoad() {
-       this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/myuser/team').then(res=>{
+       this.$axios.fetchPost('http://hxly.czxxyk.cn/home/myuser/team').then(res=>{
       if (res.code == 1){
         console.log(res)
         this.directlist = res.data.onelist
@@ -133,7 +133,7 @@ export default {
     console.log(item)
     let oldstorage
     if (item.ishosting == 1){
- this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/login/loginhost',{
+ this.$axios.fetchPost('http://hxly.czxxyk.cn/home/login/loginhost',{
       account: item.account,
        password: item.pwd
     }).then(res=>{

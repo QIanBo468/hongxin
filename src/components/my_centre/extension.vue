@@ -46,7 +46,7 @@ export default {
     };
   },
   created () {
-    this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/myuser/qrcode')
+    this.$axios.fetchPost('http://hxly.czxxyk.cn/home/myuser/qrcode')
     .then(res=>{
       console.log(res)
       this.code= res.data

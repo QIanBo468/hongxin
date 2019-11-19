@@ -9,7 +9,7 @@
         </div>
       </slot>
     </van-nav-bar>
-    <van-swipe  @change="onChange" :autoplay="3000" class="swiper">
+    <van-swipe @change="onChange" :autoplay="3000" class="swiper">
       <van-swipe-item v-for="item of adSwiper" :key="item.id">
         <img class="pic" :src="item.pic" alt />
       </van-swipe-item>
@@ -25,8 +25,16 @@
 
     <div class="gonggao">
       <div class="ggtitle">
-        <img src="../../../static/images/gonggao.png" alt />
-        <span>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{gonggao}}</span>
+        <img src="../../../static/images/gonggao.png" alt />|
+
+        <van-swipe style="height:50px;" :autoplay="3000" :width=300 :height=50 :show-indicators=false :vertical=true>
+          <van-swipe-item  v-for="(item, index) of gonggao" :key="index">
+            <!-- 111 -->
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.if_theme}}</span>
+          </van-swipe-item>
+        </van-swipe>
+
+        <!-- <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{gonggao}}</span> -->
       </div>
       <p @click="$router.push('/gonggao')">查看</p>
     </div>
@@ -151,7 +159,7 @@ export default {
       ],
       current: 0,
       indicator: "xuanzhong",
-      gonggao: "三周年奖励之特大喜讯",
+      gonggao: [],
       loading: false,
       finished: false,
       show: false,
@@ -182,27 +190,27 @@ export default {
   },
   created() {
     // axios.post()
-    let that  = this
+    let that = this;
     this.$axios
-      .fetchPost("http://hxlc.ltlfd.cn/home/index/home", {})
+      .fetchPost("http://hxly.czxxyk.cn/home/index/home", {})
       .then(res => {
         console.log(res);
         if (res.code == 1) {
-          this.gonggao = res.data.news[0].if_theme;
+          this.gonggao = res.data.news;
           this.adSwiper = res.data.banners;
           this.list = res.data.tgbzlist;
           this.lists = res.data.jsbzlist;
           console.log(this.list);
           this.onLoad(res.data.tgbzlist, res.data.jsbzlist);
-        } else if(res.code == 2) {
+        } else if (res.code == 2) {
           this.$toast(res.msg);
           setTimeout(function() {
             that.$router.push("/mydata");
-          },1500);
+          }, 1500);
         }
       });
     this.$axios
-      .fetchPost("http://hxlc.ltlfd.cn/home/index/personal")
+      .fetchPost("http://hxly.czxxyk.cn/home/index/personal")
       .then(res => {
         console.log(res);
         if (res.code == 1) {
@@ -277,6 +285,16 @@ export default {
   // margin: 0 11px 10px 13px;
   padding: 0 10px;
   box-sizing: border-box;
+  .van-swipe__track{
+    height: 50px !important;
+    width: 100% !important;
+    text-align:center;
+    line-height: 50px;
+  }
+  .van-swipe-item{
+    height: 50px !important;
+    width: 100% !important;
+  }
   .ggtitle {
     display: flex;
     align-items: center;

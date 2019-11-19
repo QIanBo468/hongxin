@@ -21,7 +21,7 @@
             <p>￥{{item.jb}}</p>
           </div>
           <div class="cont-left">
-            <img width="58px" height="58px" :src="item.pavatar" alt />
+            <!-- <img width="58px" height="58px" :src="item.pavatar" alt /> -->
             <div class="seter">
               <div>
                 <div class="g"></div>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="cont-right">
-            <img width="58px" height="58px" :src="item.gavatar" alt />
+            <!-- <img width="58px" height="58px" :src="item.gavatar" alt /> -->
             <div class="seter">
               <div>
                 <span>{{item.gname}}</span>
@@ -251,7 +251,7 @@ export default {
         this.showsdata = item;
         console.log(this.showsdata);
       } else if(item.creditpay ==1){
-        this.$axios.fetchPost('http://hxlc.ltlfd.cn/home/index/creditPay',{
+        this.$axios.fetchPost('http://hxly.czxxyk.cn/home/index/creditPay',{
           id : item.id
         }).then(res=>{
           this.$toast(res.msg)
@@ -263,7 +263,7 @@ export default {
       if (this.type == 0) {
         this.actives = "t";
         this.$axios
-          .fetchGet("http://hxlc.ltlfd.cn/home/tgbz/transaction", {
+          .fetchGet("http://hxly.czxxyk.cn/home/tgbz/transaction", {
             id: this.id
           })
           .then(res => {
@@ -277,7 +277,7 @@ export default {
           });
       } else {
         this.$axios
-          .fetchGet("http://hxlc.ltlfd.cn/home/jsbz/transaction", {
+          .fetchGet("http://hxly.czxxyk.cn/home/jsbz/transaction", {
             id: this.id
           })
           .then(res => {
@@ -296,7 +296,7 @@ export default {
       console.log(this.showsdata.id);
       if (this.fileList) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/index/home_ddxx_pcz_cl", {
+          .fetchPost("http://hxly.czxxyk.cn/home/index/home_ddxx_pcz_cl", {
             id: this.showsdata.id,
             id_pic_1: this.fileList
           })
@@ -332,7 +332,7 @@ export default {
       console.log(item.zt);
       if (item.zt == 1) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/index/home_ddxx_gcz_cl", {
+          .fetchPost("http://hxly.czxxyk.cn/home/index/home_ddxx_gcz_cl", {
             id: item.id,
             comfir: item.zt
           })

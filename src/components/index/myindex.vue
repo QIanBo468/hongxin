@@ -3,8 +3,8 @@
     <van-nav-bar class="mi_nav" title="我的"></van-nav-bar>
     <div class="usetitle">
       <div class="useatuo">
-        <div class="touxiang">
-          <img :src="usexg.avatar" width="53px" height="53px" alt />
+        <div class="touxiang" @click="avatar = true">
+          <img :src="usexg.avatar" width="53px" height="53px"  alt />
         </div>
         <div class="usename">
           <div>
@@ -114,6 +114,15 @@
       <button class="btn" @click="tuoguans">确认选择</button>
       </div>
     </van-popup>
+
+    <van-popup  :closeable=true v-model="avatar"> 
+      <div class="avatar-up">
+        <p>上传您的头像</p>
+        <van-uploader :max-count="1" v-model="fileList" multiple />
+        <van-button class="avatar-btn" @click="avatarup">确认上传</van-button>
+      </div>
+
+    </van-popup>
   </div>
 </template>
 
@@ -131,8 +140,10 @@ export default {
         active: "会员",
         auther: "./static/my_index/auther.png"
       },
+      fileList:[],
       blackup: false,
-      tuoguan: null
+      tuoguan: null,
+      avatar:false
     };
   },
   created() {
@@ -148,7 +159,7 @@ export default {
       localStorage.setItem("accessToken", ""),
         localStorage.setItem("status", 0);
       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/login/logout")
+        .fetchPost("http://hxly.czxxyk.cn/home/login/logout")
         .then(res => {
           console.log(res);
         });
@@ -163,7 +174,7 @@ export default {
     },
     tuoguans() {
       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/index/ishosting",{
+        .fetchPost("http://hxly.czxxyk.cn/home/index/ishosting",{
           status: this.radio
         })
         .then(res => {
@@ -175,7 +186,7 @@ export default {
     },
     creddata() {
       this.$axios
-        .fetchPost("http://hxlc.ltlfd.cn/home/index/personal")
+        .fetchPost("http://hxly.czxxyk.cn/home/index/personal")
         .then(res => {
           console.log(res);
           if (res.code == 1) {
@@ -184,6 +195,16 @@ export default {
             this.radio = res.data.ishosting;
           }
         });
+    },
+    avatarup() {
+      this.$axios.fetchPost('http://hxly.czxxyk.cn/home/index/updateImg',{
+        avatar: this.fileList
+      }).then(res=>{
+        console.log(res)
+        this.$toast(res.msg)
+        this.avatar = false
+        this.creddata();
+      })
     }
   }
 };
@@ -216,6 +237,9 @@ export default {
         height: 53px;
         border-radius: 50%;
         background: #0b0b1f;
+        img{
+          border-radius: 50%;
+        }
       }
       .usename {
         display: flex;
@@ -326,6 +350,26 @@ export default {
     color: #fff;
     border: none;
     background: linear-gradient(90deg,#1D1C3B 0%, #0D0900  100%)
+  }
+}
+
+.avatar-up{
+  background: #ffddaa;
+  width: 250px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-between;
+  .avatar-btn{
+    width: 80%;
+    background: linear-gradient(90deg,#1D1C3B 0%, #0D0900  100%);
+    border: none;
+    color: #fff;
+    margin-bottom: 20px;
+    span{
+       color: #fff;
+    }
   }
 }
 </style>

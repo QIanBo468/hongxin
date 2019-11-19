@@ -29,7 +29,7 @@ export default {
     this.id = this.$route.query.id;
     console.log(this.$route.query.id);
     this.$axios
-      .fetchGet("http://hxlc.ltlfd.cn/home/info/notice", { id: this.id })
+      .fetchGet("http://hxly.czxxyk.cn/home/info/notice", { id: this.id })
       .then(res => {
         console.log(res);
         if (res.data.code == 1) {

@@ -62,7 +62,7 @@ export default {
     },
     onLoad() {
       this.$axios
-        .fetchGet("http://hxlc.ltlfd.cn/home/info/buycoin_log", {
+        .fetchGet("http://hxly.czxxyk.cn/home/info/buycoin_log", {
           type: this.posttype
         })
         .then(res => {

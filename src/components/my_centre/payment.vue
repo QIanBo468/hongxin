@@ -48,7 +48,7 @@ export default {
     onLoad() {
       if (this.active == 0) {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/myuser/buyTeam")
+          .fetchPost("http://hxly.czxxyk.cn/home/myuser/buyTeam")
           .then(res => {
             console.log(res);
             if (res.code == 1) {
@@ -59,7 +59,7 @@ export default {
           });
       } else {
         this.$axios
-          .fetchPost("http://hxlc.ltlfd.cn/home/myuser/sellTeam")
+          .fetchPost("http://hxly.czxxyk.cn/home/myuser/sellTeam")
           .then(res => {
             console.log(res);
             if (res.code == 1) {
