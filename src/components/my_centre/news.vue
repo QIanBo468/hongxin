@@ -62,6 +62,8 @@ export default {
     color: #a6a6a6;
   }
   .newscont {
+    font-size: 14px;
+    color: #ffffff;
     span {
       color: #ccc !important;
     }

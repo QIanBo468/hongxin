@@ -66,13 +66,13 @@ export default {
       userName: "",
       password: "",
       yanzheng:null,
-      imgs:'http://hxly.czxxyk.cnHome/Login/verify'
+      imgs:'http://hxly.czxxyk.cn/Home/Login/verify'
     };
   },
   created() {
     let logintoken;
     this.$axios
-      .fetchPost("http://hxly.czxxyk.cnhome/login/getToken")
+      .fetchPost("http://hxly.czxxyk.cn/home/login/getToken")
       .then(res => {
         // console.log(res)
         console.log(res);
@@ -110,7 +110,7 @@ export default {
             localStorage.setItem("accessToken", res.data.token);
             this.$router.push("/index");
           } else {
-            this.imgs = 'http://hxly.czxxyk.cn//Home/Login/verify?'+Math.random()
+            this.imgs = 'http://hxly.czxxyk.cn/Home/Login/verify?'+Math.random()
             Toast(res.msg);
           }
         });

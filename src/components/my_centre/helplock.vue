@@ -195,7 +195,13 @@
         <p>上传截图凭证</p>
         <div>
           <van-uploader preview-size="80px" :max-count="1" v-model="fileList" multiple />
-          <van-circle v-if="jindutiao" v-model="currentRate" :rate="currentRates" :speed="100" :text="text" />
+          <van-circle
+            v-if="jindutiao"
+            v-model="currentRate"
+            :rate="currentRates"
+            :speed="100"
+            :text="text"
+          />
         </div>
         <van-button class="btn" @click="paysubmit" type="default" color="#ffddaa">确认提交</van-button>
       </div>
@@ -246,21 +252,27 @@ export default {
       console.log(this.showdata);
     },
     showPopups(item) {
-      if (item.zt != 2 && item.creditpay !=1) {
+      if (item.zt != 2 && item.creditpay != 1) {
         this.shows = true;
         this.showsdata = item;
         console.log(this.showsdata);
-      } else if(item.creditpay ==1){
-        this.$axios.fetchPost('http://hxly.czxxyk.cn/home/index/creditPay',{
-          id : item.id
-        }).then(res=>{
-          this.$toast(res.msg)
-          this.$router.go(0)
-        })
+      } else if (item.creditpay == 1) {
+        this.$axios
+          .fetchPost("http://hxly.czxxyk.cn/home/index/creditPay", {
+            id: item.id
+          })
+          .then(res => {
+            this.$toast(res.msg);
+            this.$router.go(0);
+          });
       }
     },
     onLoad() {
+      this.shuaxin();
+    },
+    shuaxin() {
       if (this.type == 0) {
+        console.log(this.id);
         this.actives = "t";
         this.$axios
           .fetchGet("http://hxly.czxxyk.cn/home/tgbz/transaction", {
@@ -268,26 +280,35 @@ export default {
           })
           .then(res => {
             console.log(res);
-            res.data.data.forEach(item => {
-              this.pstate.push(item);
-              console.log(this.pstate);
-            });
+            // res.data.data.forEach(item => {
+            this.pstate = res.data.data;
+            console.log(this.pstate);
+            // });
             this.loading = false;
             this.finished = true;
+            this.fileList = [];
+            this.jindutiao = false;
+            this.currentRates = 0;
+            this.currentRate = 0;
           });
       } else {
+        console.log("111");
         this.$axios
           .fetchGet("http://hxly.czxxyk.cn/home/jsbz/transaction", {
             id: this.id
           })
           .then(res => {
             console.log(res);
-            res.data.data.forEach(item => {
-              this.pstate.push(item);
+            // res.data.data.forEach(item => {
+              this.pstate=res.data.data ;
               console.log(this.pstate);
-            });
+            // });
             this.loading = false;
             this.finished = true;
+            this.fileList = [];
+            this.jindutiao = false;
+            this.currentRates = 0;
+            this.currentRate = 0;
           });
       }
     },
@@ -301,28 +322,27 @@ export default {
             id_pic_1: this.fileList
           })
           .then(res => {
-            
-            this.jindutiao = true
-            this.currentRates = 30
-            this.currentRates = 100
-            setTimeout(function(){
+            this.jindutiao = true;
+            this.currentRates = 30;
+            this.currentRates = 100;
+            setTimeout(function() {
               console.log(res);
               if (res.code == 1 && that.currentRates) {
-              that.showsdata.zt = 1;
-              that.shows = false;
-              that.$router.go(0);
-              // that.payqueren()
-              that.onLoad();
-              that.$toast(res.msg);
-              that.jindutiao = false
-              that.currentRates = 0
-            } else {
-              that.$toast(res.msg)
-              that.jindutiao = false
-              that.currentRates = 0
-            }
-            },2000)
-           
+                that.showsdata.zt = 1;
+                that.shows = false;
+
+                // window.location.reload()
+                // that.payqueren()
+
+                that.$toast(res.msg);
+
+                that.shuaxin();
+              } else {
+                that.$toast(res.msg);
+                that.jindutiao = false;
+                that.currentRates = 0;
+              }
+            }, 2000);
           });
       }
     },
@@ -339,8 +359,9 @@ export default {
           .then(res => {
             this.$toast(res.msg);
             console.log(res);
-            this.$router.go(0);
-            this.onLoad();
+            window.location.reload();
+            this.shuaxin();
+            // this.onLoad();
           });
       }
     },
