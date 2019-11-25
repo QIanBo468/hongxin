@@ -19,7 +19,9 @@
         </div>
         <div class="mingxi-content">
           <span>状态</span>
-          <p style="color:#f00">{{item.pd_zt != 1? '未支付': '已支付'}}</p>
+          
+          <p  v-if="active" style="color:#f00">{{item.pd_zt != 1? '待收款': '已收款'}}</p>
+          <p v-else  style="color:#f00">{{item.pd_zt != 1? '未支付': '已支付'}}</p>
         </div>
       </div>
     </van-list>
@@ -33,7 +35,9 @@ export default {
       loading: false,
       finished: false,
       active: 0,
-      list: [{ dakuan: "", shoukuan: "" }]
+      list: [
+
+      ]
     };
   },
   created() {
@@ -53,6 +57,8 @@ export default {
             console.log(res);
             if (res.code == 1) {
               this.list = res.data.onelist;
+              // this.list= this.list.concat(res.data.onelist,res.data.twolist,res.data.fourlist,res.data.fivelist)
+              console.log(this.list)
               this.loading = false
               this.finished = true
             }
@@ -64,6 +70,8 @@ export default {
             console.log(res);
             if (res.code == 1) {
               this.list = res.data.onelist;
+            //  this.list= this.list.concat(res.data.onelist,res.data.twolist,res.data.fourlist,res.data.fivelist)
+             console.log(this.list)
               this.loading = false
               this.finished = true
             }
@@ -80,6 +88,7 @@ export default {
   height: 100%;
   color: #ffddaa;
   padding: 0 10px;
+  box-sizing: border-box;
 }
 .mingxi {
   display: flex;

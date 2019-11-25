@@ -62,7 +62,7 @@
           </div>
            <div class="direct-content">
             <span>排单币余额</span>
-            <p>{{item.balance}}</p>
+            <p>{{item.buycoin}}</p>
           </div>
            <!-- <div class="direct-content">
             <span>注册时间</span>

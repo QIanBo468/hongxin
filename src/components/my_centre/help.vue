@@ -120,7 +120,7 @@ export default {
     return {
       checkNum: 0,
       toPeopleNum: 1000, //提供帮助
-      toPeoplesNums: 0,
+      toPeoplesNums: null,
       helpNum: 0,
       acceptNum: "", //接受帮助
       DynamicNum: 0, //动态钱包

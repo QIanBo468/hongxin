@@ -16,7 +16,7 @@
       </div>
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="dealtitle" v-for="(item, index) of mydata" :key="index">
-          <span>{{item.varid ==0 ? item.ug_note: item.varid}}</span>
+          <span>{{item.ug_note}}</span>
           <span>{{item.createtime}}</span>
           <span>{{item.money}}</span>
           <span>{{item.ug_balance}}</span>

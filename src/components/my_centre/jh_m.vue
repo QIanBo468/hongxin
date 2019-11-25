@@ -247,6 +247,9 @@ export default {
             this.$toast(res.msg);
             this.getdata();
             if (res.code == 0) {
+              this.jifenid = null,
+               this.jifennum = null,
+               this.erji ='',
               this.$router.go(0);
             }
           });
@@ -262,6 +265,9 @@ export default {
             this.$toast(res.msg);
             this.getdata();
             if (res.code == 0) {
+              this.peopleId = null,
+              this.peopleNum = null,
+              this.erji = ''
               this.$router.go(0);
             }
           });
@@ -277,6 +283,9 @@ export default {
             this.$toast(res.msg);
             this.getdata();
             if (res.code == 0) {
+              this.jifenid = null,
+              this.jifennum = null,
+              this.erji = '',
               this.$router.go(0);
             }
           });

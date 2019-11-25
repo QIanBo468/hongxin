@@ -59,7 +59,7 @@
             <div
               @click="showPopups(item)"
               :class="['state-cont',item.zt === '2'? 'blue' : 'red']"
-            >{{item.zt == '1'? '待确认' :( item.zt == 2 ? '已完成': (item.creditpay ==1 ? '积分支付' : '去支付'))}}</div>
+            >{{item.zt == '1'? '已付款' :( item.zt == 2 ? '已完成': (item.creditpay ==1 ? '积分支付' : '待打款'))}}</div>
 
             <!-- <van-cell > -->
             <div class="state-cont" @click="showPopup(item)">详细资料</div>
@@ -76,7 +76,8 @@
         </div>
       </div>
     </van-list>
-    <!-- </van-tab> -->
+
+
     <!-- <van-tab title="接受帮助" name="j"> -->
     <van-list
       v-model="loading"
@@ -94,29 +95,21 @@
             <p>￥{{item.jb}}</p>
           </div>
           <div class="cont-left">
-            <!-- <img width="58px" height="58px" :src="item.pavatar" alt /> -->
             <div class="seter">
               <div>
                 <div class="g"></div>
                 <span>{{item.pname}}</span>
               </div>
-              <!-- <div class="clear">
-                <div class="g"></div>
-                <span>{{item.p_user}}</span>
-              </div>-->
+
             </div>
           </div>
           <div class="cont-right">
-            <!-- <img width="58px" height="58px" :src="item.pavatar" alt /> -->
             <div class="seter">
               <div>
                 <span>{{item.gname}}</span>
                 <div class="g"></div>
               </div>
-              <!-- <div class="clear">
-                <span>{{item.g_user}}</span>
-                <div class="g"></div>
-              </div>-->
+ 
             </div>
           </div>
         </div>
@@ -132,7 +125,7 @@
             <div
               @click="queren(item)"
               :class="['state-cont',item.zt === '2'? 'blue' : 'red']"
-            >{{item.zt == '1'? '未确认' :( item.zt == 2 ? '已完成': '待支付')}}</div>
+            >{{item.zt == '1'? '待确认' :( item.zt == 2 ? '已完成': '待收款')}}</div>
 
             <div class="state-cont" @click="showPopup(item)">详细资料</div>
 
