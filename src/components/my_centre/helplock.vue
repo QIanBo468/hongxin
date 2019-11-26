@@ -77,7 +77,6 @@
       </div>
     </van-list>
 
-
     <!-- <van-tab title="接受帮助" name="j"> -->
     <van-list
       v-model="loading"
@@ -100,7 +99,6 @@
                 <div class="g"></div>
                 <span>{{item.pname}}</span>
               </div>
-
             </div>
           </div>
           <div class="cont-right">
@@ -109,7 +107,6 @@
                 <span>{{item.gname}}</span>
                 <div class="g"></div>
               </div>
- 
             </div>
           </div>
         </div>
@@ -175,7 +172,7 @@
           <span>{{showdata.id}}</span>
         </div>
         <div class="user">
-          <div>
+          <div class="user-dizhi">
             <p>USDT地址</p>
             <span>{{showdata.usdt}}</span>
           </div>
@@ -293,8 +290,8 @@ export default {
           .then(res => {
             console.log(res);
             // res.data.data.forEach(item => {
-              this.pstate=res.data.data ;
-              console.log(this.pstate);
+            this.pstate = res.data.data;
+            console.log(this.pstate);
             // });
             this.loading = false;
             this.finished = true;
@@ -605,19 +602,27 @@ export default {
   padding: 5px;
 }
 .shows {
-  width: 100%;
+  // width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
   background: #212243;
+  padding: 0 5px;
   .use {
+    width: 100%;
+
     font-size: 13px;
     display: flex;
     align-items: center;
+
     color: #d4850e;
     margin-bottom: 10px;
+    .user-dizhi{
+      
+      width: 100%;
+    }
   }
   p {
     color: #fff;
@@ -625,10 +630,15 @@ export default {
     font-size: 14px;
   }
   span {
+    width: 150px;
     font-size: 13px;
     color: #d4850e;
     display: inline-block;
     margin-left: 10px;
+    // display: flex;
+    // flex-wrap: wrap;
+    word-wrap: break-word;
+    word-break: normal;
   }
 }
 .user {
