@@ -47,7 +47,7 @@
           <div class="left-active">
             <div class="red"></div>编号：{{item.timeid}}
           </div>
-          <p>利息发放：{{item.stoptime}}天</p>
+          <p>利息发放：{{item.time_period}}天</p>
         </div>
         <div class="list-right">
           <p class="right-time">{{item.create_time}}</p>
