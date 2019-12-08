@@ -30,6 +30,10 @@ import payment from '@/components/my_centre/payment'
 import kaihao from '@/components/my_centre/kaihao'
 import detail from '@/components/my_centre/detail_buy'
 import jingtai from '@/components/my_centre/jingtai'
+import Shoping from '@/components/my_centre/Shoping'
+import ShopPayTheBill from '@/components/my_centre/ShopPayTheBill'
+import ShopMy from '@/components/my_centre/ShopMy'
+import Cions from '@/components/my_centre/Cions'
 Vue.use(Router)
 
 export default new Router({
@@ -48,9 +52,29 @@ export default new Router({
       component: register
     },
     {
+      path: '/ShopMy',
+      name: 'ShopMy',
+      component: ShopMy
+    },
+    {
+      path: '/Cions',
+      name: 'Cions',
+      component: Cions
+    },
+    {
       path: '/jingtai',
       name: 'jingtai',
       component: jingtai
+    },
+    {
+      path: '/ShopPayTheBill',
+      name: 'ShopPayTheBill',
+      component: ShopPayTheBill
+    },
+    {
+      path: '/Shoping',
+      name: 'Shoping',
+      component: Shoping
     },
     {
       path: '/payment',

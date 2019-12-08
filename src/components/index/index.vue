@@ -25,10 +25,17 @@
 
     <div class="gonggao">
       <div class="ggtitle">
-        <img src="../../../static/images/gonggao.png" alt />|
-
-        <van-swipe style="height:50px;" :autoplay="3000" :width=300 :height=50 :show-indicators=false :vertical=true>
-          <van-swipe-item  v-for="(item, index) of gonggao" :key="index">
+        <img src="../../../static/images/gonggao.png" alt />
+        |
+        <van-swipe
+          style="height:50px;"
+          :autoplay="3000"
+          :width="300"
+          :height="50"
+          :show-indicators="false"
+          :vertical="true"
+        >
+          <van-swipe-item v-for="(item, index) of gonggao" :key="index">
             <!-- 111 -->
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.if_theme}}</span>
           </van-swipe-item>
@@ -65,16 +72,7 @@
         <img :src="moneySwiper[4].zuimg" alt />
         <span>{{moneySwiper[4].zuname}}</span>
       </div>
-      <!-- <div class="money-item"  @click="$router.push('/help')">
-          <img :src="moneySwiper[5].zuimg" alt />
-          <span>{{moneySwiper[5].zuname}}</span>
-        </div>
-        <div class="money-item"  @click="$router.push('/help')">
-          <img :src="moneySwiper[6].zuimg" alt />
-          <span>{{moneySwiper[6].zuname}}</span>
-      </div>-->
     </van-grid>
-    <!-- class="moneyswipers moneyswiper" -->
     <van-grid square :column-num="2" class="moneyswipers">
       <div @click="$router.push({path:'/help',query:{type:0}})">
         <p>{{moneySwiper[5].zuname}}</p>
@@ -125,6 +123,14 @@
         </div>
       </div>
     </van-list>
+
+    <div class="noticePop" v-if="!noticePop" @click.stop="noticePops">
+      <div class="noticePop-cont">
+        <h3>{{gonggaosss}}</h3>
+        <p v-html="gonggaos"></p>
+        <button class="noticePopbtn" @click="noticePops">关闭</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -160,12 +166,15 @@ export default {
       current: 0,
       indicator: "xuanzhong",
       gonggao: [],
+      gonggaos:'',
+      gonggaosss:'',
       loading: false,
       finished: false,
       show: false,
       list: [],
       lists: [],
-      usexg: {}
+      usexg: {},
+      noticePop: ''
     };
   },
   methods: {
@@ -177,18 +186,18 @@ export default {
       // if (this.list.length === ls.length && this.lists.length === lss.length){
       this.loading = false;
       this.finished = true;
-      // }
-
-      // 加载状态结束
-
-      // 数据全部加载完成
-      // if (this.list.length >= 4) {
-
-      // }
-      // }, 500);
+    },
+    noticePops() {
+      this.noticePop = true;
+      sessionStorage.setItem("noticePop", true);
     }
   },
   created() {
+    console.log(sessionStorage.getItem("noticePop"))
+    if (sessionStorage.getItem("noticePop")) {
+      this.noticePop = true;
+    }
+
     // axios.post()
     let that = this;
     this.$axios
@@ -197,6 +206,8 @@ export default {
         console.log(res);
         if (res.code == 1) {
           this.gonggao = res.data.news;
+          this.gonggaos = res.data.news[0].if_content,
+          this.gonggaosss= res.data.news[0].if_theme,
           this.adSwiper = res.data.banners;
           this.list = res.data.tgbzlist;
           this.lists = res.data.jsbzlist;
@@ -285,13 +296,13 @@ export default {
   // margin: 0 11px 10px 13px;
   padding: 0 10px;
   box-sizing: border-box;
-  .van-swipe__track{
+  .van-swipe__track {
     height: 50px !important;
     width: 100% !important;
-    text-align:center;
+    text-align: center;
     line-height: 50px;
   }
-  .van-swipe-item{
+  .van-swipe-item {
     height: 50px !important;
     width: 100% !important;
   }
@@ -500,6 +511,52 @@ export default {
   }
   .suoyao {
     color: #000;
+  }
+}
+.noticePop {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h3 {
+    margin: 0;
+  }
+  .noticePop-cont {
+    width: 80%;
+    height: 60%;
+    background: #0d0d26;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+    p {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 1rem;
+      word-wrap: break-word;
+      word-break: normal;
+      // margin-bottom: 1rem;
+      overflow-y: auto;
+      font-size: 13px;
+    }
+    .noticePopbtn {
+      height: 80px;
+      width: 80%;
+      border: none;
+      border-radius: 20px;
+      background: #e29f3b;
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
   }
 }
 .van-cell {

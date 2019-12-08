@@ -78,17 +78,23 @@
         <van-grid-item @click="$toast('未开放')">
           <van-image width="30px" src="./static/my_index/Purse@3x.png" />激活码转账
         </van-grid-item>
-        <van-grid-item @click="$toast('未开放')">
-          <van-image width="30px" src="./static/my_index/16@3x.png" />待定
+        <van-grid-item @click="$router.push('ShopMy')">
+          <van-image width="30px" src="./static/my_index/16@3x.png" />我的交易
         </van-grid-item>
+         <!-- <van-grid-item @click="$toast('未开放')">
+          <van-image width="30px" src="./static/my_index/16@3x.png" />待定
+        </van-grid-item> -->
       </van-grid>
     </div>
     <div class="indexitem">
       <span>其他</span>
       <van-grid :border="false" :column-num="4" class="ziliaoicon">
-        <van-grid-item @click="$toast('暂未开放')">
+        <van-grid-item @click="$router.push('Shoping')">
           <van-image width="30px" src="./static/my_index/17@3x.png" />弘信商城
         </van-grid-item>
+         <!-- <van-grid-item @click="$toast('未开放')">
+          <van-image width="30px" src="./static/my_index/17@3x.png" />待定
+        </van-grid-item> -->
         <van-grid-item to="/gonggao">
           <van-image width="30px" src="./static/my_index/19@3x.png" />公告
         </van-grid-item>
